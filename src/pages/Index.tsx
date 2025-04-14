@@ -11,24 +11,24 @@ const Index = () => {
   const games = [
     {
       id: "1",
-      title: "Train Conductor Challenge",
-      description: "Manage train arrivals and departures across Germany's busiest stations.",
+      title: "Trainings Sessions",
+      description: "Starts your career here",
       image: "https://images.unsplash.com/photo-1516199423456-1f1e91b06f25?q=80&w=1000",
-      category: "Simulation"
+      category: "Training"
     },
     {
       id: "2",
-      title: "Track Builder",
-      description: "Design and build your own railway network connecting major German cities.",
+      title: "Sneak Peaks",
+      description: "Be decided to see the next unique Sneak peak.",
       image: "https://images.unsplash.com/photo-1552986037-cf7b9eebd374?q=80&w=1000",
-      category: "Strategy"
+      category: "Sneak Peak"
     },
     {
       id: "3",
-      title: "Station Manager",
-      description: "Run a busy Deutsche Bahn station and keep all operations running smoothly.",
+      title: "Station",
+      description: "Learn about some Germans Station here.",
       image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=1000",
-      category: "Management"
+      category: "Station"
     },
     {
       id: "4",
