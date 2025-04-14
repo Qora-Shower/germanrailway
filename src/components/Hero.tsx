@@ -44,7 +44,7 @@ const Hero = () => {
               <div className="flex items-center gap-2">
                 <Users className="h-6 w-6 text-db-red" />
                 <div>
-                  <p className="font-bold text-2xl">10K+</p>
+                  <p className="font-bold text-2xl">7.5M+</p>
                   <p className="text-sm text-gray-200">Players</p>
                 </div>
               </div>
