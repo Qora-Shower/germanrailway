@@ -60,10 +60,10 @@ const Index = () => {
     },
     {
       id: "8",
-      title: "Railway Tycoon",
-      description: "Build your own railway empire from scratch and compete with other companies.",
+      title: "Training",
+      description: "Join railway empire from scratch and compete with other companies.",
       image: "https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?q=80&w=1000",
-      category: "Strategy"
+      category: "Training"
     }
   ];
 
