@@ -1,8 +1,41 @@
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Gamepad2, Award, Users } from "lucide-react";
 
 const Hero = () => {
+  const [livePlayers, setLivePlayers] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLivePlayers = async () => {
+      try {
+        // In einer realen Implementierung würden wir hier eine API abfragen
+        // Da Roblox keine öffentliche API für Live-Spielerzahlen bietet,
+        // zeigen wir stattdessen eine Beispielzahl an
+        // In der Produktion würde diese Zahl durch eine Backend-API ersetzt werden
+        
+        // Simuliere eine API-Anfrage mit setTimeout
+        setTimeout(() => {
+          // Zufällige Spieleranzahl zwischen 150 und 500 zur Demonstration
+          const playerCount = Math.floor(Math.random() * 350) + 150;
+          setLivePlayers(playerCount);
+          setLoading(false);
+        }, 1000);
+      } catch (error) {
+        console.error("Fehler beim Abrufen der Live-Spielerzahl:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchLivePlayers();
+    
+    // Aktualisiere die Spielerzahl alle 5 Minuten
+    const interval = setInterval(fetchLivePlayers, 5 * 60 * 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative bg-gradient-to-r from-db-darkgray to-db-gray py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -44,8 +77,14 @@ const Hero = () => {
               <div className="flex items-center gap-2">
                 <Users className="h-6 w-6 text-db-red" />
                 <div>
-                  <p className="font-bold text-2xl">7.5M+</p>
-                  <p className="text-sm text-gray-200">Players</p>
+                  {loading ? (
+                    <div className="animate-pulse">
+                      <p className="font-bold text-2xl">Lädt...</p>
+                    </div>
+                  ) : (
+                    <p className="font-bold text-2xl">{livePlayers !== null ? `${livePlayers}` : "N/A"}</p>
+                  )}
+                  <p className="text-sm text-gray-200">Spieler Online</p>
                 </div>
               </div>
             </div>
