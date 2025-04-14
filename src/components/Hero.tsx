@@ -9,10 +9,10 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 text-white z-10 animate-fade-in mb-8 md:mb-0">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Welcome to <span className="text-db-red">Bahn</span>Spiele<span className="text-db-red">Welt</span>
+              Welcome to <span className="text-db-red">Deutsche Bahn</span> AG <span className="text-db-red">Roblox</span>
             </h1>
             <p className="text-lg md:text-xl mb-6 opacity-90">
-              Experience the excitement of train adventures through fun and challenging games!
+              Experience the excitement of train adventures through Roblox games!
             </p>
             <div className="flex gap-4">
               <Button size="lg" className="bg-db-red hover:bg-db-darkred text-white">

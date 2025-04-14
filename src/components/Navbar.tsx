@@ -46,9 +46,9 @@ const Navbar = () => {
           </Sheet>
 
           <a href="/" className="flex items-center">
-            <span className="text-db-red font-bold text-xl">Bahn</span>
-            <span className="text-db-darkgray font-bold text-xl">Spiele</span>
-            <span className="text-db-gray font-medium ml-1">Welt</span>
+            <span className="text-db-red font-bold text-xl">Deutsche Bahn</span>
+            <span className="text-db-darkgray font-bold text-xl ml-1">AG</span>
+            <span className="text-db-gray font-medium ml-1">Roblox</span>
           </a>
         </div>
 
