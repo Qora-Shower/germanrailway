@@ -23,7 +23,7 @@ const NotFound = () => {
       <main className="flex-grow flex items-center justify-center bg-gray-50 py-16">
         <div className="text-center px-4">
           <div className="text-db-red font-bold text-9xl mb-4">404</div>
-          <h1 className="text-4xl font-bold mb-4 text-db-darkgray">Oops! Train not found</h1>
+          <h1 className="text-4xl font-bold mb-4 text-db-darkgray">Oops! Website not found 😔</h1>
           <p className="text-xl text-db-gray mb-8 max-w-md mx-auto">
             Looks like this train has departed from a different platform. Let's get you back on track!
           </p>
@@ -32,7 +32,7 @@ const NotFound = () => {
             size="lg"
             onClick={() => window.location.href = "/"}
           >
-            <ArrowLeft className="mr-2 h-5 w-5" /> Return to Station
+            <ArrowLeft className="mr-2 h-5 w-5" /> Return back to Station
           </Button>
         </div>
       </main>
