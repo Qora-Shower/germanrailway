@@ -23,21 +23,18 @@ const Footer = () => {
               </a>
               <a href="#" className="text-gray-300 hover:text-db-red transition-colors">
                 <Instagram size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-db-red transition-colors">
-                <Github size={20} />
-              </a>
+              </a
             </div>
           </div>
           
           <div>
-            <h3 className="font-bold text-lg mb-4">Games</h3>
+            <h3 className="font-bold text-lg mb-4">Links</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Train Conductor</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Track Builder</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Station Manager</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">DB Quiz</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Rail Adventure</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Play</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Discord</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Youtube</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Twitter (X)</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Trainings Sessions</a></li>
             </ul>
           </div>
           
@@ -71,7 +68,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-700 mt-12 pt-6 text-center">
-          <p className="text-gray-400">© {new Date().getFullYear()} BahnSpieleWelt. All rights reserved.</p>
+          <p className="text-gray-400">© {new Date().getFullYear()} Deutsche Bahn AG Roblox. All rights reserved.</p>
         </div>
       </div>
     </footer>
