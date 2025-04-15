@@ -1,6 +1,5 @@
-
 import { Button } from "@/components/ui/button";
-import { Play, Users, Discord } from "lucide-react";
+import { Play, Users, AtSign } from "lucide-react";
 
 interface SpecialGameCardProps {
   title: string;
@@ -20,7 +19,7 @@ const SpecialGameCard = ({
   discordLink
 }: SpecialGameCardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-md mx-auto">
       <img src={image} alt={title} className="w-full h-48 object-cover" />
       
       <div className="p-5">
@@ -65,7 +64,7 @@ const SpecialGameCard = ({
               variant="outline" 
               className="w-full border-db-red text-db-red hover:bg-db-red hover:text-white flex items-center justify-center"
             >
-              <Discord className="mr-2 h-4 w-4" />
+              <AtSign className="mr-2 h-4 w-4" />
               Join Discord
             </Button>
           </a>
