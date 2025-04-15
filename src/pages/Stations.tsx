@@ -47,7 +47,8 @@ const Stations = () => {
     { id: 7, name: "Magdeburg Hauptbahnhof", state: "Sachsen-Anhalt" },
     { id: 8, name: "Erfurt Hauptbahnhof", state: "Thüringen" },
     { id: 9, name: "Burg (bei Magdeburg)", state: "Sachsen-Anhalt" },
-    { id: 10, name: "Dessau Hauptbahnhof", state: "Sachsen-Anhalt" }
+    { id: 10, name: "Dessau Hauptbahnhof", state: "Sachsen-Anhalt" },
+    { id: 11, name: "Freiburg im (Breisgau) Hauptbahnhof", state: "Baden-Württemberg" }
   ];
 
   // Filter stations based on search term and selected state
