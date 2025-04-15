@@ -1,3 +1,4 @@
+
 import { Facebook, Twitter, Instagram, Github } from "lucide-react";
 
 const Footer = () => {
@@ -21,7 +22,7 @@ const Footer = () => {
               </a>
               <a href="#" className="text-gray-300 hover:text-db-red transition-colors">
                 <Instagram size={20} />
-              </a
+              </a>
             </div>
           </div>
           

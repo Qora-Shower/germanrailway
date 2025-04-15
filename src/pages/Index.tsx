@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import FeaturedGames from "@/components/FeaturedGames";
 import GameGrid from "@/components/GameGrid";
 import Footer from "@/components/Footer";
+import SpecialGameCard from "@/components/SpecialGameCard";
 
 const Index = () => {
   // Sample game data - in a real app, this would come from an API
@@ -76,6 +77,21 @@ const Index = () => {
         
         <div className="container mx-auto px-4 py-12">
           <FeaturedGames games={games.slice(0, 3)} />
+          
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-6">Deutsche Bahn AG Roblox</h2>
+            <div className="max-w-md mx-auto">
+              <SpecialGameCard
+                title="Deutsche Bahn AG Roblox"
+                description="Explore the exciting world of German railways in this immersive Roblox experience!"
+                image="/lovable-uploads/2c2747d7-8de1-4fd0-97c1-28b433fd142f.png"
+                gameLink="https://www.roblox.com/de/games/116725111473963/Deutsche-Bahn-AG-Roblox"
+                groupLink="https://www.roblox.com/de/communities/33684346/DB-Deutsche-Bahn-AG"
+                discordLink="https://discord.gg/64uatkS9Zm"
+              />
+            </div>
+          </div>
+          
           <GameGrid games={games} />
         </div>
       </main>
