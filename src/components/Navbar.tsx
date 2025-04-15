@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, Home, Gamepad2, Medal, Settings, LogOut, FileSpreadsheet, Briefcase } from "lucide-react";
+import { Menu, X, User, Home, Settings, LogOut, FileSpreadsheet, Briefcase, Server, Train } from "lucide-react";
 import { 
   Sheet,
   SheetContent,
@@ -61,9 +61,13 @@ const Navbar = () => {
                   <Briefcase className="h-5 w-5" />
                   <span>Jobs</span>
                 </Link>
-                <Link to="/leaderboard" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
-                  <Medal className="h-5 w-5" />
-                  <span>Leaderboard</span>
+                <Link to="/stations" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
+                  <Train className="h-5 w-5" />
+                  <span>Stations</span>
+                </Link>
+                <Link to="/servers" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
+                  <Server className="h-5 w-5" />
+                  <span>Servers</span>
                 </Link>
                 {isLoggedIn && (
                   <Link to="/my-states" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
@@ -95,8 +99,17 @@ const Navbar = () => {
               Jobs
             </div>
           </Link>
-          <Link to="/leaderboard" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
-            Leaderboard
+          <Link to="/stations" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
+            <div className="flex items-center">
+              <Train className="mr-1 h-4 w-4" />
+              Stations
+            </div>
+          </Link>
+          <Link to="/servers" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
+            <div className="flex items-center">
+              <Server className="mr-1 h-4 w-4" />
+              Servers
+            </div>
           </Link>
         </nav>
 

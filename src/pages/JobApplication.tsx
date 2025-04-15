@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Briefcase, Send, Users, AlertCircle } from "lucide-react";
+import { Briefcase, Send, AlertCircle } from "lucide-react";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,9 +39,30 @@ const JobApplication = () => {
   const onSubmit = (data: any) => {
     setSubmitting(true);
     
-    // Simulating submission process
+    // Simulating email submission
+    const emailAddress = "deutsche.bahn.rbx@gmail.com";
+    const emailSubject = `Job Application: ${jobTitle}`;
+    const emailBody = `
+      Roblox Username: ${data.robloxUsername}
+      Discord Username: ${data.discordUsername}
+      
+      Experience:
+      ${data.experience}
+      
+      Motivation:
+      ${data.motivation}
+      
+      Availability:
+      ${data.availability}
+    `;
+    
+    // In a real application, you would use a server-side API to send an email
+    // For now, we'll simulate it with a timeout and show a success message
     setTimeout(() => {
-      console.log("Application submitted:", data);
+      console.log("Application submitted to:", emailAddress);
+      console.log("Email subject:", emailSubject);
+      console.log("Email body:", emailBody);
+      
       toast.success("Application submitted successfully!");
       navigate("/jobs");
       setSubmitting(false);
