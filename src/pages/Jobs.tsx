@@ -68,12 +68,12 @@ const Jobs = () => {
     {
       title: "Game Developer",
       description: "Design and develop exciting Roblox games for the Deutsche Bahn AG community. Experience with Lua programming and Roblox Studio required.",
-      isOpen: true,
+      isOpen: false,
     },
     {
       title: "Supervisor",
       description: "Oversee operations, train new staff, and ensure all services run according to Deutsche Bahn standards in our Roblox community.",
-      isOpen: true,
+      isOpen: false,
     },
     {
       title: "Moderator",
