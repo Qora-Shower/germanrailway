@@ -21,10 +21,12 @@ const Navbar = () => {
   const [username, setUsername] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
 
+  // Roblox login URL
+  const robloxLoginUrl = "https://authorize.roblox.com/?client_id=4943182234166422753&response_type=code&redirect_uri=https%3A%2F%2Fauth.stepfordcountyrailway.co.uk%2Fsignin-oidc&scope=openid+profile&state=CfDJ8MJ8sZSakrROmoO_zN2-eZeCTDBiWyfM8ETzwSoM9CPIXrmYfeg8o8XLdwYkZuFCavmYn3BZpAlDVGg2lJ4WYPD6nlwN7MSSU20WZbFZcNzhRnq8r3xP_iagBAt5wxb1ArrWQfmxxgR3slSteRkrJCDoYhyEnm4ace8rlk6Ugs-G&nonce=638803110765483281.YmY3YmFjMGItNmNlNy00OGY3LTkzNmUtNTBhMzBhY2ZkZjNhMzc2YjQwY2EtOGE3Ni00Yzg5LTgxZWItOTFjYzY4NDI0OGM5&code_challenge=PvOZIMSUDfNMgh0-lfizAEhUFG5EU0f8lU3b5lckktE&code_challenge_method=S256&step=accountConfirm";
+
   // Simulating Roblox login
   const handleLogin = () => {
-    // In a real implementation, this would redirect to Roblox OAuth
-    window.open("https://www.roblox.com/login", "_blank");
+    window.open(robloxLoginUrl, "_blank");
     // This is just a simulation - in a real app we would wait for OAuth callback
     setIsLoggedIn(true);
     setUsername("RobloxUser123");
@@ -54,10 +56,6 @@ const Navbar = () => {
                 <Link to="/" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
                   <Home className="h-5 w-5" />
                   <span>Home</span>
-                </Link>
-                <Link to="/games" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
-                  <Gamepad2 className="h-5 w-5" />
-                  <span>Games</span>
                 </Link>
                 <Link to="/jobs" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
                   <Briefcase className="h-5 w-5" />
@@ -91,9 +89,6 @@ const Navbar = () => {
           <Link to="/" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
             Home
           </Link>
-          <Link to="/games" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
-            Games
-          </Link>
           <Link to="/jobs" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
             <div className="flex items-center">
               <Briefcase className="mr-1 h-4 w-4" />
@@ -111,7 +106,7 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative flex items-center gap-2 rounded-full hover:bg-gray-100">
-                  <Avatar className="h-8 w-8 border border-gray-200">
+                  <Avatar className="h-8 w-8 border border-gray-200 rounded-full overflow-hidden">
                     <AvatarImage src={avatarUrl} alt={username} />
                     <AvatarFallback>{username.substring(0, 2)}</AvatarFallback>
                   </Avatar>

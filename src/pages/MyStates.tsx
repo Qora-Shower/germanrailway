@@ -23,7 +23,7 @@ const MyStates = () => {
                 <img 
                   src={playerCharacter.avatar} 
                   alt={playerCharacter.username} 
-                  className="w-48 h-48 object-cover"
+                  className="w-48 h-48 object-cover rounded-full"
                 />
               </div>
               

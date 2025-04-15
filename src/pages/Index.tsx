@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
 import FeaturedGames from "@/components/FeaturedGames";
 import GameGrid from "@/components/GameGrid";
 import Footer from "@/components/Footer";
@@ -73,12 +72,15 @@ const Index = () => {
       <Navbar />
       
       <main className="flex-grow">
-        <Hero />
-        
         <div className="container mx-auto px-4 py-12">
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Deutsche Bahn AG Roblox</h2>
-            <div className="max-w-4xl mx-auto">
+          <div className="mb-12 text-center">
+            <h1 className="text-4xl font-bold mb-4">Deutsche Bahn AG Roblox</h1>
+            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+              Explore the exciting world of German railways through interactive Roblox games and challenges.
+              Join our community of train enthusiasts and railroad professionals!
+            </p>
+            
+            <div className="w-full max-w-5xl mx-auto">
               <SpecialGameCard
                 title="Deutsche Bahn AG Roblox"
                 description="Explore the exciting world of German railways in this immersive Roblox experience!"

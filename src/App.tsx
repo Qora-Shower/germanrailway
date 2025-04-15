@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound";
 import MyStates from "./pages/MyStates";
 import Settings from "./pages/Settings";
 import Jobs from "./pages/Jobs";
+import JobDetail from "./pages/JobDetail";
+import JobApplication from "./pages/JobApplication";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/my-states" element={<MyStates />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/jobs" element={<Jobs />} />
+          <Route path="/job/:jobId" element={<JobDetail />} />
+          <Route path="/apply/:jobId" element={<JobApplication />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Play, Users, AtSign } from "lucide-react";
 
@@ -19,12 +20,12 @@ const SpecialGameCard = ({
   discordLink
 }: SpecialGameCardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-md mx-auto">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto">
       <img src={image} alt={title} className="w-full h-48 object-cover" />
       
       <div className="p-5">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-600 mb-5">{description}</p>
+        <h3 className="text-xl font-semibold mb-2 text-center">{title}</h3>
+        <p className="text-gray-600 mb-5 text-center">{description}</p>
         
         <div className="space-y-3">
           <a 

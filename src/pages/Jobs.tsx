@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Briefcase, X, Check } from "lucide-react";
@@ -31,12 +32,19 @@ const JobCard = ({ title, description, isOpen, onApply }: JobCardProps) => {
         )}
       </div>
       <p className="text-gray-600 mb-4">{description}</p>
-      {isOpen && (
+      {isOpen ? (
         <Button 
           onClick={() => onApply(title)} 
           className="bg-db-red hover:bg-db-darkred text-white"
         >
           <Briefcase className="mr-2 h-4 w-4" /> Apply
+        </Button>
+      ) : (
+        <Button 
+          disabled
+          className="bg-gray-800 hover:bg-gray-800 text-white cursor-not-allowed"
+        >
+          <X className="mr-2 h-4 w-4" /> Closed
         </Button>
       )}
     </Card>
@@ -44,16 +52,16 @@ const JobCard = ({ title, description, isOpen, onApply }: JobCardProps) => {
 };
 
 const Jobs = () => {
-  const [activeJobs, setActiveJobs] = useState<string[]>([]);
+  const navigate = useNavigate();
+  const [activeJob, setActiveJob] = useState<string | null>(null);
   const [breadcrumbs, setBreadcrumbs] = useState<string[]>(['Jobs']);
 
   const handleApply = (jobTitle: string) => {
-    if (!activeJobs.includes(jobTitle)) {
-      setActiveJobs([...activeJobs, jobTitle]);
-      if (!breadcrumbs.includes(jobTitle)) {
-        setBreadcrumbs([...breadcrumbs, jobTitle]);
-      }
-    }
+    setActiveJob(jobTitle);
+    setBreadcrumbs(['Jobs', jobTitle]);
+    // Navigate to the job detail page
+    const formattedJobTitle = jobTitle.toLowerCase().replace(/\s+/g, '-');
+    navigate(`/job/${formattedJobTitle}`);
   };
 
   const jobs = [
