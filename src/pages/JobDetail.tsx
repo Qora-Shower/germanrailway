@@ -27,7 +27,7 @@ const JobDetail = () => {
         "Understanding of game development principles",
         "Ability to work in a team environment"
       ],
-      minRank: "Experienced Developer"
+      minRank: "Driver"
     },
     "supervisor": {
       title: "Supervisor",
@@ -44,7 +44,7 @@ const JobDetail = () => {
         "Knowledge of Deutsche Bahn operations (preferred)",
         "Ability to work flexible hours"
       ],
-      minRank: "Senior Staff Member"
+      minRank: "Conductor"
     },
     "moderator": {
       title: "Moderator",
@@ -61,7 +61,7 @@ const JobDetail = () => {
         "Patient and helpful attitude",
         "Available to moderate during peak hours"
       ],
-      minRank: "Community Member"
+      minRank: "Conductor"
     }
   };
   
