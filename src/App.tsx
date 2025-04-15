@@ -14,6 +14,8 @@ import JobApplication from "./pages/JobApplication";
 import Stations from "./pages/Stations";
 import Servers from "./pages/Servers";
 import ServerDetail from "./pages/ServerDetail";
+import Routes from "./pages/Routes";
+import RouteDetail from "./pages/RouteDetail";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/stations" element={<Stations />} />
           <Route path="/servers" element={<Servers />} />
           <Route path="/server/:serverId" element={<ServerDetail />} />
+          <Route path="/routen" element={<Routes />} />
+          <Route path="/route/:routeId" element={<RouteDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
