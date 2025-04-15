@@ -76,11 +76,9 @@ const Index = () => {
         <Hero />
         
         <div className="container mx-auto px-4 py-12">
-          <FeaturedGames games={games.slice(0, 3)} />
-          
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Deutsche Bahn AG Roblox</h2>
-            <div className="max-w-md mx-auto">
+            <div className="max-w-4xl mx-auto">
               <SpecialGameCard
                 title="Deutsche Bahn AG Roblox"
                 description="Explore the exciting world of German railways in this immersive Roblox experience!"
@@ -92,6 +90,7 @@ const Index = () => {
             </div>
           </div>
           
+          <FeaturedGames games={games.slice(0, 3)} />
           <GameGrid games={games} />
         </div>
       </main>

@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Search, Menu, X, User, Home, Gamepad2, Medal, Settings, LogOut, FileSpreadsheet } from "lucide-react";
+import { Menu, X, User, Home, Gamepad2, Medal, Settings, LogOut, FileSpreadsheet, Briefcase } from "lucide-react";
 import { 
   Sheet,
   SheetContent,
@@ -17,7 +17,6 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
@@ -25,8 +24,8 @@ const Navbar = () => {
   // Simulating Roblox login
   const handleLogin = () => {
     // In a real implementation, this would redirect to Roblox OAuth
-    console.log("Logging in with Roblox...");
-    // Simulating successful login
+    window.open("https://www.roblox.com/login", "_blank");
+    // This is just a simulation - in a real app we would wait for OAuth callback
     setIsLoggedIn(true);
     setUsername("RobloxUser123");
     setAvatarUrl("/lovable-uploads/a457f883-f052-4d89-b2fd-67be6b7822e6.png");
@@ -60,6 +59,10 @@ const Navbar = () => {
                   <Gamepad2 className="h-5 w-5" />
                   <span>Games</span>
                 </Link>
+                <Link to="/jobs" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
+                  <Briefcase className="h-5 w-5" />
+                  <span>Jobs</span>
+                </Link>
                 <Link to="/leaderboard" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
                   <Medal className="h-5 w-5" />
                   <span>Leaderboard</span>
@@ -91,28 +94,19 @@ const Navbar = () => {
           <Link to="/games" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
             Games
           </Link>
+          <Link to="/jobs" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
+            <div className="flex items-center">
+              <Briefcase className="mr-1 h-4 w-4" />
+              Jobs
+            </div>
+          </Link>
           <Link to="/leaderboard" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
             Leaderboard
           </Link>
         </nav>
 
-        {/* Search and User */}
-        <div className="flex items-center space-x-4">
-          <div className="relative hidden md:flex items-center">
-            <input
-              type="text"
-              placeholder="Search games..."
-              className="px-4 py-2 pr-10 rounded-full bg-db-lightgray border-none focus:outline-none focus:ring-2 focus:ring-db-red"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Search className="absolute right-3 text-db-gray h-4 w-4" />
-          </div>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Search className="h-5 w-5" />
-            <span className="sr-only">Search</span>
-          </Button>
-
+        {/* User */}
+        <div className="flex items-center">
           {isLoggedIn ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

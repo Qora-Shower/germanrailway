@@ -19,7 +19,7 @@ const MyStates = () => {
           
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center flex-col sm:flex-row">
-              <div className="border-4 border-db-red rounded-lg overflow-hidden mb-4 sm:mb-0 sm:mr-6">
+              <div className="border-4 border-db-red rounded-full overflow-hidden mb-4 sm:mb-0 sm:mr-6">
                 <img 
                   src={playerCharacter.avatar} 
                   alt={playerCharacter.username} 

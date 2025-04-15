@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { Play, Users, Discord } from "lucide-react";
 
 interface SpecialGameCardProps {
   title: string;
@@ -20,7 +20,7 @@ const SpecialGameCard = ({
   discordLink
 }: SpecialGameCardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full">
       <img src={image} alt={title} className="w-full h-48 object-cover" />
       
       <div className="p-5">
@@ -35,7 +35,7 @@ const SpecialGameCard = ({
             className="block"
           >
             <Button className="w-full bg-db-red hover:bg-db-darkred text-white flex items-center justify-center">
-              <ExternalLink className="mr-2 h-4 w-4" />
+              <Play className="mr-2 h-4 w-4" />
               Play
             </Button>
           </a>
@@ -50,7 +50,7 @@ const SpecialGameCard = ({
               variant="outline" 
               className="w-full border-db-red text-db-red hover:bg-db-red hover:text-white flex items-center justify-center"
             >
-              <ExternalLink className="mr-2 h-4 w-4" />
+              <Users className="mr-2 h-4 w-4" />
               Join Group
             </Button>
           </a>
@@ -63,9 +63,9 @@ const SpecialGameCard = ({
           >
             <Button 
               variant="outline" 
-              className="w-full border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex items-center justify-center"
+              className="w-full border-db-red text-db-red hover:bg-db-red hover:text-white flex items-center justify-center"
             >
-              <ExternalLink className="mr-2 h-4 w-4" />
+              <Discord className="mr-2 h-4 w-4" />
               Join Discord
             </Button>
           </a>
