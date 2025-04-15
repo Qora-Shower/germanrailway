@@ -7,9 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <span className="text-db-red font-bold text-xl">Deutsche Bahn</span>
-              <span className="text-white font-bold text-xl ml-1">AG</span>
-              <span className="text-gray-300 font-medium ml-1">Roblox</span>
+              <span className="text-white font-bold text-xl ml-1">Deutsche Bahn AG Roblox</span>
             </div>
             <p className="text-gray-300 mb-4">
               Discover the exciting world of Deutsche Bahn through interactive Roblox games and challenges.
