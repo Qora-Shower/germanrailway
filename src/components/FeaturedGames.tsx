@@ -19,7 +19,7 @@ const FeaturedGames = ({ games }: FeaturedGamesProps) => {
   return (
     <div className="w-full mb-16">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-db-darkgray">Featured Games</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-db-darkgray">Usefull Info</h2>
         <div className="flex space-x-2">
           <Button variant="outline" size="icon" className="rounded-full border-db-red text-db-red hover:bg-db-lightgray">
             <ChevronLeft className="h-5 w-5" />
