@@ -18,7 +18,7 @@ const ServerDetail = () => {
   const serverData = {
     id: serverId || "Unknown",
     name: `Server: ${serverId}`,
-    players: 15,
+    players: 9,
     maxPlayers: 30,
     createdAt: new Date().toLocaleDateString(),
     uptime: "3 Stunden 24 Minuten",
@@ -67,7 +67,7 @@ const ServerDetail = () => {
       },
       {
         time: "09:37",
-        id: "RE 18095",
+        id: "RE 1",
         route: "RE1",
         destination: "Frankfurt (Oder)",
         platform: "2",
@@ -86,7 +86,7 @@ const ServerDetail = () => {
         trainClass: "Alstom Coradia Continental - 1440 129",
         driver: {
           username: "Amy191207",
-          rank: "GD"
+          rank: "CD"
         }
       },
       {
@@ -98,11 +98,11 @@ const ServerDetail = () => {
         trainClass: "ICE 3 - 403 021",
         driver: {
           username: "Alya4Desire",
-          rank: "GD"
+          rank: "LD"
         },
         guard: {
           username: "max573p",
-          rank: "GD"
+          rank: "LD"
         }
       }
     ]
