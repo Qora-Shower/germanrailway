@@ -16,6 +16,8 @@ import Servers from "./pages/Servers";
 import ServerDetail from "./pages/ServerDetail";
 import RoutesPage from "./pages/Routes";
 import RouteDetail from "./pages/RouteDetail";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +39,8 @@ const App = () => (
           <Route path="/server/:serverId" element={<ServerDetail />} />
           <Route path="/routen" element={<RoutesPage />} />
           <Route path="/route/:routeId" element={<RouteDetail />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </RouterRoutes>

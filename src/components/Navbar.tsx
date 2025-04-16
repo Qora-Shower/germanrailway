@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, Home, Settings, LogOut, FileSpreadsheet, Briefcase, Server, Train, Route } from "lucide-react";
+import { Menu, X, User, Home, Settings, LogOut, FileSpreadsheet, Briefcase, Server, Train, Route, FileText, Shield } from "lucide-react";
 import { 
   Sheet,
   SheetContent,
@@ -73,6 +73,14 @@ const Navbar = () => {
                   <Route className="h-5 w-5" />
                   <span>Routen</span>
                 </Link>
+                <Link to="/terms" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
+                  <FileText className="h-5 w-5" />
+                  <span>Nutzungsbedingungen</span>
+                </Link>
+                <Link to="/privacy" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
+                  <Shield className="h-5 w-5" />
+                  <span>Datenschutz</span>
+                </Link>
                 {isLoggedIn && (
                   <Link to="/my-states" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
                     <FileSpreadsheet className="h-5 w-5" />
@@ -119,6 +127,18 @@ const Navbar = () => {
             <div className="flex items-center">
               <Route className="mr-1 h-4 w-4" />
               Routen
+            </div>
+          </Link>
+          <Link to="/terms" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
+            <div className="flex items-center">
+              <FileText className="mr-1 h-4 w-4" />
+              Nutzungsbedingungen
+            </div>
+          </Link>
+          <Link to="/privacy" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
+            <div className="flex items-center">
+              <Shield className="mr-1 h-4 w-4" />
+              Datenschutz
             </div>
           </Link>
         </nav>

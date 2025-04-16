@@ -5,8 +5,9 @@ import { Search, Filter } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { Toggle } from "@/components/ui/toggle";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Collapsible,
   CollapsibleContent,
@@ -17,16 +18,8 @@ const Routes = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState({
-    sbahn: true,
-    rb: true,
-    re: true,
-    ire: true,
-    ec: true,
-    ic: true,
-    ice: true,
-  });
-
+  const [selectedFilter, setSelectedFilter] = useState("all");
+  
   // Example routes data - in a real app, this would be fetched from an API
   const routesData = [
     { id: 1, type: "S-Bahn", number: "S1", from: "Oranienburg", to: "Wannsee", via: "Berlin Hbf", duration: "58 min" },
@@ -41,28 +34,13 @@ const Routes = () => {
     { id: 10, type: "ICE", number: "ICE500", from: "Berlin Hbf", to: "München Hbf", via: "Nürnberg", duration: "3 h 55 min" },
     { id: 11, type: "ICE", number: "ICE1000", from: "Berlin Hbf", to: "Frankfurt (Main) Hbf", via: "Erfurt", duration: "3 h 29 min" },
     { id: 12, type: "ICE", number: "ICE1600", from: "Hamburg Hbf", to: "München Hbf", via: "Berlin", duration: "5 h 34 min" },
+    { id: 101, type: "ICE", number: "ICE101", from: "Berlin Hbf", to: "München Hbf", via: "Halle, Erfurt, Nürnberg", duration: "3 h 52 min" },
   ];
 
-  // Function to handle filter changes
-  const handleFilterChange = (filterType) => {
-    setFilters({
-      ...filters,
-      [filterType]: !filters[filterType],
-    });
-  };
-
-  // Filter routes based on search term and selected filters
+  // Filter routes based on search term and selected filter
   const filteredRoutes = routesData.filter((route) => {
-    // Check if the route type is in the enabled filters
-    const typeMatches = (
-      (route.type === "S-Bahn" && filters.sbahn) ||
-      (route.type === "RB" && filters.rb) ||
-      (route.type === "RE" && filters.re) ||
-      (route.type === "IRE" && filters.ire) ||
-      (route.type === "EC" && filters.ec) ||
-      (route.type === "IC" && filters.ic) ||
-      (route.type === "ICE" && filters.ice)
-    );
+    // Check if the route type matches the selected filter
+    const typeMatches = selectedFilter === "all" || route.type.toLowerCase() === selectedFilter;
 
     // Check if the route number, destination or via matches the search term
     const searchMatches = searchTerm === "" || 
@@ -141,76 +119,73 @@ const Routes = () => {
               </CollapsibleTrigger>
               <CollapsibleContent className="bg-white p-4 rounded-md border mt-2 w-full md:absolute md:right-0 md:z-10 md:min-w-[250px] md:shadow-md">
                 <div className="space-y-2">
-                  <h3 className="font-medium mb-2">Zugtypen</h3>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="sbahn" 
-                      checked={filters.sbahn} 
-                      onCheckedChange={() => handleFilterChange("sbahn")}
-                    />
-                    <label htmlFor="sbahn" className="text-sm font-medium">
+                  <h3 className="font-medium mb-4">Zugtypen</h3>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    <Toggle
+                      pressed={selectedFilter === "all"}
+                      onPressedChange={() => setSelectedFilter("all")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "all" ? "bg-db-red text-white hover:text-white hover:bg-db-darkred" : ""}`}
+                    >
+                      Alle
+                    </Toggle>
+                    <Toggle
+                      pressed={selectedFilter === "s-bahn"}
+                      onPressedChange={() => setSelectedFilter("s-bahn")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "s-bahn" ? "bg-green-500 text-white hover:text-white hover:bg-green-600" : ""}`}
+                    >
                       S-Bahn
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="rb" 
-                      checked={filters.rb} 
-                      onCheckedChange={() => handleFilterChange("rb")}
-                    />
-                    <label htmlFor="rb" className="text-sm font-medium">
-                      Regional Bahn (RB)
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="re" 
-                      checked={filters.re} 
-                      onCheckedChange={() => handleFilterChange("re")}
-                    />
-                    <label htmlFor="re" className="text-sm font-medium">
-                      Regional Express (RE)
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="ire" 
-                      checked={filters.ire} 
-                      onCheckedChange={() => handleFilterChange("ire")}
-                    />
-                    <label htmlFor="ire" className="text-sm font-medium">
-                      InterRegio Express (IRE)
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="ec" 
-                      checked={filters.ec} 
-                      onCheckedChange={() => handleFilterChange("ec")}
-                    />
-                    <label htmlFor="ec" className="text-sm font-medium">
-                      EuroCity (EC)
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="ic" 
-                      checked={filters.ic} 
-                      onCheckedChange={() => handleFilterChange("ic")}
-                    />
-                    <label htmlFor="ic" className="text-sm font-medium">
-                      InterCity (IC)
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="ice" 
-                      checked={filters.ice} 
-                      onCheckedChange={() => handleFilterChange("ice")}
-                    />
-                    <label htmlFor="ice" className="text-sm font-medium">
-                      InterCity Express (ICE)
-                    </label>
+                    </Toggle>
+                    <Toggle
+                      pressed={selectedFilter === "rb"}
+                      onPressedChange={() => setSelectedFilter("rb")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "rb" ? "bg-red-500 text-white hover:text-white hover:bg-red-600" : ""}`}
+                    >
+                      RB
+                    </Toggle>
+                    <Toggle
+                      pressed={selectedFilter === "re"}
+                      onPressedChange={() => setSelectedFilter("re")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "re" ? "bg-red-600 text-white hover:text-white hover:bg-red-700" : ""}`}
+                    >
+                      RE
+                    </Toggle>
+                    <Toggle
+                      pressed={selectedFilter === "ire"}
+                      onPressedChange={() => setSelectedFilter("ire")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "ire" ? "bg-orange-500 text-white hover:text-white hover:bg-orange-600" : ""}`}
+                    >
+                      IRE
+                    </Toggle>
+                    <Toggle
+                      pressed={selectedFilter === "ec"}
+                      onPressedChange={() => setSelectedFilter("ec")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "ec" ? "bg-blue-400 text-white hover:text-white hover:bg-blue-500" : ""}`}
+                    >
+                      EC
+                    </Toggle>
+                    <Toggle
+                      pressed={selectedFilter === "ic"}
+                      onPressedChange={() => setSelectedFilter("ic")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "ic" ? "bg-blue-500 text-white hover:text-white hover:bg-blue-600" : ""}`}
+                    >
+                      IC
+                    </Toggle>
+                    <Toggle
+                      pressed={selectedFilter === "ice"}
+                      onPressedChange={() => setSelectedFilter("ice")}
+                      variant="outline"
+                      className={`min-w-24 ${selectedFilter === "ice" ? "bg-blue-600 text-white hover:text-white hover:bg-blue-700" : ""}`}
+                    >
+                      ICE
+                    </Toggle>
                   </div>
                 </div>
               </CollapsibleContent>

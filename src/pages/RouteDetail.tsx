@@ -21,12 +21,36 @@ const RouteDetail = () => {
       duration: "58 min",
       description: "Die S1 verbindet den Norden und Süden Berlins. Sie fährt vom brandenburgischen Oranienburg über die Berliner Innenstadt bis nach Wannsee.",
       stops: [
-        "Oranienburg", "Lehnitz", "Borgsdorf", "Birkenwerder", "Hohen Neuendorf", 
-        "Frohnau", "Hermsdorf", "Waidmannslust", "Wittenau", "Wilhelmsruh", 
-        "Schönholz", "Wollankstraße", "Bornholmer Straße", "Gesundbrunnen", "Nordbahnhof",
-        "Oranienburger Straße", "Friedrichstraße", "Brandenburger Tor", "Potsdamer Platz", 
-        "Anhalter Bahnhof", "Yorckstraße", "Schöneberg", "Friedenau", "Feuerbachstraße", 
-        "Rathaus Steglitz", "Botanischer Garten", "Lichterfelde West", "Sundgauer Straße", "Zehlendorf", "Wannsee"
+        { name: "Oranienburg", time: 0 },
+        { name: "Lehnitz", time: 6 },
+        { name: "Borgsdorf", time: 4 },
+        { name: "Birkenwerder", time: 3 },
+        { name: "Hohen Neuendorf", time: 3 },
+        { name: "Frohnau", time: 3 },
+        { name: "Hermsdorf", time: 3 },
+        { name: "Waidmannslust", time: 2 },
+        { name: "Wittenau", time: 2 },
+        { name: "Wilhelmsruh", time: 2 },
+        { name: "Schönholz", time: 2 },
+        { name: "Wollankstraße", time: 2 },
+        { name: "Bornholmer Straße", time: 2 },
+        { name: "Gesundbrunnen", time: 2 },
+        { name: "Nordbahnhof", time: 2 },
+        { name: "Oranienburger Straße", time: 2 },
+        { name: "Friedrichstraße", time: 2 },
+        { name: "Brandenburger Tor", time: 2 },
+        { name: "Potsdamer Platz", time: 2 },
+        { name: "Anhalter Bahnhof", time: 2 },
+        { name: "Yorckstraße", time: 2 },
+        { name: "Schöneberg", time: 3 },
+        { name: "Friedenau", time: 2 },
+        { name: "Feuerbachstraße", time: 2 },
+        { name: "Rathaus Steglitz", time: 2 },
+        { name: "Botanischer Garten", time: 2 },
+        { name: "Lichterfelde West", time: 2 },
+        { name: "Sundgauer Straße", time: 2 },
+        { name: "Zehlendorf", time: 2 },
+        { name: "Wannsee", time: 3 }
       ]
     },
     { 
@@ -39,11 +63,31 @@ const RouteDetail = () => {
       duration: "83 min",
       description: "Die S2 ist eine wichtige Nord-Süd-Verbindung und verbindet Bernau im Norden mit Blankenfelde im Süden.",
       stops: [
-        "Bernau", "Bernau-Friedenstal", "Zepernick", "Röntgental", "Buch", 
-        "Karow", "Blankenburg", "Pankow", "Bornholmer Straße", "Gesundbrunnen", 
-        "Nordbahnhof", "Oranienburger Straße", "Friedrichstraße", "Unter den Linden", "Potsdamer Platz", 
-        "Anhalter Bahnhof", "Yorckstraße", "Südkreuz", "Priesterweg", "Attilastraße", 
-        "Marienfelde", "Buckower Chaussee", "Schichauweg", "Mahlow", "Blankenfelde"
+        { name: "Bernau", time: 0 },
+        { name: "Bernau-Friedenstal", time: 3 },
+        { name: "Zepernick", time: 5 },
+        { name: "Röntgental", time: 3 },
+        { name: "Buch", time: 4 },
+        { name: "Karow", time: 4 },
+        { name: "Blankenburg", time: 3 },
+        { name: "Pankow", time: 4 },
+        { name: "Bornholmer Straße", time: 3 },
+        { name: "Gesundbrunnen", time: 2 },
+        { name: "Nordbahnhof", time: 2 },
+        { name: "Oranienburger Straße", time: 2 },
+        { name: "Friedrichstraße", time: 2 },
+        { name: "Unter den Linden", time: 2 },
+        { name: "Potsdamer Platz", time: 2 },
+        { name: "Anhalter Bahnhof", time: 2 },
+        { name: "Yorckstraße", time: 2 },
+        { name: "Südkreuz", time: 3 },
+        { name: "Priesterweg", time: 3 },
+        { name: "Attilastraße", time: 3 },
+        { name: "Marienfelde", time: 3 },
+        { name: "Buckower Chaussee", time: 4 },
+        { name: "Schichauweg", time: 3 },
+        { name: "Mahlow", time: 5 },
+        { name: "Blankenfelde", time: 5 }
       ]
     },
     { 
@@ -55,7 +99,13 @@ const RouteDetail = () => {
       via: "Berlin-Spandau", 
       duration: "37 min",
       description: "Die RB10 verbindet Berlin mit dem brandenburgischen Nauen und ist Teil des Regionalverkehrs.",
-      stops: ["Berlin Hbf", "Berlin-Spandau", "Falkensee", "Brieselang", "Nauen"]
+      stops: [
+        { name: "Berlin Hbf", time: 0 },
+        { name: "Berlin-Spandau", time: 8 },
+        { name: "Falkensee", time: 7 },
+        { name: "Brieselang", time: 10 },
+        { name: "Nauen", time: 12 }
+      ]
     },
     { 
       id: 4, 
@@ -66,7 +116,15 @@ const RouteDetail = () => {
       via: "Falkensee", 
       duration: "45 min",
       description: "Die RB14 fährt von Berlin Hauptbahnhof nach Nauen und hält an allen Zwischenstationen.",
-      stops: ["Berlin Hbf", "Berlin-Jungfernheide", "Berlin-Charlottenburg", "Berlin-Spandau", "Falkensee", "Brieselang", "Nauen"]
+      stops: [
+        { name: "Berlin Hbf", time: 0 },
+        { name: "Berlin-Jungfernheide", time: 5 },
+        { name: "Berlin-Charlottenburg", time: 5 },
+        { name: "Berlin-Spandau", time: 7 },
+        { name: "Falkensee", time: 7 },
+        { name: "Brieselang", time: 10 },
+        { name: "Nauen", time: 11 }
+      ]
     },
     { 
       id: 5, 
@@ -78,9 +136,20 @@ const RouteDetail = () => {
       duration: "2 h 52 min",
       description: "Der RE1 ist eine wichtige Ost-West-Verbindung und verbindet Magdeburg mit Frankfurt (Oder) über Berlin.",
       stops: [
-        "Magdeburg Hbf", "Burg", "Genthin", "Brandenburg Hbf", "Potsdam Hbf", 
-        "Berlin-Wannsee", "Berlin-Charlottenburg", "Berlin Hbf", "Berlin Ostbahnhof", 
-        "Berlin-Ostkreuz", "Erkner", "Fürstenwalde (Spree)", "Briesen (Mark)", "Frankfurt (Oder)"
+        { name: "Magdeburg Hbf", time: 0 },
+        { name: "Burg", time: 17 },
+        { name: "Genthin", time: 14 },
+        { name: "Brandenburg Hbf", time: 28 },
+        { name: "Potsdam Hbf", time: 22 },
+        { name: "Berlin-Wannsee", time: 7 },
+        { name: "Berlin-Charlottenburg", time: 8 },
+        { name: "Berlin Hbf", time: 7 },
+        { name: "Berlin Ostbahnhof", time: 5 },
+        { name: "Berlin-Ostkreuz", time: 5 },
+        { name: "Erkner", time: 12 },
+        { name: "Fürstenwalde (Spree)", time: 16 },
+        { name: "Briesen (Mark)", time: 12 },
+        { name: "Frankfurt (Oder)", time: 19 }
       ]
     },
     { 
@@ -93,9 +162,20 @@ const RouteDetail = () => {
       duration: "5 h 1 min",
       description: "Der RE2 verbindet Wismar an der Ostsee mit Cottbus in der Lausitz und durchquert dabei Berlin.",
       stops: [
-        "Wismar", "Bad Kleinen", "Schwerin Hbf", "Ludwigslust", "Wittenberge", 
-        "Nauen", "Berlin-Spandau", "Berlin Hbf", "Berlin Ostkreuz", "Königs Wusterhausen", 
-        "Lübben (Spreewald)", "Lübbenau (Spreewald)", "Vetschau", "Cottbus"
+        { name: "Wismar", time: 0 },
+        { name: "Bad Kleinen", time: 10 },
+        { name: "Schwerin Hbf", time: 12 },
+        { name: "Ludwigslust", time: 32 },
+        { name: "Wittenberge", time: 35 },
+        { name: "Nauen", time: 40 },
+        { name: "Berlin-Spandau", time: 20 },
+        { name: "Berlin Hbf", time: 10 },
+        { name: "Berlin Ostkreuz", time: 12 },
+        { name: "Königs Wusterhausen", time: 20 },
+        { name: "Lübben (Spreewald)", time: 25 },
+        { name: "Lübbenau (Spreewald)", time: 15 },
+        { name: "Vetschau", time: 15 },
+        { name: "Cottbus", time: 15 }
       ]
     },
     { 
@@ -107,7 +187,13 @@ const RouteDetail = () => {
       via: "Wittenberge", 
       duration: "2 h 30 min",
       description: "Der IRE3 ist ein Interregio-Express zwischen Berlin und Hamburg mit wenigen Zwischenhalten.",
-      stops: ["Berlin Hbf", "Berlin-Spandau", "Wittenberge", "Ludwigslust", "Hamburg Hbf"]
+      stops: [
+        { name: "Berlin Hbf", time: 0 },
+        { name: "Berlin-Spandau", time: 10 },
+        { name: "Wittenberge", time: 45 },
+        { name: "Ludwigslust", time: 35 },
+        { name: "Hamburg Hbf", time: 60 }
+      ]
     },
     { 
       id: 8, 
@@ -118,7 +204,12 @@ const RouteDetail = () => {
       via: "Wittenberge", 
       duration: "1 h 43 min",
       description: "Der EC27 ist ein EuroCity-Zug zwischen Berlin und Hamburg und Teil eines internationalen Zuglaufs.",
-      stops: ["Berlin Hbf", "Berlin-Spandau", "Wittenberge", "Hamburg Hbf"]
+      stops: [
+        { name: "Berlin Hbf", time: 0 },
+        { name: "Berlin-Spandau", time: 8 },
+        { name: "Wittenberge", time: 35 },
+        { name: "Hamburg Hbf", time: 60 }
+      ]
     },
     { 
       id: 9, 
@@ -130,8 +221,18 @@ const RouteDetail = () => {
       duration: "8 h 30 min",
       description: "Der IC2035 verbindet die Nordseeküste bei Norddeich mit Leipzig über Hannover, Braunschweig und Berlin.",
       stops: [
-        "Norddeich Mole", "Norden", "Emden", "Leer", "Oldenburg", "Bremen", 
-        "Hannover Hbf", "Braunschweig Hbf", "Magdeburg Hbf", "Berlin Hbf", "Lutherstadt Wittenberg", "Leipzig Hbf"
+        { name: "Norddeich Mole", time: 0 },
+        { name: "Norden", time: 8 },
+        { name: "Emden", time: 15 },
+        { name: "Leer", time: 20 },
+        { name: "Oldenburg", time: 35 },
+        { name: "Bremen", time: 40 },
+        { name: "Hannover Hbf", time: 65 },
+        { name: "Braunschweig Hbf", time: 35 },
+        { name: "Magdeburg Hbf", time: 50 },
+        { name: "Berlin Hbf", time: 90 },
+        { name: "Lutherstadt Wittenberg", time: 45 },
+        { name: "Leipzig Hbf", time: 37 }
       ]
     },
     { 
@@ -143,7 +244,15 @@ const RouteDetail = () => {
       via: "Nürnberg", 
       duration: "3 h 55 min",
       description: "Der ICE500 verbindet die Hauptstadt Berlin mit München über die Schnellfahrstrecke.",
-      stops: ["Berlin Hbf", "Berlin Südkreuz", "Lutherstadt Wittenberg", "Erfurt Hbf", "Bamberg", "Nürnberg Hbf", "München Hbf"]
+      stops: [
+        { name: "Berlin Hbf", time: 0 },
+        { name: "Berlin Südkreuz", time: 5 },
+        { name: "Lutherstadt Wittenberg", time: 30 },
+        { name: "Erfurt Hbf", time: 60 },
+        { name: "Bamberg", time: 45 },
+        { name: "Nürnberg Hbf", time: 25 },
+        { name: "München Hbf", time: 70 }
+      ]
     },
     { 
       id: 11, 
@@ -154,7 +263,17 @@ const RouteDetail = () => {
       via: "Erfurt", 
       duration: "3 h 29 min",
       description: "Der ICE1000 verbindet Berlin mit Frankfurt am Main über die Schnellfahrstrecke durch Thüringen.",
-      stops: ["Berlin Hbf", "Berlin Südkreuz", "Halle (Saale) Hbf", "Erfurt Hbf", "Gotha", "Eisenach", "Fulda", "Hanau Hbf", "Frankfurt (Main) Hbf"]
+      stops: [
+        { name: "Berlin Hbf", time: 0 },
+        { name: "Berlin Südkreuz", time: 5 },
+        { name: "Halle (Saale) Hbf", time: 60 },
+        { name: "Erfurt Hbf", time: 30 },
+        { name: "Gotha", time: 15 },
+        { name: "Eisenach", time: 20 },
+        { name: "Fulda", time: 40 },
+        { name: "Hanau Hbf", time: 45 },
+        { name: "Frankfurt (Main) Hbf", time: 14 }
+      ]
     },
     { 
       id: 12, 
@@ -165,8 +284,32 @@ const RouteDetail = () => {
       via: "Berlin", 
       duration: "5 h 34 min",
       description: "Der ICE1600 verbindet Hamburg mit München über Berlin und bietet eine schnelle Nord-Süd-Verbindung.",
-      stops: ["Hamburg Hbf", "Berlin Hbf", "Leipzig Hbf", "Nürnberg Hbf", "München Hbf"]
+      stops: [
+        { name: "Hamburg Hbf", time: 0 },
+        { name: "Berlin Hbf", time: 100 },
+        { name: "Leipzig Hbf", time: 70 },
+        { name: "Nürnberg Hbf", time: 90 },
+        { name: "München Hbf", time: 74 }
+      ]
     },
+    { 
+      id: 101, 
+      type: "ICE", 
+      number: "ICE101", 
+      from: "Berlin Hbf", 
+      to: "München Hbf", 
+      via: "Halle, Erfurt, Nürnberg", 
+      duration: "3 h 52 min",
+      description: "Der ICE101 ist eine der schnellsten Verbindungen zwischen Berlin und München über die Neubaustrecke.",
+      stops: [
+        { name: "Berlin Hbf", time: 0 },
+        { name: "Berlin Südkreuz", time: 5 },
+        { name: "Halle (Saale) Hbf", time: 60 },
+        { name: "Erfurt Hbf", time: 30 },
+        { name: "Nürnberg Hbf", time: 85 },
+        { name: "München Hbf", time: 52 }
+      ]
+    }
   ];
   
   const route = routesData.find(route => route.id === Number(routeId));
@@ -264,21 +407,39 @@ const RouteDetail = () => {
               <div className="relative">
                 <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
                 <ul className="space-y-6">
-                  {route.stops.map((stop, index) => (
-                    <li key={index} className="ml-10 relative">
-                      <div className={`absolute -left-10 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border-2 
-                        ${index === 0 || index === route.stops.length - 1 ? 'bg-db-red border-db-red' : 'bg-white border-gray-400'}`}>
-                      </div>
-                      <div className="flex items-center">
-                        <Train className={`h-4 w-4 mr-2 ${index === 0 || index === route.stops.length - 1 ? 'text-db-red' : 'text-gray-500'}`} />
-                        <span className={index === 0 || index === route.stops.length - 1 ? 'font-medium' : ''}>
-                          {stop}
-                        </span>
-                        {index === 0 && <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Start</span>}
-                        {index === route.stops.length - 1 && <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Ziel</span>}
-                      </div>
-                    </li>
-                  ))}
+                  {route.stops.map((stop, index) => {
+                    const isStartOrEnd = (index === 0 || index === route.stops.length - 1);
+                    const nextStop = route.stops[index + 1];
+                    const hasTimeToNextStop = index < route.stops.length - 1 && nextStop?.time;
+                    
+                    return (
+                      <li key={index} className="ml-10 relative">
+                        <div className={`absolute -left-10 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border-2 
+                          ${isStartOrEnd ? 'bg-db-red border-db-red' : 'bg-white border-gray-400'}`}>
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="flex items-center">
+                            <Train className={`h-4 w-4 mr-2 ${isStartOrEnd ? 'text-db-red' : 'text-gray-500'}`} />
+                            <span className={isStartOrEnd ? 'font-medium' : ''}>
+                              {stop.name}
+                            </span>
+                            {index === 0 && <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Start</span>}
+                            {index === route.stops.length - 1 && <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Ziel</span>}
+                          </div>
+                          
+                          {hasTimeToNextStop && (
+                            <div className="ml-6 mt-1 text-sm text-gray-500 flex items-center">
+                              <div className="flex items-center bg-gray-100 px-2 py-1 rounded">
+                                <Clock className="h-3 w-3 mr-1" />
+                                <span>+{nextStop.time} min</span>
+                              </div>
+                              <div className="ml-2 border-t border-dashed border-gray-300 flex-grow"></div>
+                            </div>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
