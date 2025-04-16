@@ -6,7 +6,7 @@ import SearchBar from "@/components/SearchBar";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Filter, Clock, BookOpen, ChevronDown } from "lucide-react";
+import { ChevronDown, Book } from "lucide-react";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +33,10 @@ interface Training {
   level: "Beginner" | "Intermediate" | "Advanced";
   dateCreated: string;
   participants: number;
+  host?: string;
+  coHost?: string;
+  scheduledTime?: string;
+  scheduledDate?: string;
 }
 
 const trainings: Training[] = [
@@ -45,7 +49,11 @@ const trainings: Training[] = [
     duration: "45 min",
     level: "Beginner",
     dateCreated: "2025-03-15",
-    participants: 156
+    participants: 156,
+    host: "SignalPro99",
+    coHost: "StationMaster22",
+    scheduledTime: "15:30",
+    scheduledDate: "25.04.2025"
   },
   {
     id: 2,
@@ -56,7 +64,11 @@ const trainings: Training[] = [
     duration: "60 min",
     level: "Advanced",
     dateCreated: "2025-03-28",
-    participants: 87
+    participants: 87,
+    host: "ICEDriver88",
+    coHost: "SpeedMaster44",
+    scheduledTime: "17:00",
+    scheduledDate: "26.04.2025"
   },
   {
     id: 3,
@@ -67,7 +79,11 @@ const trainings: Training[] = [
     duration: "30 min",
     level: "Beginner",
     dateCreated: "2025-04-02",
-    participants: 124
+    participants: 124,
+    host: "PlatformExpert",
+    coHost: "ServicePro55",
+    scheduledTime: "14:15",
+    scheduledDate: "27.04.2025"
   },
   {
     id: 4,
@@ -78,7 +94,11 @@ const trainings: Training[] = [
     duration: "40 min",
     level: "Intermediate",
     dateCreated: "2025-04-05",
-    participants: 92
+    participants: 92,
+    host: "TicketProfi",
+    coHost: "TrainManager11",
+    scheduledTime: "10:30",
+    scheduledDate: "28.04.2025"
   },
   {
     id: 5,
@@ -89,7 +109,11 @@ const trainings: Training[] = [
     duration: "75 min",
     level: "Advanced",
     dateCreated: "2025-04-10",
-    participants: 67
+    participants: 67,
+    host: "ICEMaster77",
+    coHost: "TrainTech23",
+    scheduledTime: "16:45",
+    scheduledDate: "29.04.2025"
   },
   {
     id: 6,
@@ -100,7 +124,11 @@ const trainings: Training[] = [
     duration: "50 min",
     level: "Advanced",
     dateCreated: "2025-04-11",
-    participants: 43
+    participants: 43,
+    host: "EmergencyPro",
+    coHost: "SafetyExpert",
+    scheduledTime: "13:00",
+    scheduledDate: "30.04.2025"
   }
 ];
 
@@ -155,10 +183,21 @@ const Training = () => {
       
       <main className="flex-grow bg-gray-50">
         <div className="container mx-auto px-4 py-12">
-          <h1 className="text-3xl font-bold mb-2">Training</h1>
-          <p className="text-gray-600 mb-8">
-            Verbessere deine Fähigkeiten mit unseren speziellen Trainingseinheiten für alle Rollen im Bahnnetzwerk.
-          </p>
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h1 className="text-3xl font-bold mb-2">Training</h1>
+              <p className="text-gray-600">
+                Verbessere deine Fähigkeiten mit unseren speziellen Trainingseinheiten für alle Rollen im Bahnnetzwerk.
+              </p>
+            </div>
+            <Button 
+              className="bg-db-red hover:bg-db-darkred text-white flex items-center gap-2"
+              onClick={() => navigate("/guides")}
+            >
+              <Book className="h-4 w-4" />
+              Guides
+            </Button>
+          </div>
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
             <SearchBar 
@@ -190,10 +229,6 @@ const Training = () => {
             />
             
             <div className="flex gap-2">
-              <Button variant="outline" className="text-sm flex items-center gap-1">
-                <Filter className="h-3.5 w-3.5" />
-                Filter
-              </Button>
               <Button variant="default" className="bg-db-red hover:bg-db-darkred text-sm">
                 Neuste zuerst
               </Button>
@@ -223,14 +258,30 @@ const Training = () => {
                 </div>
                 
                 <div className="p-4 bg-white">
-                  <div className="flex justify-between text-sm">
+                  <div className="mb-2">
+                    <div className="flex justify-between items-center mb-2">
+                      <div>
+                        <span className="font-semibold text-sm">Host:</span> {training.host}
+                      </div>
+                      <div>
+                        <span className="font-semibold text-sm">Co-Host:</span> {training.coHost}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <span className="font-semibold text-sm">Datum:</span> {training.scheduledDate}
+                      </div>
+                      <div>
+                        <span className="font-semibold text-sm">Zeit:</span> {training.scheduledTime} Uhr
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between text-sm border-t pt-2">
                     <div className="flex items-center">
-                      <Clock className="h-3.5 w-3.5 mr-1" />
-                      {training.duration}
+                      <span>{training.duration}</span>
                     </div>
                     <div className="flex items-center">
-                      <BookOpen className="h-3.5 w-3.5 mr-1" />
-                      {training.participants} Teilnehmer
+                      <span>{training.participants} Teilnehmer</span>
                     </div>
                   </div>
                 </div>

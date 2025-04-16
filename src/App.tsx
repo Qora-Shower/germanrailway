@@ -20,6 +20,8 @@ import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PlayerDetail from "./pages/PlayerDetail";
 import Training from "./pages/Training";
+import Guides from "./pages/Guides";
+import GuideDetail from "./pages/GuideDetail";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ const App = () => (
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/player/:playerId" element={<PlayerDetail />} />
           <Route path="/training" element={<Training />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/guide/:guideId" element={<GuideDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </RouterRoutes>
