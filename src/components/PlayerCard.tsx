@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 
 export interface PlayerRole {
-  name: 'Signaller' | 'Conductor' | 'Platform Employee' | 'Driver' | 'Passenger';
+  name: 'Signaller' | 'Conductor' | 'Platform Employees' | 'Driver' | 'Passenger';
   abbreviation: string;
   bgColor: string;
   germanName: string;
@@ -15,31 +15,31 @@ export interface PlayerRole {
 export const PLAYER_ROLES: Record<string, PlayerRole> = {
   SIGNALLER: {
     name: 'Signaller',
-    abbreviation: 'SW',
+    abbreviation: 'SG',
     bgColor: 'bg-[#F2FCE2] text-emerald-800 border-emerald-200',
-    germanName: 'Stellwerker'
+    germanName: 'Fahrdienstleiter'
   },
   CONDUCTOR: {
     name: 'Conductor',
-    abbreviation: 'ZF',
+    abbreviation: 'CD',
     bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200',
-    germanName: 'Zugführer'
+    germanName: 'Schaffner'
   },
   PLATFORM_EMPLOYEE: {
-    name: 'Platform Employee',
-    abbreviation: 'BM',
+    name: 'Platform Staff',
+    abbreviation: 'PS',
     bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200',
     germanName: 'Bahnsteigmitarbeiter'
   },
   DRIVER: {
     name: 'Driver',
-    abbreviation: 'LF',
+    abbreviation: 'D',
     bgColor: 'bg-db-red text-white border-red-700',
     germanName: 'Lokführer'
   },
   PASSENGER: {
     name: 'Passenger',
-    abbreviation: 'FG',
+    abbreviation: 'PG',
     bgColor: 'bg-[#F1F0FB] text-gray-700 border-gray-300',
     germanName: 'Fahrgast'
   }
