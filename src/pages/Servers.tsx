@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import SearchBar from "@/components/SearchBar";
 
 const Servers = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,7 +26,6 @@ const Servers = () => {
   );
 
   const handleServerClick = (serverId: string) => {
-    // In a real app, this would navigate to a detailed server view
     navigate(`/server/${serverId}`);
   };
 
@@ -44,13 +42,11 @@ const Servers = () => {
             Click on a server to view detailed information.
           </p>
           
-          <div className="relative mb-8">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <Input
-              placeholder="Search servers by ID..."
-              className="pl-10 pr-4"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+          <div className="mb-8">
+            <SearchBar 
+              placeholder="Search servers by ID or name..." 
+              onChange={setSearchTerm}
+              initialValue={searchTerm}
             />
           </div>
           
