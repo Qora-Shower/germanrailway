@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, Filter } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Input } from "@/components/ui/input";
+import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -93,15 +92,11 @@ const Routes = () => {
           </p>
           
           <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <div className="relative flex-grow">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <Input
-                placeholder="Suchen Sie nach Zugnummer, Start, oder Ziel..."
-                className="pl-10 pr-4"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+            <SearchBar
+              placeholder="Suchen Sie nach Zugnummer, Start, oder Ziel..."
+              onChange={(value) => setSearchTerm(value)}
+              className="flex-grow"
+            />
             
             <Collapsible 
               open={showFilters}
@@ -124,7 +119,10 @@ const Routes = () => {
                   <div className="flex flex-wrap gap-2">
                     <Toggle
                       pressed={selectedFilter === "all"}
-                      onPressedChange={() => setSelectedFilter("all")}
+                      onPressedChange={() => {
+                        setSelectedFilter("all");
+                        // Reset all other filters when "All" is selected
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "all" ? "bg-db-red text-white hover:text-white hover:bg-db-darkred" : ""}`}
                     >
@@ -132,7 +130,9 @@ const Routes = () => {
                     </Toggle>
                     <Toggle
                       pressed={selectedFilter === "s-bahn"}
-                      onPressedChange={() => setSelectedFilter("s-bahn")}
+                      onPressedChange={() => {
+                        setSelectedFilter(selectedFilter === "s-bahn" ? "all" : "s-bahn");
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "s-bahn" ? "bg-green-500 text-white hover:text-white hover:bg-green-600" : ""}`}
                     >
@@ -140,7 +140,9 @@ const Routes = () => {
                     </Toggle>
                     <Toggle
                       pressed={selectedFilter === "rb"}
-                      onPressedChange={() => setSelectedFilter("rb")}
+                      onPressedChange={() => {
+                        setSelectedFilter(selectedFilter === "rb" ? "all" : "rb");
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "rb" ? "bg-red-500 text-white hover:text-white hover:bg-red-600" : ""}`}
                     >
@@ -148,7 +150,9 @@ const Routes = () => {
                     </Toggle>
                     <Toggle
                       pressed={selectedFilter === "re"}
-                      onPressedChange={() => setSelectedFilter("re")}
+                      onPressedChange={() => {
+                        setSelectedFilter(selectedFilter === "re" ? "all" : "re");
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "re" ? "bg-red-600 text-white hover:text-white hover:bg-red-700" : ""}`}
                     >
@@ -156,7 +160,9 @@ const Routes = () => {
                     </Toggle>
                     <Toggle
                       pressed={selectedFilter === "ire"}
-                      onPressedChange={() => setSelectedFilter("ire")}
+                      onPressedChange={() => {
+                        setSelectedFilter(selectedFilter === "ire" ? "all" : "ire");
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "ire" ? "bg-orange-500 text-white hover:text-white hover:bg-orange-600" : ""}`}
                     >
@@ -164,7 +170,9 @@ const Routes = () => {
                     </Toggle>
                     <Toggle
                       pressed={selectedFilter === "ec"}
-                      onPressedChange={() => setSelectedFilter("ec")}
+                      onPressedChange={() => {
+                        setSelectedFilter(selectedFilter === "ec" ? "all" : "ec");
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "ec" ? "bg-blue-400 text-white hover:text-white hover:bg-blue-500" : ""}`}
                     >
@@ -172,7 +180,9 @@ const Routes = () => {
                     </Toggle>
                     <Toggle
                       pressed={selectedFilter === "ic"}
-                      onPressedChange={() => setSelectedFilter("ic")}
+                      onPressedChange={() => {
+                        setSelectedFilter(selectedFilter === "ic" ? "all" : "ic");
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "ic" ? "bg-blue-500 text-white hover:text-white hover:bg-blue-600" : ""}`}
                     >
@@ -180,7 +190,9 @@ const Routes = () => {
                     </Toggle>
                     <Toggle
                       pressed={selectedFilter === "ice"}
-                      onPressedChange={() => setSelectedFilter("ice")}
+                      onPressedChange={() => {
+                        setSelectedFilter(selectedFilter === "ice" ? "all" : "ice");
+                      }}
                       variant="outline"
                       className={`min-w-24 ${selectedFilter === "ice" ? "bg-blue-600 text-white hover:text-white hover:bg-blue-700" : ""}`}
                     >
