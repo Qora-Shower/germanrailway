@@ -9,33 +9,39 @@ export interface PlayerRole {
   name: 'Signaller' | 'Conductor' | 'Platform Employee' | 'Driver' | 'Passenger';
   abbreviation: string;
   bgColor: string;
+  germanName: string;
 }
 
 export const PLAYER_ROLES: Record<string, PlayerRole> = {
   SIGNALLER: {
     name: 'Signaller',
-    abbreviation: 'SG',
-    bgColor: 'bg-[#F2FCE2] text-emerald-800 border-emerald-200'
+    abbreviation: 'SW',
+    bgColor: 'bg-[#F2FCE2] text-emerald-800 border-emerald-200',
+    germanName: 'Stellwerker'
   },
   CONDUCTOR: {
     name: 'Conductor',
-    abbreviation: 'CO',
-    bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200'
+    abbreviation: 'ZF',
+    bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200',
+    germanName: 'Zugführer'
   },
   PLATFORM_EMPLOYEE: {
     name: 'Platform Employee',
-    abbreviation: 'PE',
-    bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200'
+    abbreviation: 'BM',
+    bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200',
+    germanName: 'Bahnsteigmitarbeiter'
   },
   DRIVER: {
     name: 'Driver',
-    abbreviation: 'DR',
-    bgColor: 'bg-db-red text-white border-red-700'
+    abbreviation: 'LF',
+    bgColor: 'bg-db-red text-white border-red-700',
+    germanName: 'Lokführer'
   },
   PASSENGER: {
     name: 'Passenger',
-    abbreviation: 'PS',
-    bgColor: 'bg-[#F1F0FB] text-gray-700 border-gray-300'
+    abbreviation: 'FG',
+    bgColor: 'bg-[#F1F0FB] text-gray-700 border-gray-300',
+    germanName: 'Fahrgast'
   }
 };
 
@@ -56,7 +62,6 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
   const role = PLAYER_ROLES[player.role];
 
   const handleClick = () => {
-    // In a real app, this would navigate to a player detail page
     navigate(`/player/${player.id}`);
   };
 
@@ -66,7 +71,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
       onClick={handleClick}
     >
       <CardContent className="p-4 flex items-center gap-3">
-        <Avatar className="h-10 w-10 border-2 border-white">
+        <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
           <AvatarImage src={player.avatar || '/placeholder.svg'} alt={player.username} />
           <AvatarFallback>{player.username.substring(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
@@ -75,11 +80,11 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
           <p className="font-medium">{player.username}</p>
           <div className="flex items-center gap-1">
             <Badge variant="outline" className="text-xs">
-              {role.name}
+              {role.germanName}
             </Badge>
-            {player.groupRank && (
-              <span className="text-xs text-gray-500">{role.abbreviation}</span>
-            )}
+            <span className="text-xs font-semibold ml-1 bg-white bg-opacity-50 px-1 rounded">
+              {role.abbreviation}
+            </span>
           </div>
         </div>
       </CardContent>

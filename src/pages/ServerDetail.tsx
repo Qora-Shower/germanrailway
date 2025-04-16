@@ -6,10 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Server, ArrowLeft, Users, Clock, Calendar } from "lucide-react";
 import PlayerCard, { Player, PLAYER_ROLES } from "@/components/PlayerCard";
 import ConductorView from "@/components/ConductorView";
+import SearchBar from "@/components/SearchBar";
+import { useState } from "react";
 
 const ServerDetail = () => {
   const { serverId } = useParams();
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
   
   // In a real app, this would be fetched from an API based on the serverId
   const serverData = {
@@ -18,8 +21,8 @@ const ServerDetail = () => {
     players: 15,
     maxPlayers: 30,
     createdAt: new Date().toLocaleDateString(),
-    uptime: "3 hours 24 minutes",
-    region: "Europe"
+    uptime: "3 Stunden 24 Minuten",
+    region: "Europa"
   };
   
   // Sample player list organized by role - in a real app, would be fetched from an API
@@ -45,18 +48,18 @@ const ServerDetail = () => {
     ],
   };
 
-  // Sample conductor data
+  // Sample conductor data with German stations
   const conductorData = {
-    stationName: "Edgemead",
-    platforms: ["1", "2", "3"],
+    stationName: "Berlin Hauptbahnhof",
+    platforms: ["1", "2", "3", "4", "5"],
     trains: [
       {
         time: "09:38",
-        id: "2T11 R038",
-        route: "R038",
-        destination: "Leighton City",
+        id: "ICE 1511",
+        route: "ICE",
+        destination: "München Hbf",
         platform: "3",
-        trainClass: "170421 Class 170/4",
+        trainClass: "ICE 4 - 412 051",
         driver: {
           username: "matsq4",
           rank: "GD"
@@ -64,11 +67,11 @@ const ServerDetail = () => {
       },
       {
         time: "09:37",
-        id: "2L34 R024",
-        route: "R024",
-        destination: "Llyn-by-the-Sea",
+        id: "RE 18095",
+        route: "RE1",
+        destination: "Frankfurt (Oder)",
         platform: "2",
-        trainClass: "357315 Class 357",
+        trainClass: "Bombardier Talent 2 - 442 113",
         driver: {
           username: "atsuatsu6923",
           rank: "QD"
@@ -76,11 +79,11 @@ const ServerDetail = () => {
       },
       {
         time: "09:36",
-        id: "9V09 R026",
-        route: "R026",
-        destination: "Stepford Victoria",
+        id: "RB 18419",
+        route: "RB10",
+        destination: "Nauen",
         platform: "3",
-        trainClass: "68060 + 68059 Class 68",
+        trainClass: "Alstom Coradia Continental - 1440 129",
         driver: {
           username: "Amy191207",
           rank: "GD"
@@ -88,11 +91,11 @@ const ServerDetail = () => {
       },
       {
         time: "09:35",
-        id: "2W81 R038",
-        route: "R038",
-        destination: "Westwyvern",
-        platform: "2",
-        trainClass: "350391 Class 350",
+        id: "ICE 1082",
+        route: "ICE",
+        destination: "Hamburg Hbf",
+        platform: "5",
+        trainClass: "ICE 3 - 403 021",
         driver: {
           username: "Alya4Desire",
           rank: "GD"
@@ -105,8 +108,16 @@ const ServerDetail = () => {
     ]
   };
   
-  const handleViewPlayerDetails = (playerId: number) => {
-    navigate(`/player/${playerId}`);
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  // Filter players based on search query
+  const filterPlayers = (players: Player[]) => {
+    if (!searchQuery) return players;
+    return players.filter(player => 
+      player.username.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   };
 
   // Determine if there's a conductor in the server
@@ -124,12 +135,20 @@ const ServerDetail = () => {
             className="mb-6 flex items-center"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Servers
+            Zurück zu Servern
           </Button>
           
-          <div className="flex items-center mb-6">
-            <Server className="h-6 w-6 mr-2 text-db-red" />
-            <h1 className="text-3xl font-bold">{serverData.name}</h1>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
+            <div className="flex items-center">
+              <Server className="h-6 w-6 mr-2 text-db-red" />
+              <h1 className="text-3xl font-bold">{serverData.name}</h1>
+            </div>
+            
+            <SearchBar 
+              placeholder="Spieler suchen..."
+              onChange={handleSearch}
+              className="w-full md:w-72"
+            />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -150,7 +169,7 @@ const ServerDetail = () => {
                 <div className="flex items-center">
                   <Calendar className="h-4 w-4 mr-2 text-db-red" />
                   <div>
-                    <p className="text-gray-500">Created</p>
+                    <p className="text-gray-500">Erstellt</p>
                     <p className="font-medium">{serverData.createdAt}</p>
                   </div>
                 </div>
@@ -158,7 +177,7 @@ const ServerDetail = () => {
                 <div className="flex items-center">
                   <Clock className="h-4 w-4 mr-2 text-db-red" />
                   <div>
-                    <p className="text-gray-500">Uptime</p>
+                    <p className="text-gray-500">Laufzeit</p>
                     <p className="font-medium">{serverData.uptime}</p>
                   </div>
                 </div>
@@ -169,12 +188,12 @@ const ServerDetail = () => {
               <h2 className="text-lg font-semibold mb-4">
                 <div className="flex items-center">
                   <Users className="h-5 w-5 mr-2 text-db-red" />
-                  Players
+                  Spieler
                 </div>
               </h2>
               
               <p className="mb-2">
-                {serverData.players} / {serverData.maxPlayers} players online
+                {serverData.players} / {serverData.maxPlayers} Spieler online
               </p>
               
               <div className="mb-4 bg-gray-200 rounded-full h-2.5">
@@ -186,26 +205,26 @@ const ServerDetail = () => {
               
               <div className="mt-4">
                 <Button className="w-full bg-db-red hover:bg-db-darkred">
-                  Join Game
+                  Spiel beitreten
                 </Button>
               </div>
             </div>
             
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-lg font-semibold mb-4">Player Roles</h2>
+              <h2 className="text-lg font-semibold mb-4">Spielerrollen</h2>
               
               <div className="space-y-2 text-sm">
                 <div className="p-2 bg-[#F2FCE2] rounded text-emerald-800">
-                  <strong>Signaller:</strong> Controls signals and points
+                  <strong>Stellwerker:</strong> Kontrolliert Signale und Weichen
                 </div>
                 <div className="p-2 bg-[#FEF7CD] rounded text-amber-800">
-                  <strong>Conductor/Platform Employee:</strong> Dispatches trains and assists passengers
+                  <strong>Zugführer/Bahnsteigmitarbeiter:</strong> Fertigt Züge ab und hilft Fahrgästen
                 </div>
                 <div className="p-2 bg-db-red rounded text-white">
-                  <strong>Driver:</strong> Operates trains through the network
+                  <strong>Lokführer:</strong> Bedient die Züge im Netzwerk
                 </div>
                 <div className="p-2 bg-[#F1F0FB] rounded text-gray-700">
-                  <strong>Passenger:</strong> Travels on the network
+                  <strong>Fahrgast:</strong> Reist im Netzwerk
                 </div>
               </div>
             </div>
@@ -214,12 +233,20 @@ const ServerDetail = () => {
           {/* Player sections by role */}
           <div className="space-y-8">
             {Object.entries(PLAYER_ROLES).map(([roleKey, roleData]) => {
-              const rolePlayers = playersByRole[roleKey] || [];
+              const rolePlayers = filterPlayers(playersByRole[roleKey] || []);
               if (rolePlayers.length === 0) return null;
+              
+              const germanRoleName = {
+                SIGNALLER: "Stellwerker",
+                CONDUCTOR: "Zugführer",
+                PLATFORM_EMPLOYEE: "Bahnsteigmitarbeiter",
+                DRIVER: "Lokführer",
+                PASSENGER: "Fahrgast"
+              }[roleKey];
               
               return (
                 <div key={roleKey}>
-                  <h2 className="text-xl font-semibold mb-3">{roleData.name}s ({rolePlayers.length})</h2>
+                  <h2 className="text-xl font-semibold mb-3">{germanRoleName} ({rolePlayers.length})</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {rolePlayers.map(player => (
                       <PlayerCard 
@@ -236,7 +263,7 @@ const ServerDetail = () => {
           {/* Conductor View if applicable */}
           {hasConductor && (
             <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-3">Conductor Dashboard</h2>
+              <h2 className="text-xl font-semibold mb-3">Zugführer-Dashboard</h2>
               <ConductorView 
                 stationName={conductorData.stationName}
                 platforms={conductorData.platforms}

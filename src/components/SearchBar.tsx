@@ -12,7 +12,7 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({
-  placeholder = "Search...",
+  placeholder = "Suchen...",
   onChange,
   initialValue = "",
   className
@@ -28,7 +28,7 @@ const SearchBar = ({
   };
 
   return (
-    <div className={cn("relative w-full max-w-md mx-auto", className)}>
+    <div className={cn("relative w-full max-w-md", className)}>
       <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
         <Search className="h-4 w-4 text-muted-foreground" />
       </div>
@@ -37,7 +37,7 @@ const SearchBar = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
-        className="pl-10 pr-4 h-10 rounded-full border-2 focus-visible:ring-offset-0 focus-visible:ring-1"
+        className="pl-10 pr-4 h-10 rounded-full border-2 border-gray-200 focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:ring-db-red focus-visible:border-db-red transition-colors"
       />
     </div>
   );

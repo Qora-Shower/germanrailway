@@ -37,11 +37,11 @@ const ConductorView: React.FC<ConductorViewProps> = ({
       <Card className="border-2 border-db-red">
         <CardHeader className="bg-db-darkred text-white py-4">
           <div className="flex items-center">
-            <h2 className="text-2xl font-bold">Dispatching trains at {stationName}</h2>
+            <h2 className="text-2xl font-bold">Züge abfertigen in {stationName}</h2>
           </div>
           <div className="flex items-center mt-2">
             <Flag className="h-4 w-4 mr-2" />
-            <p>Platforms {platforms.join(', ')}</p>
+            <p>Gleis {platforms.join(', ')}</p>
           </div>
         </CardHeader>
         
@@ -54,15 +54,15 @@ const ConductorView: React.FC<ConductorViewProps> = ({
                   <div className="flex items-center gap-2">
                     <Flag className="h-4 w-4 text-db-red" />
                     <span className="font-bold">{train.id}</span>
-                    <span className="text-gray-600">to {train.destination}</span>
+                    <span className="text-gray-600">nach {train.destination}</span>
                   </div>
-                  <div className="text-sm mt-1">Platform {train.platform}</div>
+                  <div className="text-sm mt-1">Gleis {train.platform}</div>
                   <div className="text-xs text-gray-500 mt-1">{train.trainClass}</div>
                   
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2">
                     <div className="flex items-center">
                       <Info className="h-3 w-3 mr-1 text-gray-500" />
-                      <span className="text-xs text-gray-600">Driver:</span>
+                      <span className="text-xs text-gray-600">Fahrer:</span>
                       <Badge className="ml-2 bg-db-red text-white text-xs">
                         {train.driver.rank}
                       </Badge>
@@ -72,7 +72,7 @@ const ConductorView: React.FC<ConductorViewProps> = ({
                     {train.guard && (
                       <div className="flex items-center ml-0 sm:ml-4">
                         <Info className="h-3 w-3 mr-1 text-gray-500" />
-                        <span className="text-xs text-gray-600">Guard:</span>
+                        <span className="text-xs text-gray-600">Schaffner:</span>
                         <Badge className="ml-2 bg-db-red text-white text-xs">
                           {train.guard.rank}
                         </Badge>
