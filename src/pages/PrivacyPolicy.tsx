@@ -27,10 +27,9 @@ const PrivacyPolicy = () => {
             </p>
             <p className="mb-4">
               Deutsche Bahn AG Roblox<br />
-              Musterstraße 123<br />
-              10115 Berlin<br />
+              Magdeburg<br />
               Deutschland<br />
-              E-Mail: datenschutz@db-roblox.de
+              E-Mail: deutsche.bahn.rbx@gmail.com 
             </p>
 
             <h2 className="text-2xl font-semibold mt-8 mb-4">2. Erhebung und Speicherung personenbezogener Daten</h2>
