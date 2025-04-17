@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 
 export interface PlayerRole {
-  name: 'Signaller' | 'Conductor' | 'Platform Employees' | 'Driver' | 'Passenger';
+  name: 'Signaller' | 'Conductor' | 'Platform Staff' | 'Driver' | 'Passenger';
   abbreviation: string;
   bgColor: string;
   textColor: string;
@@ -32,7 +32,7 @@ export const PLAYER_ROLES: Record<string, PlayerRole> = {
     germanName: 'Schaffner'
   },
   PLATFORM_EMPLOYEE: {
-    name: 'Platform Employees',
+    name: 'Platform Staff',
     abbreviation: 'PS',
     bgColor: 'bg-[#FEF7CD]',
     textColor: 'text-amber-800',

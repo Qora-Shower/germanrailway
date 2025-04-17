@@ -1,9 +1,8 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, Clock, MapPin, Train, Info } from "lucide-react";
 
 const RouteDetail = () => {
@@ -444,8 +443,8 @@ const RouteDetail = () => {
               <div className="font-bold text-xl mb-6">Inbound</div>
               
               <div className="relative px-10">
-                {/* Vertical timeline line - moved slightly to the right to center it with the location markers */}
-                <div className="absolute left-[25px] top-0 bottom-0 w-0.5 bg-[#1a2547]"></div>
+                {/* Vertical timeline line - moved to the right to center with the location markers */}
+                <div className="absolute left-[28px] top-0 bottom-0 w-0.5 bg-[#1a2547]"></div>
                 
                 <ul className="space-y-10">
                   {route.stops.map((stop, index) => {
@@ -456,7 +455,7 @@ const RouteDetail = () => {
                     return (
                       <li key={index} className="relative">
                         {/* Circle marker */}
-                        <div className="absolute left-[-10px] top-1/2 transform -translate-y-1/2">
+                        <div className="absolute left-[-7px] top-1/2 transform -translate-y-1/2">
                           <div className="h-5 w-5 rounded-full border-2 border-gray-400 bg-[#0a112b] flex items-center justify-center z-10">
                             {isStartOrEnd && <div className="h-2.5 w-2.5 rounded-full bg-white"></div>}
                           </div>
