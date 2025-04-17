@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Train, Flag, AlertTriangle, Users, Signal } from "lucide-react";
+import { ArrowLeft, Clock, Train, Flag, AlertTriangle, Users, Signal, Info, MapPin, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -122,11 +122,11 @@ const PlayerDetail = () => {
         return renderPassengerView();
       default:
         return (
-          <Card className="border shadow-lg p-8 text-center">
+          <Card className="border-0 shadow-lg p-8 text-center bg-[#0a112b]">
             <div className="flex flex-col items-center justify-center py-12">
-              <Train className="h-16 w-16 text-gray-300 mb-4" />
-              <h2 className="text-2xl font-semibold text-gray-700">Keine Daten verfügbar</h2>
-              <p className="mt-2 text-gray-500 max-w-md">
+              <Train className="h-16 w-16 text-gray-600 mb-4" />
+              <h2 className="text-2xl font-semibold text-white">Keine Daten verfügbar</h2>
+              <p className="mt-2 text-gray-400 max-w-md">
                 Für diesen Spieler stehen keine weiteren Informationen zur Verfügung.
               </p>
             </div>
@@ -139,8 +139,8 @@ const PlayerDetail = () => {
     if (!roleData) return null;
     
     return (
-      <Card className="border-2 border-db-red overflow-hidden shadow-lg">
-        <div className="bg-db-darkred text-white p-6">
+      <Card className="border-0 overflow-hidden shadow-lg bg-[#0a112b]">
+        <div className="bg-db-red text-white p-6">
           <h1 className="text-2xl sm:text-3xl font-bold">{roleData.trainId} {roleData.route}</h1>
           <div className="flex items-center mt-2">
             <Train className="h-5 w-5 mr-2" />
@@ -173,31 +173,31 @@ const PlayerDetail = () => {
         
         <div className="p-6">
           <div className="relative">
-            <div className="absolute left-[22px] top-2 bottom-6 w-0.5 bg-gray-300"></div>
+            <div className="absolute left-[25px] top-2 bottom-6 w-0.5 bg-gray-700"></div>
             {roleData.stations.map((station, index) => {
               const isActive = index === 0 || 
                               (roleData.stations[index-1].departed && !station.departed);
               return (
               <div key={index} className="flex mb-8 relative">
                 <div className="mr-6 text-right w-16">
-                  <span className={station.departed ? "text-emerald-600 font-semibold" : "text-gray-500"}>
+                  <span className={station.departed ? "text-emerald-400 font-semibold" : "text-gray-400"}>
                     {station.time}
                   </span>
                   {station.estimated && !station.departed && (
-                    <div className="text-xs text-amber-600 font-semibold">Est. {station.estimated}</div>
+                    <div className="text-xs text-amber-500 font-semibold">Est. {station.estimated}</div>
                   )}
                   {station.duration > 0 && (
-                    <div className="text-xs text-gray-400 mt-1">+{station.duration} min</div>
+                    <div className="text-xs text-gray-500 mt-1">+{station.duration} min</div>
                   )}
                 </div>
                 
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center z-10 ${
+                  <div className={`h-5 w-5 rounded-full flex items-center justify-center z-10 border-2 ${
                     station.departed 
-                      ? "bg-emerald-500 text-white" 
+                      ? "bg-emerald-700 border-emerald-500 text-white" 
                       : isActive 
-                        ? "bg-db-red text-white ring-4 ring-db-red/20" 
-                        : "bg-gray-300"
+                        ? "bg-db-red border-db-red text-white ring-4 ring-db-red/20" 
+                        : "bg-gray-800 border-gray-600"
                   }`}>
                     {station.departed ? <Flag className="h-3 w-3" /> : ""}
                   </div>
@@ -206,27 +206,27 @@ const PlayerDetail = () => {
                 <div className="ml-10 flex-grow">
                   <p className={`font-medium ${
                     station.departed 
-                      ? "text-emerald-700" 
+                      ? "text-emerald-400" 
                       : isActive 
                         ? "text-db-red" 
-                        : "text-gray-700"
+                        : "text-white"
                   }`}>
                     {station.name}
                   </p>
                   
                   {station.departed && (
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-400">
                       <Clock className="h-3 w-3 inline mr-1" />
                       Abgefahren um {roleData.departureTime}
                       {station.delay && station.delay > 0 && (
-                        <span className="text-amber-600 ml-2">(Verspätung: {station.delay} Min.)</span>
+                        <span className="text-amber-500 ml-2">(Verspätung: {station.delay} Min.)</span>
                       )}
                     </div>
                   )}
                   
                   {index === 0 && (
                     <div className="mt-2">
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-gray-400">
                         Zug wird von {playerData.username} gefahren
                       </div>
                     </div>
@@ -234,6 +234,16 @@ const PlayerDetail = () => {
                 </div>
               </div>
             )})}
+          </div>
+          
+          <div className="mt-6 pt-4 border-t border-gray-700">
+            <div className="flex items-center justify-between">
+              <div></div>
+              <Button variant="link" className="text-blue-400 p-0">
+                <span className="underline mr-1">Details Information</span>
+                <ExternalLink className="h-3 w-3" />
+              </Button>
+            </div>
           </div>
         </div>
       </Card>
@@ -244,7 +254,7 @@ const PlayerDetail = () => {
     if (!roleData) return null;
     
     return (
-      <Card className="border-2 border-emerald-500 overflow-hidden shadow-lg">
+      <Card className="border-0 overflow-hidden shadow-lg bg-[#0a112b]">
         <div className="bg-emerald-700 text-white p-6">
           <h1 className="text-2xl sm:text-3xl font-bold">Stellwerk: {roleData.stationName}</h1>
           <div className="flex items-center mt-2">
@@ -254,31 +264,41 @@ const PlayerDetail = () => {
         </div>
         
         <div className="p-6">
-          <h2 className="text-xl font-semibold mb-4 flex items-center">
-            <Train className="h-5 w-5 mr-2 text-emerald-700" />
+          <h2 className="text-xl font-semibold mb-4 flex items-center text-white">
+            <Train className="h-5 w-5 mr-2 text-emerald-400" />
             <span>Aktive Züge im Bereich</span>
           </h2>
           
           <div className="space-y-4">
             {roleData.activeTrains.map((train, index) => (
-              <Card key={index} className="border p-4 hover:shadow-md transition-all">
+              <div key={index} className="p-4 bg-[#091029] rounded-lg border border-gray-800 hover:bg-[#0c1433] transition-colors cursor-pointer">
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="font-semibold text-lg">{train.id}</p>
-                    <p className="text-sm text-gray-600">Fahrer: {train.driver}</p>
+                    <p className="font-semibold text-lg text-white">{train.id}</p>
+                    <p className="text-sm text-gray-400">Fahrer: {train.driver}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium">Gleis {train.platform}</p>
+                    <p className="font-medium text-white">Gleis {train.platform}</p>
                     <p className="text-sm">
                       Ankunft: {train.estimatedArrival}
                       {train.delay > 0 && (
-                        <span className="text-amber-600 ml-1">(+{train.delay})</span>
+                        <span className="text-amber-500 ml-1">(+{train.delay})</span>
                       )}
                     </p>
                   </div>
                 </div>
-              </Card>
+              </div>
             ))}
+          </div>
+          
+          <div className="mt-6 pt-4 border-t border-gray-700">
+            <div className="flex items-center justify-between">
+              <div></div>
+              <Button variant="link" className="text-blue-400 p-0">
+                <span className="underline mr-1">Details Information</span>
+                <ExternalLink className="h-3 w-3" />
+              </Button>
+            </div>
           </div>
         </div>
       </Card>
@@ -289,39 +309,49 @@ const PlayerDetail = () => {
     if (!roleData) return null;
     
     return (
-      <Card className="border-2 border-amber-400 overflow-hidden shadow-lg">
-        <div className="bg-amber-500 text-white p-6">
+      <Card className="border-0 overflow-hidden shadow-lg bg-[#0a112b]">
+        <div className="bg-amber-600 text-white p-6">
           <h1 className="text-2xl sm:text-3xl font-bold">{roleData.trainId}</h1>
           <p className="mt-1">{roleData.trainRoute}</p>
           <div className="flex items-center mt-4">
             <Train className="h-5 w-5 mr-2" />
             <p className="font-medium">Nächster Halt: {roleData.nextStop}</p>
-            <span className="ml-3 px-2 py-0.5 bg-white text-amber-500 rounded">Gleis {roleData.platform}</span>
+            <span className="ml-3 px-2 py-0.5 bg-white text-amber-600 rounded text-sm">Gleis {roleData.platform}</span>
           </div>
         </div>
         
         <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <div>
-              <p className="text-gray-600">Abfahrt:</p>
-              <p className="font-medium text-lg">{roleData.departsAt}</p>
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="p-3 bg-[#091029] rounded-lg border border-gray-800">
+              <p className="text-gray-400 text-sm">Abfahrt:</p>
+              <p className="font-medium text-white">{roleData.departsAt}</p>
             </div>
-            <div>
-              <p className="text-gray-600">Lokführer:</p>
-              <p className="font-medium">{roleData.driver}</p>
+            <div className="p-3 bg-[#091029] rounded-lg border border-gray-800">
+              <p className="text-gray-400 text-sm">Lokführer:</p>
+              <p className="font-medium text-white">{roleData.driver}</p>
             </div>
-            <div>
-              <p className="text-gray-600">Verspätung:</p>
-              <p className={`font-medium ${roleData.currentDelay > 0 ? "text-amber-600" : "text-green-600"}`}>
+            <div className="p-3 bg-[#091029] rounded-lg border border-gray-800">
+              <p className="text-gray-400 text-sm">Verspätung:</p>
+              <p className={`font-medium ${roleData.currentDelay > 0 ? "text-amber-500" : "text-emerald-400"}`}>
                 {roleData.currentDelay > 0 ? `+${roleData.currentDelay} Min.` : "Pünktlich"}
               </p>
             </div>
           </div>
           
-          <div className="mt-6">
-            <div className="flex items-center justify-center py-8">
+          <div className="mt-8 p-6 bg-[#091029] rounded-lg border border-gray-800">
+            <div className="flex items-center justify-center">
               <Users className="h-8 w-8 mr-3 text-amber-500" />
-              <h2 className="text-xl font-semibold">Zugführer: {playerData.username}</h2>
+              <h2 className="text-xl font-semibold text-white">Zugführer: {playerData.username}</h2>
+            </div>
+          </div>
+          
+          <div className="mt-6 pt-4 border-t border-gray-700">
+            <div className="flex items-center justify-between">
+              <div></div>
+              <Button variant="link" className="text-blue-400 p-0">
+                <span className="underline mr-1">Details Information</span>
+                <ExternalLink className="h-3 w-3" />
+              </Button>
             </div>
           </div>
         </div>
@@ -331,11 +361,11 @@ const PlayerDetail = () => {
 
   const renderPassengerView = () => {
     if (!roleData || !roleData.currentTrain) return (
-      <Card className="border-2 border-gray-300 shadow-lg p-8 text-center">
+      <Card className="border-0 shadow-lg p-8 text-center bg-[#0a112b]">
         <div className="flex flex-col items-center justify-center py-12">
-          <Train className="h-16 w-16 text-gray-300 mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-700">Keine Zugdaten verfügbar</h2>
-          <p className="mt-2 text-gray-500 max-w-md">
+          <Train className="h-16 w-16 text-gray-600 mb-4" />
+          <h2 className="text-2xl font-semibold text-white">Keine Zugdaten verfügbar</h2>
+          <p className="mt-2 text-gray-400 max-w-md">
             Für Passagiere werden keine aktiven Zugverbindungen angezeigt, wenn sie nicht in einem Zug sitzen. 
             Passagiere können mit Zügen reisen, die von Fahrern gesteuert werden.
           </p>
@@ -344,36 +374,30 @@ const PlayerDetail = () => {
     );
     
     const train = roleData.currentTrain;
-    let bgColor = "";
-    let textColor = "";
+    let headerColor = "";
     
     switch (train.type) {
       case "S-Bahn":
-        bgColor = "bg-green-100";
-        textColor = "text-green-800";
+        headerColor = "bg-green-600";
         break;
       case "RB":
       case "RE":
-        bgColor = "bg-red-100";
-        textColor = "text-red-800";
+        headerColor = "bg-db-red";
         break;
       case "IRE":
-        bgColor = "bg-orange-100";
-        textColor = "text-orange-800";
+        headerColor = "bg-orange-600";
         break;
       case "IC":
       case "ICE":
-        bgColor = "bg-blue-100";
-        textColor = "text-blue-800";
+        headerColor = "bg-blue-800";
         break;
       default:
-        bgColor = "bg-gray-100";
-        textColor = "text-gray-800";
+        headerColor = "bg-gray-700";
     }
     
     return (
-      <Card className="border-2 border-gray-300 overflow-hidden shadow-lg">
-        <div className={`${bgColor} ${textColor} p-6`}>
+      <Card className="border-0 overflow-hidden shadow-lg bg-[#0a112b]">
+        <div className={`${headerColor} text-white p-6`}>
           <h1 className="text-2xl sm:text-3xl font-bold">{train.id}</h1>
           <p className="mt-1">{train.from} → {train.to}</p>
           <div className="flex items-center mt-4">
@@ -388,13 +412,23 @@ const PlayerDetail = () => {
         </div>
         
         <div className="p-6">
-          <div className="flex justify-center items-center py-12">
+          <div className="p-6 bg-[#091029] rounded-lg border border-gray-800 mb-6">
             <div className="text-center">
-              <p className="text-gray-600 mb-2">Sie reisen als Fahrgast</p>
-              <h2 className="text-xl font-semibold">{playerData.username}</h2>
-              <p className="mt-4 text-sm text-gray-500">
+              <p className="text-gray-400 mb-2">Sie reisen als Fahrgast</p>
+              <h2 className="text-xl font-semibold text-white">{playerData.username}</h2>
+              <p className="mt-4 text-sm text-gray-400">
                 Ankunft in {train.nextStop}: {train.arrivesAt} Uhr
               </p>
+            </div>
+          </div>
+          
+          <div className="mt-6 pt-4 border-t border-gray-700">
+            <div className="flex items-center justify-between">
+              <div></div>
+              <Button variant="link" className="text-blue-400 p-0">
+                <span className="underline mr-1">Details Information</span>
+                <ExternalLink className="h-3 w-3" />
+              </Button>
             </div>
           </div>
         </div>
@@ -403,7 +437,7 @@ const PlayerDetail = () => {
   };
   
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
+    <div className="flex flex-col min-h-screen bg-[#040816] text-white">
       <Navbar />
       
       <main className="flex-grow">
@@ -411,7 +445,7 @@ const PlayerDetail = () => {
           <Button 
             variant="ghost" 
             onClick={() => navigate(-1)}
-            className="mb-6 flex items-center"
+            className="mb-6 flex items-center text-white"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Zurück
@@ -421,7 +455,7 @@ const PlayerDetail = () => {
             <Badge className={`${role.bgColor} ${role.textColor} ${role.borderColor} mr-3 py-1 px-3`}>
               {role.abbreviation}
             </Badge>
-            <h1 className="text-2xl font-bold">{playerData.username}</h1>
+            <h1 className="text-2xl font-bold text-white">{playerData.username}</h1>
           </div>
           
           {renderRoleSpecificView()}

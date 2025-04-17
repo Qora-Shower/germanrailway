@@ -79,24 +79,40 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
 
   return (
     <Card 
-      className={`border-2 cursor-pointer hover:shadow-md transition-all ${role.borderColor} bg-white`}
+      className={`border-2 cursor-pointer hover:shadow-md transition-all rounded-lg overflow-hidden ${role.borderColor} bg-[#0a112b]`}
       onClick={handleClick}
     >
+      <div className={`${
+        player.role === "SIGNALLER" ? "bg-emerald-800" :
+        player.role === "CONDUCTOR" || player.role === "PLATFORM_EMPLOYEE" ? "bg-amber-600" :
+        player.role === "DRIVER" ? "bg-db-red" :
+        "bg-gray-600"
+      } px-4 py-2 text-white text-sm font-medium`}>
+        {role.germanName}
+      </div>
+      
       <CardContent className="p-4 flex items-center gap-3">
         <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
           <AvatarImage src={player.avatar || '/placeholder.svg'} alt={player.username} />
-          <AvatarFallback>{player.username.substring(0, 2).toUpperCase()}</AvatarFallback>
+          <AvatarFallback className="bg-gray-700 text-white">{player.username.substring(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
         
         <div className="flex-grow">
-          <p className="font-medium">{player.username}</p>
-          <div className="flex items-center gap-1">
-            <Badge variant="outline" className={`text-xs ${role.textColor} ${role.borderColor}`}>
-              {role.germanName}
-            </Badge>
-            <span className={`text-xs font-semibold ml-1 bg-white px-1 rounded ${role.textColor}`}>
+          <p className="font-medium text-white">{player.username}</p>
+          <div className="flex items-center gap-1 mt-1">
+            <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
+              player.role === "SIGNALLER" ? "bg-emerald-900 text-emerald-200" :
+              player.role === "CONDUCTOR" || player.role === "PLATFORM_EMPLOYEE" ? "bg-amber-900 text-amber-200" :
+              player.role === "DRIVER" ? "bg-red-900 text-red-200" :
+              "bg-gray-700 text-gray-200"
+            }`}>
               {role.abbreviation}
             </span>
+            {player.groupRank && (
+              <span className="text-xs bg-gray-700 text-gray-200 px-2 py-0.5 rounded ml-1">
+                {player.groupRank}
+              </span>
+            )}
           </div>
         </div>
       </CardContent>

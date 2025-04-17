@@ -1,9 +1,10 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ChevronLeft, Clock, MapPin, Train } from "lucide-react";
+import { ChevronLeft, Clock, MapPin, Train, Info } from "lucide-react";
 
 const RouteDetail = () => {
   const { routeId } = useParams();
@@ -359,8 +360,27 @@ const RouteDetail = () => {
     }
   };
 
+  const getHeaderColor = (routeType) => {
+    switch (routeType) {
+      case "S-Bahn":
+        return "bg-green-600 text-white";
+      case "RB":
+      case "RE":
+        return "bg-db-red text-white";
+      case "IRE":
+        return "bg-orange-500 text-white";
+      case "EC":
+      case "IC":
+        return "bg-blue-700 text-white";
+      case "ICE":
+        return "bg-blue-800 text-white";
+      default:
+        return "bg-gray-700 text-white";
+    }
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#040816] text-white">
       <Navbar />
       
       <main className="flex-grow">
@@ -368,51 +388,65 @@ const RouteDetail = () => {
           <Button 
             variant="ghost" 
             onClick={() => navigate('/routen')}
-            className="mb-4"
+            className="mb-4 text-white"
           >
             <ChevronLeft className="mr-2 h-4 w-4" />
             Zurück zu allen Routen
           </Button>
           
-          {/* Route header card with red border */}
-          <div className="grid gap-6">
-            <Card className="border-2 border-db-red rounded-lg shadow-md p-6">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getRouteColor(route.type)}`}>
-                      {route.type}
-                    </span>
-                    <h1 className="text-3xl font-bold">{route.number}</h1>
-                  </div>
-                  <p className="text-gray-600 mt-2">
-                    {route.from} → {route.to}
-                  </p>
-                </div>
-                
-                <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-md">
-                  <Clock className="h-5 w-5 text-gray-600" />
-                  <span className="font-medium">{route.duration}</span>
+          <div className="mb-6">
+            <h1 className="text-3xl font-bold">ROUTE</h1>
+          </div>
+          
+          {/* Route header card */}
+          <Card className="border-0 rounded-lg shadow-lg bg-[#0a112b] mb-6">
+            <div className={`rounded-t-lg p-5 ${getHeaderColor(route.type)}`}>
+              <div className="flex items-center gap-2">
+                <Train className="h-6 w-6" />
+                <h2 className="text-2xl font-bold">{route.type} {route.number}</h2>
+              </div>
+              <p className="text-lg mt-2">
+                {route.from} → {route.to}
+              </p>
+            </div>
+            
+            <div className="p-5">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center text-gray-200">
+                  <Clock className="h-5 w-5 mr-2" />
+                  <span>Fahrzeit: {route.duration}</span>
                 </div>
               </div>
-            </Card>
-            
-            {/* Route description card with orange border */}
-            <Card className="border-2 border-amber-300 rounded-lg shadow-md p-6">
-              <div className="mt-2">
-                <h2 className="text-xl font-semibold mb-2">Beschreibung</h2>
-                <p className="text-gray-700">{route.description}</p>
+              
+              <div className="text-gray-300">
+                <p>{route.description}</p>
               </div>
-            </Card>
-            
-            {/* Stops card with red border and centered vertical timeline */}
-            <Card className="border-2 border-db-red rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
+              
+              <div className="mt-4 border-t border-gray-700 pt-4">
+                <div className="flex items-center text-blue-400 cursor-pointer">
+                  <Info className="h-4 w-4 mr-1" />
+                  <span className="underline">Details Information</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+          
+          {/* Stops card with vertical timeline */}
+          <Card className="border-0 rounded-lg shadow-md overflow-hidden bg-[#0a112b]">
+            <div className="p-6 border-b border-gray-700">
+              <h2 className="text-xl font-bold flex items-center">
                 <MapPin className="mr-2 h-5 w-5" />
                 Haltestellen
               </h2>
-              <div className="relative px-4">
-                <div className="absolute left-[22px] top-[14px] bottom-6 w-0.5 bg-gray-300"></div>
+            </div>
+            
+            <div className="p-6">
+              <div className="font-bold text-xl mb-6">Inbound</div>
+              
+              <div className="relative px-10">
+                {/* Vertical timeline line - moved slightly to the right to center it with the location markers */}
+                <div className="absolute left-[25px] top-0 bottom-0 w-0.5 bg-[#1a2547]"></div>
+                
                 <ul className="space-y-10">
                   {route.stops.map((stop, index) => {
                     const isStartOrEnd = (index === 0 || index === route.stops.length - 1);
@@ -421,25 +455,38 @@ const RouteDetail = () => {
                     
                     return (
                       <li key={index} className="relative">
-                        <div className={`absolute left-0 top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full border-2 z-10
-                          ${isStartOrEnd ? 'bg-db-red border-db-red' : 'bg-white border-gray-400'}`}>
+                        {/* Circle marker */}
+                        <div className="absolute left-[-10px] top-1/2 transform -translate-y-1/2">
+                          <div className="h-5 w-5 rounded-full border-2 border-gray-400 bg-[#0a112b] flex items-center justify-center z-10">
+                            {isStartOrEnd && <div className="h-2.5 w-2.5 rounded-full bg-white"></div>}
+                          </div>
                         </div>
-                        <div className="ml-10 flex flex-col">
+                        
+                        {/* Content */}
+                        <div className="ml-6">
+                          {/* Station name */}
                           <div className="flex items-center">
-                            <Train className={`h-4 w-4 mr-2 ${isStartOrEnd ? 'text-db-red' : 'text-gray-500'}`} />
-                            <span className={isStartOrEnd ? 'font-medium' : ''}>
+                            <span className="text-lg font-medium text-white">
                               {stop.name}
                             </span>
-                            {index === 0 && <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Start</span>}
-                            {index === route.stops.length - 1 && <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Ziel</span>}
+                            {index === 0 && 
+                              <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Start</span>
+                            }
+                            {index === route.stops.length - 1 && 
+                              <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Ziel</span>
+                            }
                           </div>
                           
+                          {/* Distance */}
+                          <div className="text-gray-400 flex items-center mt-1 text-sm">
+                            <span>⋮</span>
+                            <span className="ml-2">0.0 miles</span>
+                          </div>
+                          
+                          {/* Time to next stop */}
                           {hasTimeToNextStop && (
-                            <div className="mt-1 text-sm text-gray-500 flex items-center">
-                              <div className="flex items-center bg-gray-100 px-2 py-1 rounded">
-                                <Clock className="h-3 w-3 mr-1" />
-                                <span>+{nextStop.time} min</span>
-                              </div>
+                            <div className="mt-2 text-gray-200 absolute -left-2 top-14">
+                              + {nextStop.time} min
                             </div>
                           )}
                         </div>
@@ -448,8 +495,12 @@ const RouteDetail = () => {
                   })}
                 </ul>
               </div>
-            </Card>
-          </div>
+              
+              {route.stops.length > 15 && (
+                <div className="mt-8 font-bold text-xl">Outbound</div>
+              )}
+            </div>
+          </Card>
         </div>
       </main>
       
