@@ -22,7 +22,7 @@ const Navbar = () => {
   const [avatarUrl, setAvatarUrl] = useState("");
 
   // Roblox login URL
-  const robloxLoginUrl = "https://authorize.roblox.com/?client_id=4943182234166422753&response_type=code&redirect_uri=https%3A%2F%2Fauth.stepfordcountyrailway.co.uk%2Fsignin-oidc&scope=openid+profile&state=CfDJ8MJ8sZSakrROmoO_zN2-eZeCTDBiWyfM8ETzwSoM9CPIXrmYfeg8o8XLdwYkZuFCavmYn3BZpAlDVGg2lJ4WYPD6nlwN7MSSU20WZbFZcNzhRnq8r3xP_iagBAt5wxb1ArrWQfmxxgR3slSteRkrJCDoYhyEnm4ace8rlk6Ugs-G&nonce=638803110765483281.YmY3YmFjMGItNmNlNy00OGY3LTkzNmUtNTBhMzBhY2ZkZjNhMzc2YjQwY2EtOGE3Ni00Yzg5LTgxZWItOTFjYzY4NDI0OGM5&code_challenge=PvOZIMSUDfNMgh0-lfizAEhUFG5EU0f8lU3b5lckktE&code_challenge_method=S256&step=accountConfirm";
+  const robloxLoginUrl = "https://authorize.roblox.com/?client_id=3633418418761126744&response_type=code&redirect_uri=https%3A%2F%2Fauth.germanrailway.lovable.app%2Fsignin-oidc&scope=openid+profile&state=CfDJ8MJ8sZSakrROmoO_zN2-eZeCTDBiWyfM8ETzwSoM9CPIXrmYfeg8o8XLdwYkZuFCavmYn3BZpAlDVGg2lJ4WYPD6nlwN7MSSU20WZbFZcNzhRnq8r3xP_iagBAt5wxb1ArrWQfmxxgR3slSteRkrJCDoYhyEnm4ace8rlk6Ugs-G&nonce=638803110765483281.YmY3YmFjMGItNmNlNy00OGY3LTkzNmUtNTBhMzBhY2ZkZjNhMzc2YjQwY2EtOGE3Ni00Yzg5LTgxZWItOTFjYzY4NDI0OGM5&code_challenge=PvOZIMSUDfNMgh0-lfizAEhUFG5EU0f8lU3b5lckktE&code_challenge_method=S256&step=accountConfirm";
 
   // Simulating Roblox login
   const handleLogin = () => {
