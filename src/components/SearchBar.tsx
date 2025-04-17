@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Filter } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
@@ -57,7 +57,7 @@ const SearchBar = ({
         className={cn(
           "transition-all duration-200",
           variant === 'modern' 
-            ? "pl-10 pr-4 h-10 rounded-full border-2 border-gray-200 shadow-sm focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:ring-db-red focus-visible:border-db-red"
+            ? "pl-10 pr-4 h-12 rounded-full border-2 border-gray-200 shadow-sm focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:ring-db-red focus-visible:border-db-red"
             : "pl-10 pr-4 h-10 rounded-md border focus-visible:ring-1"
         )}
       />

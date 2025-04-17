@@ -9,6 +9,8 @@ export interface PlayerRole {
   name: 'Signaller' | 'Conductor' | 'Platform Employees' | 'Driver' | 'Passenger';
   abbreviation: string;
   bgColor: string;
+  textColor: string;
+  borderColor: string;
   germanName: string;
 }
 
@@ -16,31 +18,41 @@ export const PLAYER_ROLES: Record<string, PlayerRole> = {
   SIGNALLER: {
     name: 'Signaller',
     abbreviation: 'SG',
-    bgColor: 'bg-[#F2FCE2] text-emerald-800 border-emerald-200',
+    bgColor: 'bg-[#F2FCE2]',
+    textColor: 'text-emerald-800',
+    borderColor: 'border-emerald-200',
     germanName: 'Fahrdienstleiter'
   },
   CONDUCTOR: {
     name: 'Conductor',
     abbreviation: 'CD',
-    bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200',
+    bgColor: 'bg-[#FEF7CD]',
+    textColor: 'text-amber-800',
+    borderColor: 'border-amber-200',
     germanName: 'Schaffner'
   },
   PLATFORM_EMPLOYEE: {
     name: 'Platform Staff',
     abbreviation: 'PS',
-    bgColor: 'bg-[#FEF7CD] text-amber-800 border-amber-200',
+    bgColor: 'bg-[#FEF7CD]',
+    textColor: 'text-amber-800',
+    borderColor: 'border-amber-200',
     germanName: 'Bahnsteigmitarbeiter'
   },
   DRIVER: {
     name: 'Driver',
     abbreviation: 'D',
-    bgColor: 'bg-db-red text-white border-red-700',
+    bgColor: 'bg-db-red',
+    textColor: 'text-white',
+    borderColor: 'border-red-700',
     germanName: 'Lokführer'
   },
   PASSENGER: {
     name: 'Passenger',
     abbreviation: 'PG',
-    bgColor: 'bg-[#F1F0FB] text-gray-700 border-gray-300',
+    bgColor: 'bg-[#F1F0FB]',
+    textColor: 'text-gray-700',
+    borderColor: 'border-gray-300',
     germanName: 'Fahrgast'
   }
 };
@@ -67,7 +79,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
 
   return (
     <Card 
-      className={`border cursor-pointer hover:shadow-md transition-all ${role.bgColor}`}
+      className={`border-2 cursor-pointer hover:shadow-md transition-all ${role.borderColor} bg-white`}
       onClick={handleClick}
     >
       <CardContent className="p-4 flex items-center gap-3">
@@ -79,10 +91,10 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
         <div className="flex-grow">
           <p className="font-medium">{player.username}</p>
           <div className="flex items-center gap-1">
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className={`text-xs ${role.textColor} ${role.borderColor}`}>
               {role.germanName}
             </Badge>
-            <span className="text-xs font-semibold ml-1 bg-white bg-opacity-50 px-1 rounded">
+            <span className={`text-xs font-semibold ml-1 bg-white px-1 rounded ${role.textColor}`}>
               {role.abbreviation}
             </span>
           </div>

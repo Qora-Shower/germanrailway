@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, ChevronDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Collapsible,
   CollapsibleContent,
@@ -96,119 +101,75 @@ const Routes = () => {
               placeholder="Suchen Sie nach Zugnummer, Start, oder Ziel..."
               onChange={(value) => setSearchTerm(value)}
               className="flex-grow"
-            />
-            
-            <Collapsible 
-              open={showFilters}
-              onOpenChange={setShowFilters}
-              className="md:w-auto w-full"
-            >
-              <CollapsibleTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  className="flex items-center gap-2 w-full md:w-auto"
-                >
-                  <Filter className="h-4 w-4" />
-                  Filter
-                </Button>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="bg-white p-4 rounded-md border mt-2 w-full md:absolute md:right-0 md:z-10 md:min-w-[250px] md:shadow-md">
-                <div className="space-y-2">
-                  <h3 className="font-medium mb-4">Zugtypen</h3>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    <Toggle
-                      pressed={selectedFilter === "all"}
-                      onPressedChange={() => {
-                        setSelectedFilter("all");
-                        // Reset all other filters when "All" is selected
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "all" ? "bg-db-red text-white hover:text-white hover:bg-db-darkred" : ""}`}
+              withFilter={
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="h-8 gap-1 ml-2 rounded-full border-gray-300 flex items-center">
+                      <Filter className="h-3.5 w-3.5" />
+                      <span className="hidden sm:inline">{selectedFilter === "all" ? "Alle" : selectedFilter.toUpperCase()}</span>
+                      <ChevronDown className="h-3.5 w-3.5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("all")}
+                      className="cursor-pointer"
                     >
                       Alle
-                    </Toggle>
-                    <Toggle
-                      pressed={selectedFilter === "s-bahn"}
-                      onPressedChange={() => {
-                        setSelectedFilter(selectedFilter === "s-bahn" ? "all" : "s-bahn");
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "s-bahn" ? "bg-green-500 text-white hover:text-white hover:bg-green-600" : ""}`}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("s-bahn")}
+                      className="cursor-pointer"
                     >
                       S-Bahn
-                    </Toggle>
-                    <Toggle
-                      pressed={selectedFilter === "rb"}
-                      onPressedChange={() => {
-                        setSelectedFilter(selectedFilter === "rb" ? "all" : "rb");
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "rb" ? "bg-red-500 text-white hover:text-white hover:bg-red-600" : ""}`}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("rb")}
+                      className="cursor-pointer"
                     >
                       RB
-                    </Toggle>
-                    <Toggle
-                      pressed={selectedFilter === "re"}
-                      onPressedChange={() => {
-                        setSelectedFilter(selectedFilter === "re" ? "all" : "re");
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "re" ? "bg-red-600 text-white hover:text-white hover:bg-red-700" : ""}`}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("re")}
+                      className="cursor-pointer"
                     >
                       RE
-                    </Toggle>
-                    <Toggle
-                      pressed={selectedFilter === "ire"}
-                      onPressedChange={() => {
-                        setSelectedFilter(selectedFilter === "ire" ? "all" : "ire");
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "ire" ? "bg-orange-500 text-white hover:text-white hover:bg-orange-600" : ""}`}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("ire")}
+                      className="cursor-pointer"
                     >
                       IRE
-                    </Toggle>
-                    <Toggle
-                      pressed={selectedFilter === "ec"}
-                      onPressedChange={() => {
-                        setSelectedFilter(selectedFilter === "ec" ? "all" : "ec");
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "ec" ? "bg-blue-400 text-white hover:text-white hover:bg-blue-500" : ""}`}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("ec")}
+                      className="cursor-pointer"
                     >
                       EC
-                    </Toggle>
-                    <Toggle
-                      pressed={selectedFilter === "ic"}
-                      onPressedChange={() => {
-                        setSelectedFilter(selectedFilter === "ic" ? "all" : "ic");
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "ic" ? "bg-blue-500 text-white hover:text-white hover:bg-blue-600" : ""}`}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("ic")}
+                      className="cursor-pointer"
                     >
                       IC
-                    </Toggle>
-                    <Toggle
-                      pressed={selectedFilter === "ice"}
-                      onPressedChange={() => {
-                        setSelectedFilter(selectedFilter === "ice" ? "all" : "ice");
-                      }}
-                      variant="outline"
-                      className={`min-w-24 ${selectedFilter === "ice" ? "bg-blue-600 text-white hover:text-white hover:bg-blue-700" : ""}`}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setSelectedFilter("ice")}
+                      className="cursor-pointer"
                     >
                       ICE
-                    </Toggle>
-                  </div>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              }
+            />
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredRoutes.map((route) => (
               <div 
                 key={route.id} 
-                className={`rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer border ${getRouteColor(route.type)}`}
+                className={`rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer border-2 ${getRouteColor(route.type)}`}
                 onClick={() => handleRouteClick(route.id)}
               >
                 <div className="flex justify-between items-start">

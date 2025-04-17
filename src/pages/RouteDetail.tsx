@@ -374,50 +374,57 @@ const RouteDetail = () => {
             Zurück zu allen Routen
           </Button>
           
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-db-red">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getRouteColor(route.type)}`}>
-                    {route.type}
-                  </span>
-                  <h1 className="text-3xl font-bold">{route.number}</h1>
+          {/* Route header card with red border */}
+          <div className="grid gap-6">
+            <Card className="border-2 border-db-red rounded-lg shadow-md p-6">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getRouteColor(route.type)}`}>
+                      {route.type}
+                    </span>
+                    <h1 className="text-3xl font-bold">{route.number}</h1>
+                  </div>
+                  <p className="text-gray-600 mt-2">
+                    {route.from} → {route.to}
+                  </p>
                 </div>
-                <p className="text-gray-600 mt-2">
-                  {route.from} → {route.to}
-                </p>
+                
+                <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-md">
+                  <Clock className="h-5 w-5 text-gray-600" />
+                  <span className="font-medium">{route.duration}</span>
+                </div>
               </div>
-              
-              <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-md">
-                <Clock className="h-5 w-5 text-gray-600" />
-                <span className="font-medium">{route.duration}</span>
+            </Card>
+            
+            {/* Route description card with orange border */}
+            <Card className="border-2 border-amber-300 rounded-lg shadow-md p-6">
+              <div className="mt-2">
+                <h2 className="text-xl font-semibold mb-2">Beschreibung</h2>
+                <p className="text-gray-700">{route.description}</p>
               </div>
-            </div>
+            </Card>
             
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">Beschreibung</h2>
-              <p className="text-gray-700">{route.description}</p>
-            </div>
-            
-            <div className="mt-6">
+            {/* Stops card with red border and centered vertical timeline */}
+            <Card className="border-2 border-db-red rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4 flex items-center">
                 <MapPin className="mr-2 h-5 w-5" />
                 Haltestellen
               </h2>
-              <div className="relative">
-                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                <ul className="space-y-6">
+              <div className="relative px-4">
+                <div className="absolute left-[22px] top-[14px] bottom-6 w-0.5 bg-gray-300"></div>
+                <ul className="space-y-10">
                   {route.stops.map((stop, index) => {
                     const isStartOrEnd = (index === 0 || index === route.stops.length - 1);
                     const nextStop = route.stops[index + 1];
                     const hasTimeToNextStop = index < route.stops.length - 1 && nextStop?.time;
                     
                     return (
-                      <li key={index} className="ml-10 relative">
-                        <div className={`absolute -left-10 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border-2 
+                      <li key={index} className="relative">
+                        <div className={`absolute left-0 top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full border-2 z-10
                           ${isStartOrEnd ? 'bg-db-red border-db-red' : 'bg-white border-gray-400'}`}>
                         </div>
-                        <div className="flex flex-col">
+                        <div className="ml-10 flex flex-col">
                           <div className="flex items-center">
                             <Train className={`h-4 w-4 mr-2 ${isStartOrEnd ? 'text-db-red' : 'text-gray-500'}`} />
                             <span className={isStartOrEnd ? 'font-medium' : ''}>
@@ -428,12 +435,11 @@ const RouteDetail = () => {
                           </div>
                           
                           {hasTimeToNextStop && (
-                            <div className="ml-6 mt-1 text-sm text-gray-500 flex items-center">
+                            <div className="mt-1 text-sm text-gray-500 flex items-center">
                               <div className="flex items-center bg-gray-100 px-2 py-1 rounded">
                                 <Clock className="h-3 w-3 mr-1" />
                                 <span>+{nextStop.time} min</span>
                               </div>
-                              <div className="ml-2 border-t border-dashed border-gray-300 flex-grow"></div>
                             </div>
                           )}
                         </div>
@@ -442,7 +448,7 @@ const RouteDetail = () => {
                   })}
                 </ul>
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       </main>
