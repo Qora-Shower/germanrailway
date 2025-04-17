@@ -3,7 +3,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft, User, Users, UserRoundCheck, ShieldCheck, Shield } from "lucide-react";
 
 interface GuideContent {

@@ -1,8 +1,8 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { ChevronLeft, Clock, MapPin, Train } from "lucide-react";
 
 const RouteDetail = () => {

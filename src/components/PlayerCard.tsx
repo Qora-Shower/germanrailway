@@ -32,7 +32,7 @@ export const PLAYER_ROLES: Record<string, PlayerRole> = {
     germanName: 'Schaffner'
   },
   PLATFORM_EMPLOYEE: {
-    name: 'Platform Staff',
+    name: 'Platform Employees',
     abbreviation: 'PS',
     bgColor: 'bg-[#FEF7CD]',
     textColor: 'text-amber-800',
