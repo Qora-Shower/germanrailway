@@ -5,6 +5,7 @@ import FeaturedGames from "@/components/FeaturedGames";
 import GameGrid from "@/components/GameGrid";
 import Footer from "@/components/Footer";
 import SpecialGameCard from "@/components/SpecialGameCard";
+import Hero from "@/components/Hero";
 
 const Index = () => {
   // Sample game data - in a real app, this would come from an API
@@ -72,15 +73,20 @@ const Index = () => {
       <Navbar />
       
       <main className="flex-grow">
+        {/* Hero Section */}
+        <Hero />
+        
         <div className="container mx-auto px-4 py-12">
-          <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold mb-4">Deutsche Bahn AG Roblox</h1>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Explore the exciting world of German railways through interactive Roblox games and challenges.
-              Join our community of train enthusiasts and railroad professionals!
-            </p>
+          <div className="mb-12 bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="p-8 text-center border-b border-gray-100">
+              <h1 className="text-4xl font-bold mb-4 text-db-red">Deutsche Bahn AG Roblox</h1>
+              <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                Explore the exciting world of German railways through interactive Roblox games and challenges.
+                Join our community of train enthusiasts and railroad professionals!
+              </p>
+            </div>
             
-            <div className="w-full max-w-5xl mx-auto">
+            <div className="w-full max-w-5xl mx-auto p-6">
               <SpecialGameCard
                 title="Deutsche Bahn AG Roblox"
                 description="Explore the exciting world of German railways in this immersive Roblox experience!"

@@ -1,9 +1,14 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, Clock, MapPin, Train, Info } from "lucide-react";
+import { 
+  Card,
+  CardContent,
+  CardHeader
+} from "@/components/ui/card";
+import { ChevronLeft, Clock, MapPin, Train, Info, ArrowRight } from "lucide-react";
 
 const RouteDetail = () => {
   const { routeId } = useParams();
@@ -13,6 +18,7 @@ const RouteDetail = () => {
   const routesData = [
     { 
       id: 1, 
+      routeNumber: "R001",
       type: "S-Bahn", 
       number: "S1", 
       from: "Oranienburg", 
@@ -337,29 +343,16 @@ const RouteDetail = () => {
     );
   }
 
-  // Helper function to determine the route color
-  const getRouteColor = (routeType) => {
-    switch (routeType) {
-      case "S-Bahn":
-        return "bg-green-100 border-green-300 text-green-800";
-      case "RB":
-        return "bg-red-100 border-red-300 text-red-800";
-      case "RE":
-        return "bg-red-200 border-red-400 text-red-800";
-      case "IRE":
-        return "bg-orange-100 border-orange-300 text-orange-800";
-      case "EC":
-        return "bg-blue-100 border-blue-300 text-blue-800";
-      case "IC":
-        return "bg-blue-200 border-blue-400 text-blue-800";
-      case "ICE":
-        return "bg-blue-300 border-blue-500 text-blue-800";
-      default:
-        return "bg-gray-100 border-gray-300 text-gray-800";
-    }
+  // Create the reverse route for the return journey
+  const reverseRoute = {
+    ...route,
+    from: route.to,
+    to: route.from,
+    stops: [...route.stops].reverse()
   };
 
-  const getHeaderColor = (routeType) => {
+  // Helper function to determine the route color
+  const getRouteHeaderColor = (routeType) => {
     switch (routeType) {
       case "S-Bahn":
         return "bg-green-600 text-white";
@@ -379,7 +372,7 @@ const RouteDetail = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#040816] text-white">
+    <div className="flex flex-col min-h-screen bg-[#f5f5f5]">
       <Navbar />
       
       <main className="flex-grow">
@@ -387,19 +380,20 @@ const RouteDetail = () => {
           <Button 
             variant="ghost" 
             onClick={() => navigate('/routen')}
-            className="mb-4 text-white"
+            className="mb-4"
           >
             <ChevronLeft className="mr-2 h-4 w-4" />
             Zurück zu allen Routen
           </Button>
           
           <div className="mb-6">
-            <h1 className="text-3xl font-bold">ROUTE</h1>
+            <h1 className="text-3xl font-bold">{route.routeNumber}: {route.type} {route.number}</h1>
+            <p className="text-xl mt-2">{route.from} <ArrowRight className="inline h-4 w-4" /> {route.to}</p>
           </div>
           
           {/* Route header card */}
-          <Card className="border-0 rounded-lg shadow-lg bg-[#0a112b] mb-6">
-            <div className={`rounded-t-lg p-5 ${getHeaderColor(route.type)}`}>
+          <Card className="rounded-lg shadow-md overflow-hidden bg-white mb-6">
+            <CardHeader className={`p-5 ${getRouteHeaderColor(route.type)}`}>
               <div className="flex items-center gap-2">
                 <Train className="h-6 w-6" />
                 <h2 className="text-2xl font-bold">{route.type} {route.number}</h2>
@@ -407,44 +401,42 @@ const RouteDetail = () => {
               <p className="text-lg mt-2">
                 {route.from} → {route.to}
               </p>
-            </div>
+            </CardHeader>
             
-            <div className="p-5">
+            <CardContent className="p-5">
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center text-gray-200">
+                <div className="flex items-center text-gray-700">
                   <Clock className="h-5 w-5 mr-2" />
                   <span>Fahrzeit: {route.duration}</span>
                 </div>
               </div>
               
-              <div className="text-gray-300">
+              <div className="text-gray-600">
                 <p>{route.description}</p>
               </div>
               
-              <div className="mt-4 border-t border-gray-700 pt-4">
-                <div className="flex items-center text-blue-400 cursor-pointer">
+              <div className="mt-4 border-t border-gray-200 pt-4">
+                <button className="flex items-center text-db-red hover:underline cursor-pointer">
                   <Info className="h-4 w-4 mr-1" />
-                  <span className="underline">Details Information</span>
-                </div>
+                  <span className="font-medium">Details Information</span>
+                </button>
               </div>
-            </div>
+            </CardContent>
           </Card>
           
-          {/* Stops card with vertical timeline */}
-          <Card className="border-0 rounded-lg shadow-md overflow-hidden bg-[#0a112b]">
-            <div className="p-6 border-b border-gray-700">
+          {/* Stops card with vertical timeline - INBOUND */}
+          <Card className="rounded-lg shadow-md overflow-hidden bg-white mb-6">
+            <CardHeader className="p-6 border-b border-gray-200">
               <h2 className="text-xl font-bold flex items-center">
                 <MapPin className="mr-2 h-5 w-5" />
-                Haltestellen
+                Haltestellen (Hinfahrt)
               </h2>
-            </div>
+            </CardHeader>
             
-            <div className="p-6">
-              <div className="font-bold text-xl mb-6">Inbound</div>
-              
-              <div className="relative px-10">
-                {/* Vertical timeline line - moved to the right to center with the location markers */}
-                <div className="absolute left-[28px] top-0 bottom-0 w-0.5 bg-[#1a2547]"></div>
+            <CardContent className="p-6">
+              <div className="relative pl-10">
+                {/* Vertical timeline line - properly centered through the circles */}
+                <div className="absolute left-[29px] top-0 bottom-0 w-0.5 bg-gray-300"></div>
                 
                 <ul className="space-y-10">
                   {route.stops.map((stop, index) => {
@@ -455,17 +447,17 @@ const RouteDetail = () => {
                     return (
                       <li key={index} className="relative">
                         {/* Circle marker */}
-                        <div className="absolute left-[-7px] top-1/2 transform -translate-y-1/2">
-                          <div className="h-5 w-5 rounded-full border-2 border-gray-400 bg-[#0a112b] flex items-center justify-center z-10">
-                            {isStartOrEnd && <div className="h-2.5 w-2.5 rounded-full bg-white"></div>}
+                        <div className="absolute left-[-28px] top-1/2 transform -translate-y-1/2">
+                          <div className={`h-6 w-6 rounded-full border-2 ${isStartOrEnd ? 'border-db-red' : 'border-gray-400'} bg-white flex items-center justify-center z-10`}>
+                            {isStartOrEnd && <div className="h-3 w-3 rounded-full bg-db-red"></div>}
                           </div>
                         </div>
                         
                         {/* Content */}
-                        <div className="ml-6">
+                        <div className="ml-4">
                           {/* Station name */}
                           <div className="flex items-center">
-                            <span className="text-lg font-medium text-white">
+                            <span className="text-lg font-medium text-gray-800">
                               {stop.name}
                             </span>
                             {index === 0 && 
@@ -476,15 +468,9 @@ const RouteDetail = () => {
                             }
                           </div>
                           
-                          {/* Distance */}
-                          <div className="text-gray-400 flex items-center mt-1 text-sm">
-                            <span>⋮</span>
-                            <span className="ml-2">0.0 miles</span>
-                          </div>
-                          
                           {/* Time to next stop */}
                           {hasTimeToNextStop && (
-                            <div className="mt-2 text-gray-200 absolute -left-2 top-14">
+                            <div className="mt-2 text-gray-600 absolute -left-0 top-14 bg-white px-1 text-sm">
                               + {nextStop.time} min
                             </div>
                           )}
@@ -494,11 +480,66 @@ const RouteDetail = () => {
                   })}
                 </ul>
               </div>
-              
-              {route.stops.length > 15 && (
-                <div className="mt-8 font-bold text-xl">Outbound</div>
-              )}
-            </div>
+            </CardContent>
+          </Card>
+          
+          {/* Stops card with vertical timeline - OUTBOUND */}
+          <Card className="rounded-lg shadow-md overflow-hidden bg-white">
+            <CardHeader className="p-6 border-b border-gray-200">
+              <h2 className="text-xl font-bold flex items-center">
+                <MapPin className="mr-2 h-5 w-5" />
+                Haltestellen (Rückfahrt)
+              </h2>
+            </CardHeader>
+            
+            <CardContent className="p-6">
+              <div className="relative pl-10">
+                {/* Vertical timeline line - properly centered through the circles */}
+                <div className="absolute left-[29px] top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                
+                <ul className="space-y-10">
+                  {reverseRoute.stops.map((stop, index) => {
+                    const isStartOrEnd = (index === 0 || index === reverseRoute.stops.length - 1);
+                    const nextStop = reverseRoute.stops[index + 1];
+                    const hasTimeToNextStop = index < reverseRoute.stops.length - 1 && nextStop?.time;
+                    
+                    return (
+                      <li key={index} className="relative">
+                        {/* Circle marker */}
+                        <div className="absolute left-[-28px] top-1/2 transform -translate-y-1/2">
+                          <div className={`h-6 w-6 rounded-full border-2 ${isStartOrEnd ? 'border-db-red' : 'border-gray-400'} bg-white flex items-center justify-center z-10`}>
+                            {isStartOrEnd && <div className="h-3 w-3 rounded-full bg-db-red"></div>}
+                          </div>
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="ml-4">
+                          {/* Station name */}
+                          <div className="flex items-center">
+                            <span className="text-lg font-medium text-gray-800">
+                              {stop.name}
+                            </span>
+                            {index === 0 && 
+                              <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Start</span>
+                            }
+                            {index === reverseRoute.stops.length - 1 && 
+                              <span className="ml-2 text-xs bg-db-red text-white px-2 py-0.5 rounded">Ziel</span>
+                            }
+                          </div>
+                          
+                          {/* Time to next stop */}
+                          {hasTimeToNextStop && (
+                            <div className="mt-2 text-gray-600 absolute -left-0 top-14 bg-white px-1 text-sm">
+                              + {nextStop.time} min
+                            </div>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </CardContent>
           </Card>
         </div>
       </main>

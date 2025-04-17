@@ -1,78 +1,101 @@
-// Make sure we import Button from the correct location
+import { useParams, useNavigate } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Calendar } from "lucide-react"
+import { 
+  Card, 
+  CardContent, 
+  CardDescription as CardDescriptionImport,
+  CardHeader, 
+  CardTitle as CardTitleImport 
+} from "@/components/ui/card";
+import { ChevronLeft } from "lucide-react";
 
-export default function GuideDetail() {
+// Rename imported components to avoid name conflicts
+const CardTitle = CardTitleImport;
+const CardDescription = CardDescriptionImport;
+
+const GuideDetail = () => {
+  const { guideId } = useParams();
+  const navigate = useNavigate();
+
+  // Example guide data - in a real app, this would be fetched from an API
+  const guidesData = [
+    { 
+      id: "1", 
+      title: "Getting Started with Deutsche Bahn AG Roblox", 
+      description: "A comprehensive guide for new players to understand the basics of the game.",
+      content: "Welcome to Deutsche Bahn AG Roblox! This guide will walk you through the basics of the game, including how to drive trains, manage stations, and interact with other players."
+    },
+    { 
+      id: "2", 
+      title: "Advanced Train Driving Techniques", 
+      description: "Learn advanced techniques to drive trains more efficiently and safely.",
+      content: "This guide covers advanced train driving techniques, such as how to manage speed, handle curves, and deal with emergencies."
+    },
+    { 
+      id: "3", 
+      title: "Station Management Guide", 
+      description: "A detailed guide on how to effectively manage your stations.",
+      content: "This guide provides a detailed overview of station management, including how to hire staff, maintain equipment, and ensure passenger satisfaction."
+    }
+  ];
+  
+  const guide = guidesData.find(guide => guide.id === guideId);
+
+  if (!guide) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow container mx-auto px-4 py-12">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/guides')}
+            className="mb-4"
+          >
+            <ChevronLeft className="mr-2 h-4 w-4" />
+            Back to all Guides
+          </Button>
+          <div className="text-center py-12">
+            <h1 className="text-3xl font-bold mb-4">Guide not found</h1>
+            <p className="text-gray-600">The requested guide does not exist.</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
-    <div className="container mx-auto py-10">
-      <Card className="w-[380px]">
-        <CardHeader>
-          <CardTitle>Account</CardTitle>
-          <CardDescription>
-            Make changes to your account here. Click save when you're done.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <label htmlFor="name">Name</label>
-                <input
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  id="name"
-                  placeholder="Enter your name"
-                />
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <label htmlFor="username">Username</label>
-                <input
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  id="username"
-                  placeholder="Enter your username"
-                />
-              </div>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Save</Button>
-        </CardFooter>
-      </Card>
-      <Accordion type="single" collapsible className="w-[400px]">
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-2">
-          <AccordionTrigger>Is it styled with Radix Themes?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It comes with default styles that matches the other components
-            astyled with Radix Themes.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-3">
-          <AccordionTrigger>Is it animated?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It's animated using Radix UI primitives.
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <Calendar />
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
+      <main className="flex-grow">
+        <div className="container mx-auto px-4 py-12">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/guides')}
+            className="mb-4"
+          >
+            <ChevronLeft className="mr-2 h-4 w-4" />
+            Back to all Guides
+          </Button>
+          
+          <Card className="w-full">
+            <CardHeader>
+              <CardTitle>{guide.title}</CardTitle>
+              <CardDescription>{guide.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>{guide.content}</p>
+            </CardContent>
+          </Card>
+        </div>
+      </main>
+      
+      <Footer />
     </div>
-  )
-}
+  );
+};
+
+export default GuideDetail;

@@ -1,11 +1,12 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, Filter, ChevronDown } from "lucide-react";
+import { Search, Filter, ChevronDown, Train } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
-import { Toggle } from "@/components/ui/toggle";
+import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,32 +14,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 
 const Routes = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("all");
   
   // Example routes data - in a real app, this would be fetched from an API
   const routesData = [
-    { id: 1, type: "S-Bahn", number: "S1", from: "Oranienburg", to: "Wannsee", via: "Berlin Hbf", duration: "58 min" },
-    { id: 2, type: "S-Bahn", number: "S2", from: "Bernau", to: "Blankenfelde", via: "Berlin Hbf", duration: "83 min" },
-    { id: 3, type: "RB", number: "RB10", from: "Berlin Hbf", to: "Nauen", via: "Berlin-Spandau", duration: "37 min" },
-    { id: 4, type: "RB", number: "RB14", from: "Berlin Hbf", to: "Nauen", via: "Falkensee", duration: "45 min" },
-    { id: 5, type: "RE", number: "RE1", from: "Magdeburg Hbf", to: "Frankfurt (Oder)", via: "Berlin Hbf", duration: "2 h 52 min" },
-    { id: 6, type: "RE", number: "RE2", from: "Wismar", to: "Cottbus", via: "Berlin", duration: "5 h 1 min" },
-    { id: 7, type: "IRE", number: "IRE3", from: "Berlin Hbf", to: "Hamburg Hbf", via: "Wittenberge", duration: "2 h 30 min" },
-    { id: 8, type: "EC", number: "EC27", from: "Berlin Hbf", to: "Hamburg Hbf", via: "Wittenberge", duration: "1 h 43 min" },
-    { id: 9, type: "IC", number: "IC2035", from: "Norddeich Mole", to: "Leipzig Hbf", via: "Berlin", duration: "8 h 30 min" },
-    { id: 10, type: "ICE", number: "ICE500", from: "Berlin Hbf", to: "München Hbf", via: "Nürnberg", duration: "3 h 55 min" },
-    { id: 11, type: "ICE", number: "ICE1000", from: "Berlin Hbf", to: "Frankfurt (Main) Hbf", via: "Erfurt", duration: "3 h 29 min" },
-    { id: 12, type: "ICE", number: "ICE1600", from: "Hamburg Hbf", to: "München Hbf", via: "Berlin", duration: "5 h 34 min" },
-    { id: 101, type: "ICE", number: "ICE101", from: "Berlin Hbf", to: "München Hbf", via: "Halle, Erfurt, Nürnberg", duration: "3 h 52 min" },
+    { id: 1, routeNumber: "R001", type: "S-Bahn", number: "S1", from: "Oranienburg", to: "Wannsee", via: "Berlin Hbf", duration: "58 min" },
+    { id: 2, routeNumber: "R002", type: "S-Bahn", number: "S2", from: "Bernau", to: "Blankenfelde", via: "Berlin Hbf", duration: "83 min" },
+    { id: 3, routeNumber: "R003", type: "RB", number: "RB10", from: "Berlin Hbf", to: "Nauen", via: "Berlin-Spandau", duration: "37 min" },
+    { id: 4, routeNumber: "R004", type: "RB", number: "RB14", from: "Berlin Hbf", to: "Nauen", via: "Falkensee", duration: "45 min" },
+    { id: 5, routeNumber: "R005", type: "RE", number: "RE1", from: "Magdeburg Hbf", to: "Frankfurt (Oder)", via: "Berlin Hbf", duration: "2 h 52 min" },
+    { id: 6, routeNumber: "R006", type: "RE", number: "RE2", from: "Wismar", to: "Cottbus", via: "Berlin", duration: "5 h 1 min" },
+    { id: 7, routeNumber: "R007", type: "IRE", number: "IRE3", from: "Berlin Hbf", to: "Hamburg Hbf", via: "Wittenberge", duration: "2 h 30 min" },
+    { id: 8, routeNumber: "R008", type: "EC", number: "EC27", from: "Berlin Hbf", to: "Hamburg Hbf", via: "Wittenberge", duration: "1 h 43 min" },
+    { id: 9, routeNumber: "R009", type: "IC", number: "IC2035", from: "Norddeich Mole", to: "Leipzig Hbf", via: "Berlin", duration: "8 h 30 min" },
+    { id: 10, routeNumber: "R010", type: "ICE", number: "ICE500", from: "Berlin Hbf", to: "München Hbf", via: "Nürnberg", duration: "3 h 55 min" },
+    { id: 11, routeNumber: "R011", type: "ICE", number: "ICE1000", from: "Berlin Hbf", to: "Frankfurt (Main) Hbf", via: "Erfurt", duration: "3 h 29 min" },
+    { id: 12, routeNumber: "R012", type: "ICE", number: "ICE1600", from: "Hamburg Hbf", to: "München Hbf", via: "Berlin", duration: "5 h 34 min" },
+    { id: 101, routeNumber: "R101", type: "ICE", number: "ICE101", from: "Berlin Hbf", to: "München Hbf", via: "Halle, Erfurt, Nürnberg", duration: "3 h 52 min" },
   ];
 
   // Filter routes based on search term and selected filter
@@ -51,7 +52,8 @@ const Routes = () => {
       route.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
       route.from.toLowerCase().includes(searchTerm.toLowerCase()) ||
       route.to.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      route.via.toLowerCase().includes(searchTerm.toLowerCase());
+      route.via.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      route.routeNumber.toLowerCase().includes(searchTerm.toLowerCase());
     
     return typeMatches && searchMatches;
   });
@@ -61,24 +63,22 @@ const Routes = () => {
   };
 
   // Get background color based on route type
-  const getRouteColor = (routeType) => {
+  const getRouteHeaderColor = (routeType) => {
     switch (routeType) {
       case "S-Bahn":
-        return "bg-green-100 border-green-300";
+        return "bg-green-600 text-white";
       case "RB":
-        return "bg-red-100 border-red-300";
       case "RE":
-        return "bg-red-200 border-red-400";
+        return "bg-db-red text-white";
       case "IRE":
-        return "bg-orange-100 border-orange-300";
+        return "bg-orange-500 text-white";
       case "EC":
-        return "bg-blue-100 border-blue-300";
       case "IC":
-        return "bg-blue-200 border-blue-400";
+        return "bg-blue-700 text-white";
       case "ICE":
-        return "bg-blue-300 border-blue-500";
+        return "bg-blue-800 text-white";
       default:
-        return "bg-gray-100 border-gray-300";
+        return "bg-gray-700 text-white";
     }
   };
 
@@ -88,7 +88,7 @@ const Routes = () => {
       
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-12">
-          <h1 className="text-3xl font-bold mb-4">All Routen</h1>
+          <h1 className="text-3xl font-bold mb-4">Alle Routen</h1>
           
           <p className="text-gray-600 mb-8">
             Entdecken Sie alle Zuglinien der Deutschen Bahn in unserem Roblox Spiel. 
@@ -167,34 +167,50 @@ const Routes = () => {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredRoutes.map((route) => (
-              <div 
+              <Card 
                 key={route.id} 
-                className={`rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer border-2 ${getRouteColor(route.type)}`}
+                className="rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer border border-gray-200"
                 onClick={() => handleRouteClick(route.id)}
               >
-                <div className="flex justify-between items-start">
-                  <span className={`font-bold text-lg ${route.type === "ICE" ? "text-blue-700" : ""}`}>
-                    {route.number}
-                  </span>
-                  <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium">
-                    {route.type}
-                  </span>
-                </div>
-                <div className="mt-2 space-y-1">
-                  <p className="text-sm">
-                    <span className="font-medium">Von:</span> {route.from}
-                  </p>
-                  <p className="text-sm">
-                    <span className="font-medium">Nach:</span> {route.to}
-                  </p>
-                  <p className="text-sm">
-                    <span className="font-medium">Via:</span> {route.via}
-                  </p>
-                  <p className="text-sm">
-                    <span className="font-medium">Fahrzeit:</span> {route.duration}
-                  </p>
-                </div>
-              </div>
+                <CardHeader className={`p-3 rounded-t-lg ${getRouteHeaderColor(route.type)}`}>
+                  <div className="flex justify-between items-center">
+                    <Badge className="text-lg bg-white text-black font-bold">
+                      {route.routeNumber}
+                    </Badge>
+                    <Badge className="bg-white/30 text-white">
+                      {route.type} {route.number}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                
+                <CardContent className="p-4">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-semibold">Von:</div>
+                        <div className="font-medium">{route.from}</div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-right">Nach:</div>
+                        <div className="font-medium">{route.to}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold">Via:</div>
+                      <div className="text-sm">{route.via}</div>
+                    </div>
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="flex items-center">
+                        <Train className="w-4 h-4 mr-1" />
+                        <span className="text-sm font-semibold">{route.duration}</span>
+                      </div>
+                      <Badge variant="outline" className="text-xs">
+                        Details ansehen
+                      </Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
           
