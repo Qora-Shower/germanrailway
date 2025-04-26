@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -5,15 +6,11 @@ import { Button } from "@/components/ui/button";
 import { 
   Card, 
   CardContent, 
-  CardDescription as CardDescriptionImport,
+  CardDescription,
   CardHeader, 
-  CardTitle as CardTitleImport 
+  CardTitle 
 } from "@/components/ui/card";
 import { ChevronLeft } from "lucide-react";
-
-// Rename imported components to avoid name conflicts
-const CardTitle = CardTitleImport;
-const CardDescription = CardDescriptionImport;
 
 const GuideDetail = () => {
   const { guideId } = useParams();

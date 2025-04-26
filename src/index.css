@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -48,11 +48,11 @@
   }
 
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-ubuntu;
   }
 }
 
@@ -71,5 +71,29 @@
   
   .btn-db {
     @apply bg-db-red hover:bg-db-darkred text-white px-4 py-2 rounded-md transition-colors;
+  }
+
+  .timeline-circle {
+    @apply h-6 w-6 rounded-full border-2 bg-white flex items-center justify-center z-10;
+  }
+
+  .timeline-line {
+    @apply absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300;
+  }
+
+  .db-route-card {
+    @apply border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all overflow-hidden;
+  }
+
+  .db-card-header {
+    @apply p-3 rounded-t-lg font-medium text-white;
+  }
+
+  .db-server-card {
+    @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-200 p-4;
+  }
+
+  .db-section {
+    @apply mb-8 bg-white rounded-xl shadow-lg overflow-hidden;
   }
 }

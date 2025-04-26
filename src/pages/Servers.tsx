@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
-import { Server, Users, User, AlertCircle } from "lucide-react";
+import { Server, Users, User, AlertCircle, Clock, MapPin } from "lucide-react";
 import { 
   Card, 
   CardContent, 
@@ -31,7 +31,10 @@ const Servers = () => {
         conductor: 1,
         signaller: 1
       },
-      status: "active"
+      status: "active",
+      region: "Europe",
+      uptime: "3h 24m",
+      createdAt: "2023-04-25"
     },
     { 
       id: "P03X7YTR", 
@@ -45,7 +48,10 @@ const Servers = () => {
         conductor: 2,
         signaller: 2
       },
-      status: "active" 
+      status: "active",
+      region: "Europe",
+      uptime: "6h 12m",
+      createdAt: "2023-04-25"
     },
     { 
       id: "A67BN45Z", 
@@ -60,7 +66,10 @@ const Servers = () => {
         signaller: 1
       },
       status: "maintenance",
-      maintenanceMsg: "Server restart in 15 minutes"
+      maintenanceMsg: "Server restart in 15 minutes",
+      region: "Europe",
+      uptime: "12h 45m",
+      createdAt: "2023-04-24"
     },
     { 
       id: "QW34RT56", 
@@ -74,7 +83,10 @@ const Servers = () => {
         conductor: 2,
         signaller: 1
       },
-      status: "active"
+      status: "active",
+      region: "Europe",
+      uptime: "4h 18m",
+      createdAt: "2023-04-25"
     },
     { 
       id: "ZX89CV34", 
@@ -88,7 +100,10 @@ const Servers = () => {
         conductor: 0,
         signaller: 1
       },
-      status: "active"
+      status: "active",
+      region: "Europe",
+      uptime: "1h 35m",
+      createdAt: "2023-04-26"
     },
     { 
       id: "BN67M456", 
@@ -102,7 +117,10 @@ const Servers = () => {
         conductor: 2,
         signaller: 1
       },
-      status: "full"
+      status: "full",
+      region: "Europe",
+      uptime: "8h 20m",
+      createdAt: "2023-04-24"
     }
   ];
 
@@ -131,7 +149,7 @@ const Servers = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
       
       <main className="flex-grow">
@@ -158,20 +176,24 @@ const Servers = () => {
             {filteredServers.map((server) => (
               <Card 
                 key={server.id} 
-                className="rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-200 hover:border-db-red cursor-pointer overflow-hidden"
+                className="db-server-card cursor-pointer transition-all hover:translate-y-[-2px]"
                 onClick={() => handleServerClick(server.id)}
               >
-                <CardHeader className="p-4 border-b border-gray-100 bg-gray-50">
-                  <div className="flex justify-between items-center">
+                <CardHeader className="p-4 pb-2 flex justify-between items-start">
+                  <div>
                     <h3 className="text-lg font-bold">{server.id}</h3>
-                    <Badge className={getStatusColor(server.status)}>
-                      {server.status === 'active' ? 'Active' : 
-                       server.status === 'maintenance' ? 'Maintenance' : 'Full'}
-                    </Badge>
+                    <div className="flex items-center text-gray-500 mt-1">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      <span className="text-sm">{server.region}</span>
+                    </div>
                   </div>
+                  <Badge className={getStatusColor(server.status)}>
+                    {server.status === 'active' ? 'Active' : 
+                     server.status === 'maintenance' ? 'Maintenance' : 'Full'}
+                  </Badge>
                 </CardHeader>
                 
-                <CardContent className="p-4">
+                <CardContent className="p-4 pt-2">
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm text-gray-600">Players</span>
@@ -187,55 +209,75 @@ const Servers = () => {
                     </div>
                   </div>
                   
-                  {/* Player types breakdown */}
-                  <div className="grid grid-cols-5 gap-2 mt-4 text-center">
+                  {/* Player roles statistics */}
+                  <div className="grid grid-cols-5 gap-1 mt-4">
                     <div className="flex flex-col items-center">
-                      <div className="bg-blue-100 text-blue-800 p-1 px-2 rounded-md text-xs font-medium mb-1 w-full">
+                      <div className="bg-db-red text-white px-2 py-1 rounded-t-md text-xs font-medium w-full text-center">
                         Driver
                       </div>
-                      <span className="text-sm font-bold">{server.playerTypes.driver}</span>
+                      <div className="bg-gray-100 py-1 w-full text-center font-bold text-sm">
+                        {server.playerTypes.driver}
+                      </div>
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="bg-green-100 text-green-800 p-1 px-2 rounded-md text-xs font-medium mb-1 w-full">
+                      <div className="bg-amber-500 text-white px-2 py-1 rounded-t-md text-xs font-medium w-full text-center">
                         Staff
                       </div>
-                      <span className="text-sm font-bold">{server.playerTypes.platformStaff}</span>
+                      <div className="bg-gray-100 py-1 w-full text-center font-bold text-sm">
+                        {server.playerTypes.platformStaff}
+                      </div>
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="bg-purple-100 text-purple-800 p-1 px-2 rounded-md text-xs font-medium mb-1 w-full">
+                      <div className="bg-purple-600 text-white px-2 py-1 rounded-t-md text-xs font-medium w-full text-center">
                         Conductor
                       </div>
-                      <span className="text-sm font-bold">{server.playerTypes.conductor}</span>
-                    </div>
-                    
-                    <div className="flex flex-col items-center">
-                      <div className="bg-yellow-100 text-yellow-800 p-1 px-2 rounded-md text-xs font-medium mb-1 w-full">
-                        Signal
+                      <div className="bg-gray-100 py-1 w-full text-center font-bold text-sm">
+                        {server.playerTypes.conductor}
                       </div>
-                      <span className="text-sm font-bold">{server.playerTypes.signaller}</span>
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="bg-gray-100 text-gray-800 p-1 px-2 rounded-md text-xs font-medium mb-1 w-full">
+                      <div className="bg-green-600 text-white px-2 py-1 rounded-t-md text-xs font-medium w-full text-center">
+                        Signaller
+                      </div>
+                      <div className="bg-gray-100 py-1 w-full text-center font-bold text-sm">
+                        {server.playerTypes.signaller}
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col items-center">
+                      <div className="bg-gray-600 text-white px-2 py-1 rounded-t-md text-xs font-medium w-full text-center">
                         Passenger
                       </div>
-                      <span className="text-sm font-bold">{server.playerTypes.passenger}</span>
+                      <div className="bg-gray-100 py-1 w-full text-center font-bold text-sm">
+                        {server.playerTypes.passenger}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between text-sm text-gray-500">
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 mr-1" />
+                      <span>{server.uptime}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Users className="h-4 w-4 mr-1" />
+                      <span>{server.players} online</span>
                     </div>
                   </div>
                 </CardContent>
                 
-                <CardFooter className="px-4 py-3 border-t border-gray-100 bg-gray-50 flex justify-between items-center">
-                  <div className="flex items-center text-sm">
-                    <Users className="h-4 w-4 mr-1 text-gray-500" />
-                    <span className="text-gray-600">{server.players} players online</span>
-                  </div>
-                  
-                  {server.maintenanceMsg && (
+                <CardFooter className="px-4 py-3 border-t border-gray-100 flex justify-between items-center bg-gray-50 rounded-b-lg">
+                  {server.maintenanceMsg ? (
                     <div className="flex items-center text-sm text-yellow-600">
                       <AlertCircle className="h-4 w-4 mr-1" />
                       <span>{server.maintenanceMsg}</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center text-sm text-db-red font-medium">
+                      View Server Details
                     </div>
                   )}
                 </CardFooter>

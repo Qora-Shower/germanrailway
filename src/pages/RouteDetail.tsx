@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,7 +7,7 @@ import {
   CardContent,
   CardHeader
 } from "@/components/ui/card";
-import { ChevronLeft, Clock, MapPin, Train, Info, ArrowRight } from "lucide-react";
+import { ChevronLeft, Clock, MapPin, Train, Info, ArrowRight, Home } from "lucide-react";
 
 const RouteDetail = () => {
   const { routeId } = useParams();
@@ -26,6 +25,8 @@ const RouteDetail = () => {
       via: "Berlin Hbf", 
       duration: "58 min",
       description: "Die S1 verbindet den Norden und Süden Berlins. Sie fährt vom brandenburgischen Oranienburg über die Berliner Innenstadt bis nach Wannsee.",
+      hasDepot: true,
+      depotName: "Depot Oranienburg",
       stops: [
         { name: "Oranienburg", time: 0 },
         { name: "Lehnitz", time: 6 },
@@ -57,7 +58,8 @@ const RouteDetail = () => {
         { name: "Sundgauer Straße", time: 2 },
         { name: "Zehlendorf", time: 2 },
         { name: "Wannsee", time: 3 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 2, 
@@ -68,6 +70,8 @@ const RouteDetail = () => {
       via: "Berlin Hbf", 
       duration: "83 min",
       description: "Die S2 ist eine wichtige Nord-Süd-Verbindung und verbindet Bernau im Norden mit Blankenfelde im Süden.",
+      hasDepot: true,
+      depotName: "Depot Bernau",
       stops: [
         { name: "Bernau", time: 0 },
         { name: "Bernau-Friedenstal", time: 3 },
@@ -94,7 +98,8 @@ const RouteDetail = () => {
         { name: "Schichauweg", time: 3 },
         { name: "Mahlow", time: 5 },
         { name: "Blankenfelde", time: 5 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 3, 
@@ -105,13 +110,16 @@ const RouteDetail = () => {
       via: "Berlin-Spandau", 
       duration: "37 min",
       description: "Die RB10 verbindet Berlin mit dem brandenburgischen Nauen und ist Teil des Regionalverkehrs.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Berlin Hbf", time: 0 },
         { name: "Berlin-Spandau", time: 8 },
         { name: "Falkensee", time: 7 },
         { name: "Brieselang", time: 10 },
         { name: "Nauen", time: 12 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 4, 
@@ -122,6 +130,8 @@ const RouteDetail = () => {
       via: "Falkensee", 
       duration: "45 min",
       description: "Die RB14 fährt von Berlin Hauptbahnhof nach Nauen und hält an allen Zwischenstationen.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Berlin Hbf", time: 0 },
         { name: "Berlin-Jungfernheide", time: 5 },
@@ -130,7 +140,8 @@ const RouteDetail = () => {
         { name: "Falkensee", time: 7 },
         { name: "Brieselang", time: 10 },
         { name: "Nauen", time: 11 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 5, 
@@ -141,6 +152,8 @@ const RouteDetail = () => {
       via: "Berlin Hbf", 
       duration: "2 h 52 min",
       description: "Der RE1 ist eine wichtige Ost-West-Verbindung und verbindet Magdeburg mit Frankfurt (Oder) über Berlin.",
+      hasDepot: true,
+      depotName: "Depot Magdeburg",
       stops: [
         { name: "Magdeburg Hbf", time: 0 },
         { name: "Burg", time: 17 },
@@ -156,7 +169,8 @@ const RouteDetail = () => {
         { name: "Fürstenwalde (Spree)", time: 16 },
         { name: "Briesen (Mark)", time: 12 },
         { name: "Frankfurt (Oder)", time: 19 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 6, 
@@ -167,6 +181,8 @@ const RouteDetail = () => {
       via: "Berlin", 
       duration: "5 h 1 min",
       description: "Der RE2 verbindet Wismar an der Ostsee mit Cottbus in der Lausitz und durchquert dabei Berlin.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Wismar", time: 0 },
         { name: "Bad Kleinen", time: 10 },
@@ -182,7 +198,8 @@ const RouteDetail = () => {
         { name: "Lübbenau (Spreewald)", time: 15 },
         { name: "Vetschau", time: 15 },
         { name: "Cottbus", time: 15 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 7, 
@@ -193,13 +210,16 @@ const RouteDetail = () => {
       via: "Wittenberge", 
       duration: "2 h 30 min",
       description: "Der IRE3 ist ein Interregio-Express zwischen Berlin und Hamburg mit wenigen Zwischenhalten.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Berlin Hbf", time: 0 },
         { name: "Berlin-Spandau", time: 10 },
         { name: "Wittenberge", time: 45 },
         { name: "Ludwigslust", time: 35 },
         { name: "Hamburg Hbf", time: 60 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 8, 
@@ -210,12 +230,15 @@ const RouteDetail = () => {
       via: "Wittenberge", 
       duration: "1 h 43 min",
       description: "Der EC27 ist ein EuroCity-Zug zwischen Berlin und Hamburg und Teil eines internationalen Zuglaufs.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Berlin Hbf", time: 0 },
         { name: "Berlin-Spandau", time: 8 },
         { name: "Wittenberge", time: 35 },
         { name: "Hamburg Hbf", time: 60 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 9, 
@@ -226,6 +249,8 @@ const RouteDetail = () => {
       via: "Berlin", 
       duration: "8 h 30 min",
       description: "Der IC2035 verbindet die Nordseeküste bei Norddeich mit Leipzig über Hannover, Braunschweig und Berlin.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Norddeich Mole", time: 0 },
         { name: "Norden", time: 8 },
@@ -239,7 +264,8 @@ const RouteDetail = () => {
         { name: "Berlin Hbf", time: 90 },
         { name: "Lutherstadt Wittenberg", time: 45 },
         { name: "Leipzig Hbf", time: 37 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 10, 
@@ -250,6 +276,8 @@ const RouteDetail = () => {
       via: "Nürnberg", 
       duration: "3 h 55 min",
       description: "Der ICE500 verbindet die Hauptstadt Berlin mit München über die Schnellfahrstrecke.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Berlin Hbf", time: 0 },
         { name: "Berlin Südkreuz", time: 5 },
@@ -258,7 +286,8 @@ const RouteDetail = () => {
         { name: "Bamberg", time: 45 },
         { name: "Nürnberg Hbf", time: 25 },
         { name: "München Hbf", time: 70 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 11, 
@@ -269,6 +298,8 @@ const RouteDetail = () => {
       via: "Erfurt", 
       duration: "3 h 29 min",
       description: "Der ICE1000 verbindet Berlin mit Frankfurt am Main über die Schnellfahrstrecke durch Thüringen.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Berlin Hbf", time: 0 },
         { name: "Berlin Südkreuz", time: 5 },
@@ -279,7 +310,8 @@ const RouteDetail = () => {
         { name: "Fulda", time: 40 },
         { name: "Hanau Hbf", time: 45 },
         { name: "Frankfurt (Main) Hbf", time: 14 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 12, 
@@ -290,13 +322,16 @@ const RouteDetail = () => {
       via: "Berlin", 
       duration: "5 h 34 min",
       description: "Der ICE1600 verbindet Hamburg mit München über Berlin und bietet eine schnelle Nord-Süd-Verbindung.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Hamburg Hbf", time: 0 },
         { name: "Berlin Hbf", time: 100 },
         { name: "Leipzig Hbf", time: 70 },
         { name: "Nürnberg Hbf", time: 90 },
         { name: "München Hbf", time: 74 }
-      ]
+      ],
+      returnDepot: false
     },
     { 
       id: 101, 
@@ -307,6 +342,8 @@ const RouteDetail = () => {
       via: "Halle, Erfurt, Nürnberg", 
       duration: "3 h 52 min",
       description: "Der ICE101 ist eine der schnellsten Verbindungen zwischen Berlin und München über die Neubaustrecke.",
+      hasDepot: false,
+      depotName: null,
       stops: [
         { name: "Berlin Hbf", time: 0 },
         { name: "Berlin Südkreuz", time: 5 },
@@ -314,7 +351,8 @@ const RouteDetail = () => {
         { name: "Erfurt Hbf", time: 30 },
         { name: "Nürnberg Hbf", time: 85 },
         { name: "München Hbf", time: 52 }
-      ]
+      ],
+      returnDepot: false
     }
   ];
   
@@ -348,7 +386,9 @@ const RouteDetail = () => {
     ...route,
     from: route.to,
     to: route.from,
-    stops: [...route.stops].reverse()
+    stops: [...route.stops].reverse(),
+    depotName: route.returnDepot ? `Depot ${route.to}` : null,
+    hasDepot: route.returnDepot
   };
 
   // Helper function to determine the route color
@@ -372,7 +412,7 @@ const RouteDetail = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#f5f5f5]">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
       
       <main className="flex-grow">
@@ -387,7 +427,7 @@ const RouteDetail = () => {
           </Button>
           
           <div className="mb-6">
-            <h1 className="text-3xl font-bold">{route.routeNumber}: {route.type} {route.number}</h1>
+            <h1 className="text-3xl font-bold">{route.routeNumber}: {route.number}</h1>
             <p className="text-xl mt-2">{route.from} <ArrowRight className="inline h-4 w-4" /> {route.to}</p>
           </div>
           
@@ -396,7 +436,7 @@ const RouteDetail = () => {
             <CardHeader className={`p-5 ${getRouteHeaderColor(route.type)}`}>
               <div className="flex items-center gap-2">
                 <Train className="h-6 w-6" />
-                <h2 className="text-2xl font-bold">{route.type} {route.number}</h2>
+                <h2 className="text-2xl font-bold">{route.number}</h2>
               </div>
               <p className="text-lg mt-2">
                 {route.from} → {route.to}
@@ -435,20 +475,35 @@ const RouteDetail = () => {
             
             <CardContent className="p-6">
               <div className="relative pl-10">
-                {/* Vertical timeline line - properly centered through the circles */}
-                <div className="absolute left-[29px] top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                {/* Depot marker if applicable */}
+                {route.hasDepot && (
+                  <div className="absolute left-0 top-0">
+                    <div className="timeline-circle border-db-depot text-db-depot">
+                      <Home className="h-3 w-3" />
+                    </div>
+                    <div className="ml-8 mb-6">
+                      <span className="text-lg font-medium text-db-depot">
+                        {route.depotName}
+                      </span>
+                    </div>
+                  </div>
+                )}
                 
-                <ul className="space-y-10">
+                {/* Vertical timeline line - properly centered through the circles */}
+                <div className="absolute left-[15px] top-0 bottom-0 w-0.5 bg-gray-300" style={{ zIndex: 1 }}></div>
+                
+                <ul className="space-y-10 relative" style={{ zIndex: 5 }}>
                   {route.stops.map((stop, index) => {
                     const isStartOrEnd = (index === 0 || index === route.stops.length - 1);
                     const nextStop = route.stops[index + 1];
                     const hasTimeToNextStop = index < route.stops.length - 1 && nextStop?.time;
+                    const marginTop = index === 0 && route.hasDepot ? "mt-10" : "";
                     
                     return (
-                      <li key={index} className="relative">
+                      <li key={index} className={`relative ${marginTop}`}>
                         {/* Circle marker */}
-                        <div className="absolute left-[-28px] top-1/2 transform -translate-y-1/2">
-                          <div className={`h-6 w-6 rounded-full border-2 ${isStartOrEnd ? 'border-db-red' : 'border-gray-400'} bg-white flex items-center justify-center z-10`}>
+                        <div className="absolute left-[-28px] top-1/2 transform -translate-y-1/2" style={{ zIndex: 10 }}>
+                          <div className={`timeline-circle ${isStartOrEnd ? 'border-db-red' : 'border-gray-400'}`}>
                             {isStartOrEnd && <div className="h-3 w-3 rounded-full bg-db-red"></div>}
                           </div>
                         </div>
@@ -479,6 +534,20 @@ const RouteDetail = () => {
                     );
                   })}
                 </ul>
+                
+                {/* Return depot marker if applicable */}
+                {route.returnDepot && (
+                  <div className="absolute left-0 bottom-[-60px]">
+                    <div className="timeline-circle border-db-yellow text-db-yellow">
+                      <Home className="h-3 w-3" />
+                    </div>
+                    <div className="ml-8">
+                      <span className="text-lg font-medium text-db-yellow">
+                        Mögl. Abstellung
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -494,20 +563,35 @@ const RouteDetail = () => {
             
             <CardContent className="p-6">
               <div className="relative pl-10">
-                {/* Vertical timeline line - properly centered through the circles */}
-                <div className="absolute left-[29px] top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                {/* Depot marker if applicable */}
+                {reverseRoute.hasDepot && (
+                  <div className="absolute left-0 top-0">
+                    <div className="timeline-circle border-db-depot text-db-depot">
+                      <Home className="h-3 w-3" />
+                    </div>
+                    <div className="ml-8 mb-6">
+                      <span className="text-lg font-medium text-db-depot">
+                        {reverseRoute.depotName}
+                      </span>
+                    </div>
+                  </div>
+                )}
                 
-                <ul className="space-y-10">
+                {/* Vertical timeline line - properly centered through the circles */}
+                <div className="absolute left-[15px] top-0 bottom-0 w-0.5 bg-gray-300" style={{ zIndex: 1 }}></div>
+                
+                <ul className="space-y-10 relative" style={{ zIndex: 5 }}>
                   {reverseRoute.stops.map((stop, index) => {
                     const isStartOrEnd = (index === 0 || index === reverseRoute.stops.length - 1);
                     const nextStop = reverseRoute.stops[index + 1];
                     const hasTimeToNextStop = index < reverseRoute.stops.length - 1 && nextStop?.time;
+                    const marginTop = index === 0 && reverseRoute.hasDepot ? "mt-10" : "";
                     
                     return (
-                      <li key={index} className="relative">
+                      <li key={index} className={`relative ${marginTop}`}>
                         {/* Circle marker */}
-                        <div className="absolute left-[-28px] top-1/2 transform -translate-y-1/2">
-                          <div className={`h-6 w-6 rounded-full border-2 ${isStartOrEnd ? 'border-db-red' : 'border-gray-400'} bg-white flex items-center justify-center z-10`}>
+                        <div className="absolute left-[-28px] top-1/2 transform -translate-y-1/2" style={{ zIndex: 10 }}>
+                          <div className={`timeline-circle ${isStartOrEnd ? 'border-db-red' : 'border-gray-400'}`}>
                             {isStartOrEnd && <div className="h-3 w-3 rounded-full bg-db-red"></div>}
                           </div>
                         </div>
@@ -538,6 +622,20 @@ const RouteDetail = () => {
                     );
                   })}
                 </ul>
+                
+                {/* Return depot marker if applicable */}
+                {reverseRoute.returnDepot && (
+                  <div className="absolute left-0 bottom-[-60px]">
+                    <div className="timeline-circle border-db-yellow text-db-yellow">
+                      <Home className="h-3 w-3" />
+                    </div>
+                    <div className="ml-8">
+                      <span className="text-lg font-medium text-db-yellow">
+                        Mögl. Abstellung
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>

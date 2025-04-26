@@ -19,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				ubuntu: ['Ubuntu', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -68,7 +71,9 @@ export default {
 					darkred: '#AB000F',
 					gray: '#646973',
 					lightgray: '#F0F3F5',
-					darkgray: '#2D2E35'
+					darkgray: '#2D2E35',
+					depot: '#0FA0CE',
+					yellow: '#FFCC00'
 				}
 			},
 			borderRadius: {

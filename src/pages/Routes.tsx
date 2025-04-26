@@ -62,7 +62,7 @@ const Routes = () => {
     navigate(`/route/${routeId}`);
   };
 
-  // Get background color based on route type
+  // Get header color based on route type
   const getRouteHeaderColor = (routeType) => {
     switch (routeType) {
       case "S-Bahn":
@@ -83,7 +83,7 @@ const Routes = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
       
       <main className="flex-grow">
@@ -169,22 +169,22 @@ const Routes = () => {
             {filteredRoutes.map((route) => (
               <Card 
                 key={route.id} 
-                className="rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer border border-gray-200"
+                className="db-route-card cursor-pointer"
                 onClick={() => handleRouteClick(route.id)}
               >
-                <CardHeader className={`p-3 rounded-t-lg ${getRouteHeaderColor(route.type)}`}>
-                  <div className="flex justify-between items-center">
-                    <Badge className="text-lg bg-white text-black font-bold">
+                <div className="border-b border-gray-100">
+                  <div className={`px-4 py-3 rounded-t-lg flex justify-between items-center ${getRouteHeaderColor(route.type)}`}>
+                    <div className="text-lg font-medium">
                       {route.routeNumber}
-                    </Badge>
-                    <Badge className="bg-white/30 text-white">
-                      {route.type} {route.number}
-                    </Badge>
+                    </div>
+                    <div className="text-lg font-medium">
+                      {route.number}
+                    </div>
                   </div>
-                </CardHeader>
+                </div>
                 
                 <CardContent className="p-4">
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-semibold">Von:</div>
