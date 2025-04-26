@@ -24,7 +24,7 @@ interface TrainRoute {
   nextStation?: string;
   platform: string;
   delay?: number;
-  status: "active" | "cancelled";
+  status: "active" | "cancelled" | string;
   stops: Stop[];
 }
 

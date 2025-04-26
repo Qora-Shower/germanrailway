@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -39,7 +40,7 @@ const ServerDetail = () => {
       nextStation: "Freiburg Hbf",
       platform: "3",
       delay: 2,
-      status: "active",
+      status: "active" as "active", // Type assertion to ensure it matches the TrainRoute interface
       stops: [
         { name: "Berlin Hbf", time: "09:36", platform: "14", departed: true },
         { name: "Magdeburg Hbf", time: "10:48", platform: "3", current: true },
@@ -56,7 +57,7 @@ const ServerDetail = () => {
       trainUnit: "Bombardier Talent 2 - 442 113",
       currentStation: "Brandenburg Hbf",
       platform: "2",
-      status: "cancelled",
+      status: "cancelled" as "cancelled", // Type assertion to ensure it matches the TrainRoute interface
       stops: []
     }
   ];
