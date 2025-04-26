@@ -12,6 +12,7 @@ import Jobs from "./pages/Jobs";
 import JobDetail from "./pages/JobDetail";
 import JobApplication from "./pages/JobApplication";
 import Stations from "./pages/Stations";
+import StationDetail from "./pages/StationDetail";
 import Servers from "./pages/Servers";
 import ServerDetail from "./pages/ServerDetail";
 import RoutesPage from "./pages/Routes";
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/job/:jobId" element={<JobDetail />} />
           <Route path="/apply/:jobId" element={<JobApplication />} />
           <Route path="/stations" element={<Stations />} />
+          <Route path="/station/:stationId" element={<StationDetail />} />
           <Route path="/servers" element={<Servers />} />
           <Route path="/server/:serverId" element={<ServerDetail />} />
           <Route path="/routen" element={<RoutesPage />} />

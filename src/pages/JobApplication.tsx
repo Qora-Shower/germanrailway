@@ -4,13 +4,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Briefcase, Send, AlertCircle } from "lucide-react";
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
+import { Briefcase, Send, AlertCircle, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Separator } from "@/components/ui/separator";
 
 const JobApplication = () => {
   const { jobId } = useParams();
@@ -63,7 +63,7 @@ const JobApplication = () => {
       console.log("Email subject:", emailSubject);
       console.log("Email body:", emailBody);
       
-      toast.success("Application submitted successfully!");
+      toast.success("Bewerbung erfolgreich abgeschickt!");
       navigate("/jobs");
       setSubmitting(false);
     }, 1500);
@@ -76,14 +76,14 @@ const JobApplication = () => {
         <main className="flex-grow container mx-auto px-4 py-12">
           <div className="flex items-center mb-6 text-red-500">
             <AlertCircle className="h-6 w-6 mr-2" />
-            <h1 className="text-3xl font-bold">Invalid Job</h1>
+            <h1 className="text-3xl font-bold">Ungültiger Job</h1>
           </div>
-          <p>Sorry, the job application you're looking for doesn't exist.</p>
+          <p>Die gesuchte Stelle existiert leider nicht.</p>
           <Button 
             onClick={() => navigate("/jobs")}
             className="mt-4 bg-db-red hover:bg-db-darkred text-white"
           >
-            Return to Jobs
+            Zurück zu Jobs
           </Button>
         </main>
         <Footer />
@@ -95,137 +95,161 @@ const JobApplication = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      <main className="flex-grow">
+      <main className="flex-grow bg-gray-50">
         <div className="container mx-auto px-4 py-12">
-          <div className="flex items-center mb-6">
-            <Briefcase className="h-6 w-6 mr-2 text-db-red" />
-            <h1 className="text-3xl font-bold">Apply for {jobTitle}</h1>
+          <Button 
+            onClick={() => navigate(`/job/${jobId}`)}
+            variant="ghost" 
+            className="flex items-center mb-6 hover:bg-gray-100"
+          >
+            <ArrowLeft className="mr-2 h-5 w-5" />
+            Zurück zur Jobbeschreibung
+          </Button>
+          
+          <div className="bg-gray-100 p-4 rounded-xl mb-8 flex items-center">
+            <Briefcase className="h-6 w-6 mr-3 text-db-red" />
+            <div className="text-gray-700 font-medium cursor-pointer" onClick={() => navigate("/jobs")}>Jobs</div>
+            <div className="mx-3 text-gray-400">/</div>
+            <div className="text-gray-700 font-medium cursor-pointer" onClick={() => navigate(`/job/${jobId}`)}>{jobTitle}</div>
+            <div className="mx-3 text-gray-400">/</div>
+            <div className="text-db-red font-medium">Bewerben</div>
           </div>
           
-          <div className="bg-gray-100 p-4 rounded-lg mb-8">
-            <NavigationMenu>
-              <NavigationMenuList className="flex flex-wrap gap-2">
-                <NavigationMenuItem className="flex items-center">
-                  <NavigationMenuLink 
-                    className="flex items-center text-db-red cursor-pointer"
-                    onClick={() => navigate("/jobs")}
-                  >
-                    <Briefcase className="mr-1 h-4 w-4" />
-                    Jobs
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem className="flex items-center">
-                  <span className="mx-2">&gt;</span>
-                  <NavigationMenuLink 
-                    className="flex items-center text-gray-700 cursor-pointer"
-                    onClick={() => navigate(`/job/${jobId}`)}
-                  >
-                    {jobTitle}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem className="flex items-center">
-                  <span className="mx-2">&gt;</span>
-                  <NavigationMenuLink className="flex items-center text-gray-700">
-                    Apply
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                  control={form.control}
-                  name="robloxUsername"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Roblox Username</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your Roblox username" {...field} required />
-                      </FormControl>
-                      <FormDescription>Your Roblox username for verification purposes.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="discordUsername"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Discord Username</FormLabel>
-                      <FormControl>
-                        <Input placeholder="username#0000" {...field} required />
-                      </FormControl>
-                      <FormDescription>We'll use Discord for communication.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="experience"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Relevant Experience</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Describe your relevant experience..." className="min-h-[120px]" {...field} required />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="motivation"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Why do you want to join our team?</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Tell us why you want to join..." className="min-h-[120px]" {...field} required />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="availability"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Availability</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Let us know your availability..." className="min-h-[120px]" {...field} required />
-                      </FormControl>
-                      <FormDescription>
-                        Please provide details about when you are available to work or volunteer.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <Button 
-                  type="submit" 
-                  className="bg-db-red hover:bg-db-darkred text-white w-full sm:w-auto px-8 py-6"
-                  disabled={submitting}
-                >
-                  {submitting ? (
-                    <>Processing...</>
-                  ) : (
-                    <>
-                      <Send className="mr-2 h-5 w-5" /> Submit Application
-                    </>
-                  )}
-                </Button>
-              </form>
-            </Form>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+              <div className="border-b border-gray-100 p-6">
+                <div className="flex items-center">
+                  <Briefcase className="h-8 w-8 mr-3 text-db-red" />
+                  <h1 className="text-2xl font-bold">Bewerbung für {jobTitle}</h1>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <div className="grid grid-cols-1 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="robloxUsername"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Roblox Benutzername</FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="Dein Roblox Benutzername" 
+                                {...field} 
+                                required 
+                                className="focus-visible:ring-db-red focus-visible:border-db-red"
+                              />
+                            </FormControl>
+                            <FormDescription>Dein Roblox Benutzername für Verifizierungszwecke.</FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="discordUsername"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Discord Benutzername</FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="username#0000" 
+                                {...field} 
+                                required 
+                                className="focus-visible:ring-db-red focus-visible:border-db-red"
+                              />
+                            </FormControl>
+                            <FormDescription>Wir nutzen Discord für die Kommunikation.</FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    
+                    <Separator />
+                    
+                    <FormField
+                      control={form.control}
+                      name="experience"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Relevante Erfahrung</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              placeholder="Beschreibe deine relevante Erfahrung..." 
+                              className="min-h-[120px] focus-visible:ring-db-red focus-visible:border-db-red" 
+                              {...field} 
+                              required 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="motivation"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Warum möchtest du Teil unseres Teams werden?</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              placeholder="Erzähle uns, warum du dich bewerben möchtest..." 
+                              className="min-h-[120px] focus-visible:ring-db-red focus-visible:border-db-red" 
+                              {...field} 
+                              required 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="availability"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Deine Verfügbarkeit</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              placeholder="Teile uns mit, wann du verfügbar bist..." 
+                              className="min-h-[120px] focus-visible:ring-db-red focus-visible:border-db-red" 
+                              {...field} 
+                              required 
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            Bitte gib an, an welchen Tagen und zu welchen Uhrzeiten du verfügbar bist.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <div className="flex justify-end pt-4">
+                      <Button 
+                        type="submit" 
+                        className="bg-db-red hover:bg-db-darkred text-white px-8 py-3"
+                        disabled={submitting}
+                      >
+                        {submitting ? (
+                          <>Wird verarbeitet...</>
+                        ) : (
+                          <>
+                            <Send className="mr-2 h-5 w-5" /> Bewerbung absenden
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </form>
+                </Form>
+              </div>
+            </div>
           </div>
         </div>
       </main>

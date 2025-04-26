@@ -96,4 +96,23 @@
   .db-section {
     @apply mb-8 bg-white rounded-xl shadow-lg overflow-hidden;
   }
+
+  /* Modern form controls */
+  .db-input {
+    @apply rounded-md border-gray-300 focus:ring-db-red focus:border-db-red;
+  }
+
+  /* Modern card design */
+  .db-card {
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 overflow-hidden;
+  }
+
+  /* Timeline elements */
+  .db-timeline-circle {
+    @apply h-5 w-5 rounded-full border-2 border-db-red bg-white z-10 flex items-center justify-center;
+  }
+  
+  .db-timeline-line {
+    @apply absolute h-full w-0.5 bg-gray-300 left-1/2 transform -translate-x-1/2;
+  }
 }
