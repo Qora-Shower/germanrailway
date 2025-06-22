@@ -2,42 +2,68 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Bell, Globe, Eye, EyeOff, Languages, User, Shield, Palette, MessageSquare } from "lucide-react";
+import { Bell, Globe, Eye, EyeOff, Languages, User, Shield, Palette, MapPin } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import FlagSelect from "@/components/FlagSelect";
+import CitySelect from "@/components/CitySelect";
+import { useSettings } from "@/contexts/SettingsContext";
 
 const Settings = () => {
+  const {
+    darkMode,
+    selectedLanguage,
+    selectedCity,
+    cityPublic,
+    setDarkMode,
+    setSelectedLanguage,
+    setSelectedCity,
+    setCityPublic,
+    saveSettings
+  } = useSettings();
+
   const [showRealTimeActivity, setShowRealTimeActivity] = useState(true);
   const [hideMyStates, setHideMyStates] = useState(false);
   const [enableEmailNotifications, setEnableEmailNotifications] = useState(true);
   const [enableGameUpdates, setEnableGameUpdates] = useState(true);
   const [enableEventReminders, setEnableEventReminders] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("en-GB");
-
-  // Apply dark mode to document
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      document.body.style.backgroundColor = '#000000';
-      document.body.style.color = '#ffffff';
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.style.backgroundColor = '';
-      document.body.style.color = '';
-    }
-  }, [darkMode]);
 
   const handleSaveChanges = () => {
-    toast.success("Einstellungen wurden gespeichert");
+    saveSettings();
+    toast.success("Einstellungen wurden erfolgreich gespeichert", {
+      style: {
+        backgroundColor: darkMode ? '#1f2937' : '#ffffff',
+        color: darkMode ? '#ffffff' : '#000000',
+        border: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`,
+      },
+      icon: '✅'
+    });
   };
 
   const handleLanguageChange = (languageCode: string) => {
     setSelectedLanguage(languageCode);
-    toast.success("Sprache wurde geändert");
+    toast.success("Sprache wurde geändert", {
+      style: {
+        backgroundColor: darkMode ? '#1f2937' : '#ffffff',
+        color: darkMode ? '#ffffff' : '#000000',
+        border: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`,
+      },
+      icon: '🌍'
+    });
+  };
+
+  const handleCityChange = (cityCode: string) => {
+    setSelectedCity(cityCode);
+    toast.success("Stadt wurde geändert", {
+      style: {
+        backgroundColor: darkMode ? '#1f2937' : '#ffffff',
+        color: darkMode ? '#ffffff' : '#000000',
+        border: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`,
+      },
+      icon: '📍'
+    });
   };
 
   const cardClass = `border-0 shadow-xl rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl ${
@@ -256,6 +282,49 @@ const Settings = () => {
                   <div className={`p-4 rounded-xl ${darkMode ? "bg-gray-800" : "bg-blue-50"}`}>
                     <p className={`text-sm ${subtextClass}`}>
                       Die Sprachänderung wird nach dem Speichern auf die gesamte Website angewendet.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Card>
+            
+            {/* City Section */}
+            <Card className={cardClass}>
+              <div className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-3 bg-cyan-500 rounded-xl">
+                    <MapPin className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className={`text-2xl font-bold ${textClass}`}>Your City</h2>
+                    <p className={subtextClass}>Wähle deine Stadt für lokale Zeitangaben</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-6">
+                  <CitySelect 
+                    value={selectedCity}
+                    onValueChange={handleCityChange}
+                    darkMode={darkMode}
+                  />
+                  
+                  <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className={`font-semibold ${textClass}`}>Stadt öffentlich anzeigen</p>
+                        <p className={`text-sm ${subtextClass}`}>Andere Spieler können deine Stadt sehen</p>
+                      </div>
+                      <Switch 
+                        checked={cityPublic} 
+                        onCheckedChange={setCityPublic}
+                        className="data-[state=checked]:bg-db-red"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className={`p-4 rounded-xl ${darkMode ? "bg-gray-800" : "bg-blue-50"}`}>
+                    <p className={`text-sm ${subtextClass}`}>
+                      Deine Stadtauswahl wird für Zeitangaben und lokale Informationen verwendet.
                     </p>
                   </div>
                 </div>

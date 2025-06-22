@@ -47,12 +47,84 @@
     --sidebar-ring: 352 100% 45%;
   }
 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 352 100% 45%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 352 100% 45%;
+
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 352 100% 45%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 352 100% 45%;
+  }
+
   html {
     font-family: 'Ubuntu', sans-serif;
   }
 
   body {
-    @apply bg-background text-foreground font-ubuntu;
+    @apply bg-background text-foreground font-ubuntu transition-colors duration-300;
+  }
+
+  /* Dark mode support for all elements */
+  .dark {
+    color-scheme: dark;
+  }
+
+  .dark * {
+    border-color: rgb(55 65 81 / 0.2);
+  }
+
+  .dark .bg-white {
+    @apply bg-gray-900;
+  }
+
+  .dark .text-gray-900 {
+    @apply text-white;
+  }
+
+  .dark .text-gray-600 {
+    @apply text-gray-300;
+  }
+
+  .dark .border-gray-200 {
+    @apply border-gray-700;
+  }
+
+  .dark .bg-gray-50 {
+    @apply bg-gray-800;
+  }
+
+  .dark .bg-gray-100 {
+    @apply bg-gray-800;
   }
 }
 
@@ -114,5 +186,30 @@
   
   .db-timeline-line {
     @apply absolute h-full w-0.5 bg-gray-300 left-1/2 transform -translate-x-1/2;
+  }
+
+  /* Dark mode specific components */
+  .dark .game-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+
+  .dark .db-server-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+
+  .dark .db-section {
+    @apply bg-gray-800;
+  }
+
+  .dark .db-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+
+  .dark .timeline-circle {
+    @apply bg-gray-800 border-gray-600;
+  }
+
+  .dark .db-timeline-circle {
+    @apply bg-gray-800 border-gray-600;
   }
 }
