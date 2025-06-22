@@ -1,19 +1,13 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Bell, Globe, Eye, EyeOff, Languages } from "lucide-react";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
+import { Bell, Globe, Eye, EyeOff, Languages, User, Shield, Palette, MessageSquare } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import FlagSelect from "@/components/FlagSelect";
 
 const Settings = () => {
   const [showRealTimeActivity, setShowRealTimeActivity] = useState(true);
@@ -22,205 +16,256 @@ const Settings = () => {
   const [enableGameUpdates, setEnableGameUpdates] = useState(true);
   const [enableEventReminders, setEnableEventReminders] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
-  const [translateOption, setTranslateOption] = useState("none");
-  const [selectedLanguage, setSelectedLanguage] = useState("Deutsch");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-GB");
+
+  // Apply dark mode to document
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      document.body.style.backgroundColor = '#000000';
+      document.body.style.color = '#ffffff';
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.body.style.backgroundColor = '';
+      document.body.style.color = '';
+    }
+  }, [darkMode]);
 
   const handleSaveChanges = () => {
     toast.success("Einstellungen wurden gespeichert");
   };
 
-  const handleAutomaticTranslation = () => {
-    setTranslateOption("auto");
-    toast.success("Automatische Übersetzung aktiviert");
-    // In a real app, we would detect the user's language here
+  const handleLanguageChange = (languageCode: string) => {
+    setSelectedLanguage(languageCode);
+    toast.success("Sprache wurde geändert");
   };
 
-  const handleManualTranslationSelect = (language: string) => {
-    setTranslateOption("manual");
-    setSelectedLanguage(language);
-    toast.success(`Manuelle Übersetzung auf ${language} aktiviert`);
-  };
+  const cardClass = `border-0 shadow-xl rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl ${
+    darkMode 
+      ? "bg-gray-900 border-gray-700" 
+      : "bg-white"
+  }`;
+
+  const textClass = darkMode ? "text-white" : "text-gray-900";
+  const subtextClass = darkMode ? "text-gray-300" : "text-gray-600";
+  const bgClass = darkMode ? "bg-black" : "bg-gradient-to-br from-gray-50 to-gray-100";
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={`flex flex-col min-h-screen transition-all duration-300 ${bgClass}`}>
       <Navbar />
       
-      <main className="flex-grow bg-gray-50">
-        <div className="container mx-auto px-4 py-12 max-w-4xl">
-          <h1 className="text-3xl font-bold mb-8">Einstellungen</h1>
+      <main className="flex-grow">
+        <div className="container mx-auto px-4 py-12 max-w-5xl">
+          <div className="text-center mb-12">
+            <h1 className={`text-5xl font-bold mb-4 ${textClass}`}>Einstellungen</h1>
+            <p className={`text-xl ${subtextClass}`}>Passe deine Präferenzen an und verwalte dein Konto</p>
+          </div>
           
-          <div className="space-y-8">
-            <Card className="border shadow-md p-6 bg-white">
-              <h2 className="text-xl font-semibold mb-6">Konto</h2>
-              
-              <div className="flex items-center justify-between py-3 border-b">
-                <div>
-                  <p className="font-medium">Verbundenes Konto</p>
-                  <p className="text-gray-500 text-sm">Dein mit Deutsche Bahn AG Roblox verbundenes Konto</p>
-                </div>
-                <div className="flex items-center">
-                  <img 
-                    src="/lovable-uploads/a457f883-f052-4d89-b2fd-67be6b7822e6.png"
-                    alt="Roblox Account" 
-                    className="w-8 h-8 rounded-full mr-3"
-                  />
-                  <span className="font-medium">RobloxUser123</span>
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="border shadow-md p-6 bg-white">
-              <h2 className="text-xl font-semibold mb-6">Privacy</h2>
-              <p className="text-gray-600 mb-6">
-                Es ist wichtig für uns, dass du die Kontrolle über deine Daten hast. 
-                Hier kannst du festlegen, welche Informationen andere sehen können und 
-                wie deine Aktivitäten auf unserer Plattform angezeigt werden.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-center justify-between py-2">
-                  <div>
-                    <p className="font-medium">Echtzeit-Aktivität anzeigen</p>
-                    <p className="text-gray-500 text-sm">Zeigt anderen, wenn du online bist</p>
+          <div className="grid gap-8">
+            {/* Account Section */}
+            <Card className={cardClass}>
+              <div className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-3 bg-db-red rounded-xl">
+                    <User className="h-6 w-6 text-white" />
                   </div>
-                  <Switch 
-                    checked={showRealTimeActivity} 
-                    onCheckedChange={setShowRealTimeActivity}
-                    className="data-[state=checked]:bg-db-red"
-                  />
+                  <div>
+                    <h2 className={`text-2xl font-bold ${textClass}`}>Konto</h2>
+                    <p className={subtextClass}>Verwalte deine Konto-Informationen</p>
+                  </div>
                 </div>
                 
-                <div className="flex items-center justify-between py-2">
-                  <div>
-                    <p className="font-medium">Meine States verbergen</p>
-                    <p className="text-gray-500 text-sm">Verbirgt deine Statistiken vor anderen Spielern</p>
+                <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className={`font-semibold text-lg ${textClass}`}>Verbundenes Konto</p>
+                      <p className={`text-sm ${subtextClass}`}>Dein mit Deutsche Bahn AG Roblox verbundenes Konto</p>
+                    </div>
+                    <div className="flex items-center">
+                      <img 
+                        src="/lovable-uploads/a457f883-f052-4d89-b2fd-67be6b7822e6.png"
+                        alt="Roblox Account" 
+                        className="w-10 h-10 rounded-full mr-4 ring-2 ring-db-red"
+                      />
+                      <span className={`font-semibold ${textClass}`}>RobloxUser123</span>
+                    </div>
                   </div>
-                  <Switch 
-                    checked={hideMyStates} 
-                    onCheckedChange={setHideMyStates}
-                    className="data-[state=checked]:bg-db-red"
-                  />
                 </div>
               </div>
             </Card>
             
-            <Card className="border shadow-md p-6 bg-white">
-              <h2 className="text-xl font-semibold mb-6">Benachrichtigungen</h2>
-              <p className="text-gray-600 mb-6">
-                Bleibe informiert über wichtige Ereignisse und Updates. Du kannst hier festlegen, 
-                welche Benachrichtigungen du erhalten möchtest.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-center justify-between py-2">
-                  <div>
-                    <p className="font-medium">E-Mail Benachrichtigungen</p>
-                    <p className="text-gray-500 text-sm">Erhalte wichtige Updates per E-Mail</p>
+            {/* Privacy Section */}
+            <Card className={cardClass}>
+              <div className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-3 bg-green-500 rounded-xl">
+                    <Shield className="h-6 w-6 text-white" />
                   </div>
-                  <Switch 
-                    checked={enableEmailNotifications} 
-                    onCheckedChange={setEnableEmailNotifications}
-                    className="data-[state=checked]:bg-db-red"
-                  />
+                  <div>
+                    <h2 className={`text-2xl font-bold ${textClass}`}>Datenschutz</h2>
+                    <p className={subtextClass}>Kontrolliere deine Privatsphäre-Einstellungen</p>
+                  </div>
                 </div>
                 
-                <div className="flex items-center justify-between py-2">
-                  <div>
-                    <p className="font-medium">Spiel-Updates</p>
-                    <p className="text-gray-500 text-sm">Erhalte Benachrichtigungen über neue Features und Updates</p>
+                <div className="space-y-6">
+                  <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <Eye className={`h-5 w-5 ${textClass}`} />
+                        <div>
+                          <p className={`font-semibold ${textClass}`}>Echtzeit-Aktivität anzeigen</p>
+                          <p className={`text-sm ${subtextClass}`}>Zeigt anderen, wenn du online bist</p>
+                        </div>
+                      </div>
+                      <Switch 
+                        checked={showRealTimeActivity} 
+                        onCheckedChange={setShowRealTimeActivity}
+                        className="data-[state=checked]:bg-db-red"
+                      />
+                    </div>
                   </div>
-                  <Switch 
-                    checked={enableGameUpdates} 
-                    onCheckedChange={setEnableGameUpdates}
-                    className="data-[state=checked]:bg-db-red"
-                  />
-                </div>
-                
-                <div className="flex items-center justify-between py-2">
-                  <div>
-                    <p className="font-medium">Event-Erinnerungen</p>
-                    <p className="text-gray-500 text-sm">Erhalte Erinnerungen über bevorstehende Events</p>
-                  </div>
-                  <Switch 
-                    checked={enableEventReminders} 
-                    onCheckedChange={setEnableEventReminders}
-                    className="data-[state=checked]:bg-db-red"
-                  />
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="border shadow-md p-6 bg-white">
-              <h2 className="text-xl font-semibold mb-6">Darstellung</h2>
-              <p className="text-gray-600 mb-6">
-                Passe das Erscheinungsbild der Website an deine Präferenzen an.
-              </p>
-              
-              <div className="flex items-center justify-between py-2">
-                <div>
-                  <p className="font-medium">Dunkler Modus</p>
-                  <p className="text-gray-500 text-sm">Aktiviert ein dunkles Farbschema für die Website</p>
-                </div>
-                <Switch 
-                  checked={darkMode} 
-                  onCheckedChange={setDarkMode}
-                  className="data-[state=checked]:bg-db-red"
-                />
-              </div>
-            </Card>
-            
-            <Card className="border shadow-md p-6 bg-white">
-              <h2 className="text-xl font-semibold mb-6">Translate Website</h2>
-              <p className="text-gray-600 mb-6">
-                Stelle die Sprache der Website nach deinen Bedürfnissen ein.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Button 
-                    variant={translateOption === "auto" ? "default" : "outline"}
-                    className={translateOption === "auto" ? "bg-db-red hover:bg-db-darkred" : ""}
-                    onClick={handleAutomaticTranslation}
-                  >
-                    <Globe className="mr-2 h-4 w-4" />
-                    Translate Automatically
-                  </Button>
                   
-                  <Select onValueChange={handleManualTranslationSelect} value={selectedLanguage}>
-                    <SelectTrigger 
-                      className={`${translateOption === "manual" ? "border-db-red ring-1 ring-db-red" : ""}`}
-                    >
-                      <SelectValue placeholder="Translate Manually" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Deutsch">Deutsch</SelectItem>
-                      <SelectItem value="English">English</SelectItem>
-                      <SelectItem value="Español">Español</SelectItem>
-                      <SelectItem value="Français">Français</SelectItem>
-                      <SelectItem value="Italiano">Italiano</SelectItem>
-                      <SelectItem value="日本語">日本語</SelectItem>
-                      <SelectItem value="한국어">한국어</SelectItem>
-                      <SelectItem value="Nederlands">Nederlands</SelectItem>
-                      <SelectItem value="Polski">Polski</SelectItem>
-                      <SelectItem value="Português">Português</SelectItem>
-                      <SelectItem value="Русский">Русский</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <EyeOff className={`h-5 w-5 ${textClass}`} />
+                        <div>
+                          <p className={`font-semibold ${textClass}`}>Meine Statistiken verbergen</p>
+                          <p className={`text-sm ${subtextClass}`}>Verbirgt deine Statistiken vor anderen Spielern</p>
+                        </div>
+                      </div>
+                      <Switch 
+                        checked={hideMyStates} 
+                        onCheckedChange={setHideMyStates}
+                        className="data-[state=checked]:bg-db-red"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+            
+            {/* Notifications Section */}
+            <Card className={cardClass}>
+              <div className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-3 bg-blue-500 rounded-xl">
+                    <Bell className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className={`text-2xl font-bold ${textClass}`}>Benachrichtigungen</h2>
+                    <p className={subtextClass}>Wähle, welche Benachrichtigungen du erhalten möchtest</p>
+                  </div>
                 </div>
                 
-                {translateOption === "manual" && (
-                  <div className="p-3 bg-gray-100 rounded-md">
-                    <p className="text-sm text-gray-600">
-                      Auf allen Seiten wird jetzt ein Übersetzungsbutton für {selectedLanguage} angezeigt.
+                <div className="grid gap-4">
+                  <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className={`font-semibold ${textClass}`}>E-Mail Benachrichtigungen</p>
+                        <p className={`text-sm ${subtextClass}`}>Erhalte wichtige Updates per E-Mail</p>
+                      </div>
+                      <Switch 
+                        checked={enableEmailNotifications} 
+                        onCheckedChange={setEnableEmailNotifications}
+                        className="data-[state=checked]:bg-db-red"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className={`font-semibold ${textClass}`}>Spiel-Updates</p>
+                        <p className={`text-sm ${subtextClass}`}>Erhalte Benachrichtigungen über neue Features</p>
+                      </div>
+                      <Switch 
+                        checked={enableGameUpdates} 
+                        onCheckedChange={setEnableGameUpdates}
+                        className="data-[state=checked]:bg-db-red"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className={`font-semibold ${textClass}`}>Event-Erinnerungen</p>
+                        <p className={`text-sm ${subtextClass}`}>Erhalte Erinnerungen über bevorstehende Events</p>
+                      </div>
+                      <Switch 
+                        checked={enableEventReminders} 
+                        onCheckedChange={setEnableEventReminders}
+                        className="data-[state=checked]:bg-db-red"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+            
+            {/* Appearance Section */}
+            <Card className={cardClass}>
+              <div className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-3 bg-purple-500 rounded-xl">
+                    <Palette className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className={`text-2xl font-bold ${textClass}`}>Darstellung</h2>
+                    <p className={subtextClass}>Passe das Erscheinungsbild der Website an</p>
+                  </div>
+                </div>
+                
+                <div className={`p-6 rounded-xl ${darkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className={`font-semibold ${textClass}`}>Dunkler Modus</p>
+                      <p className={`text-sm ${subtextClass}`}>Aktiviert ein dunkles Farbschema für die gesamte Website</p>
+                    </div>
+                    <Switch 
+                      checked={darkMode} 
+                      onCheckedChange={setDarkMode}
+                      className="data-[state=checked]:bg-db-red"
+                    />
+                  </div>
+                </div>
+              </div>
+            </Card>
+            
+            {/* Language Section */}
+            <Card className={cardClass}>
+              <div className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-3 bg-orange-500 rounded-xl">
+                    <Languages className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className={`text-2xl font-bold ${textClass}`}>Sprache</h2>
+                    <p className={subtextClass}>Wähle deine bevorzugte Sprache für die Website</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <FlagSelect 
+                    value={selectedLanguage}
+                    onValueChange={handleLanguageChange}
+                    darkMode={darkMode}
+                  />
+                  
+                  <div className={`p-4 rounded-xl ${darkMode ? "bg-gray-800" : "bg-blue-50"}`}>
+                    <p className={`text-sm ${subtextClass}`}>
+                      Die Sprachänderung wird nach dem Speichern auf die gesamte Website angewendet.
                     </p>
                   </div>
-                )}
+                </div>
               </div>
             </Card>
             
-            <div className="flex justify-end">
+            {/* Save Button */}
+            <div className="flex justify-center pt-8">
               <Button 
-                className="bg-db-red hover:bg-db-darkred" 
+                className="bg-db-red hover:bg-db-darkred text-white px-12 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" 
                 onClick={handleSaveChanges}
               >
                 Änderungen speichern
