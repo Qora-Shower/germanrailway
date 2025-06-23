@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,6 +23,7 @@ import PlayerDetail from "./pages/PlayerDetail";
 import Training from "./pages/Training";
 import Guides from "./pages/Guides";
 import GuideDetail from "./pages/GuideDetail";
+import DBAgent from "./pages/DBAgent";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +47,7 @@ const App = () => (
             <Route path="/server/:serverId" element={<ServerDetail />} />
             <Route path="/routen" element={<RoutesPage />} />
             <Route path="/route/:routeId" element={<RouteDetail />} />
+            <Route path="/db-agent" element={<DBAgent />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/player/:playerId" element={<PlayerDetail />} />

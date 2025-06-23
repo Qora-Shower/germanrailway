@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, Home, Settings, LogOut, FileSpreadsheet, Briefcase, Server, Train, Route, FileText, Shield, BookOpen } from "lucide-react";
+import { Menu, X, User, Home, Settings, LogOut, FileSpreadsheet, Briefcase, Server, Train, Route, FileText, Shield, BookOpen, Bot } from "lucide-react";
 import { 
   Sheet,
   SheetContent,
@@ -73,6 +72,10 @@ const Navbar = () => {
                   <Route className="h-5 w-5" />
                   <span>Routen</span>
                 </Link>
+                <Link to="/db-agent" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
+                  <Bot className="h-5 w-5" />
+                  <span>DB Agent (AI)</span>
+                </Link>
                 <Link to="/training" className="flex items-center gap-2 text-lg font-medium px-2 py-2 rounded-md hover:bg-gray-100 transition-colors">
                   <BookOpen className="h-5 w-5" />
                   <span>Training</span>
@@ -131,6 +134,12 @@ const Navbar = () => {
             <div className="flex items-center">
               <Route className="mr-1 h-4 w-4" />
               Routen
+            </div>
+          </Link>
+          <Link to="/db-agent" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
+            <div className="flex items-center">
+              <Bot className="mr-1 h-4 w-4" />
+              DB Agent (AI)
             </div>
           </Link>
           <Link to="/training" className="text-db-darkgray font-medium hover:text-db-red transition-colors">
