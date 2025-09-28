@@ -173,8 +173,7 @@ const Training = () => {
   });
 
   const handleTrainingClick = (trainingId: number) => {
-    // In a real app, this would navigate to a detailed view of the training
-    console.log(`Training clicked: ${trainingId}`);
+    navigate(`/training/${trainingId}`);
   };
 
   return (
@@ -239,52 +238,80 @@ const Training = () => {
             {filteredTrainings.map((training) => (
               <Card 
                 key={training.id}
-                className="border overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                className="group border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden hover:-translate-y-1"
                 onClick={() => handleTrainingClick(training.id)}
               >
-                <div className={`p-4 ${getRoleBadgeClass(training.role)}`}>
-                  <div className="flex justify-between items-start">
-                    <Badge className="bg-blue-200 text-blue-800 hover:bg-blue-300">
-                      {training.authorBadge}
-                    </Badge>
-                    <Badge className={`${getLevelBadgeClass(training.level)}`}>
-                      {training.level}
-                    </Badge>
-                  </div>
-                  <h3 className="font-bold text-lg mt-3">{training.title}</h3>
-                  <div className="flex items-center mt-1">
-                    <span className="text-sm font-medium">von {training.author}</span>
+                {/* Modern gradient header */}
+                <div className={`relative p-6 ${getRoleBadgeClass(training.role)} bg-gradient-to-br from-current to-opacity-80`}>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex justify-between items-start mb-4">
+                      <Badge className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm">
+                        {training.authorBadge}
+                      </Badge>
+                      <Badge className="bg-white/90 text-gray-800 hover:bg-white border-0">
+                        {training.level}
+                      </Badge>
+                    </div>
+                    <h3 className="font-bold text-xl mb-2 text-white leading-tight">{training.title}</h3>
+                    <div className="flex items-center gap-2 text-white/90">
+                      <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+                        <span className="text-xs font-medium">{training.author.charAt(0)}</span>
+                      </div>
+                      <span className="text-sm font-medium">von {training.author}</span>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="p-4 bg-white">
-                  <div className="mb-2">
-                    <div className="flex justify-between items-center mb-2">
-                      <div>
-                        <span className="font-semibold text-sm">Host:</span> {training.host}
-                      </div>
-                      <div>
-                        <span className="font-semibold text-sm">Co-Host:</span> {training.coHost}
-                      </div>
+                {/* Modern content section */}
+                <div className="p-6 bg-white">
+                  {/* Host information with modern styling */}
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Host</p>
+                      <p className="text-sm font-semibold text-gray-900 mt-1">{training.host}</p>
                     </div>
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Co-Host</p>
+                      <p className="text-sm font-semibold text-gray-900 mt-1">{training.coHost}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Schedule with modern design */}
+                  <div className="bg-gradient-to-r from-db-red/5 to-transparent rounded-lg p-4 mb-4 border-l-4 border-db-red">
                     <div className="flex justify-between items-center">
                       <div>
-                        <span className="font-semibold text-sm">Datum:</span> {training.scheduledDate}
+                        <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Datum</p>
+                        <p className="text-sm font-bold text-gray-900">{training.scheduledDate}</p>
                       </div>
-                      <div>
-                        <span className="font-semibold text-sm">Zeit:</span> {training.scheduledTime} Uhr
+                      <div className="text-right">
+                        <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Zeit</p>
+                        <p className="text-sm font-bold text-db-red">{training.scheduledTime} Uhr</p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-between text-sm border-t pt-2">
-                    <div className="flex items-center">
-                      <span>{training.duration}</span>
+                  
+                  {/* Stats footer */}
+                  <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span className="text-xs font-bold text-blue-600">⏱</span>
+                      </div>
+                      <span className="text-sm font-medium">{training.duration}</span>
                     </div>
-                    <div className="flex items-center">
-                      <span>{training.participants} Teilnehmer</span>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <span className="text-xs font-bold text-green-600">👥</span>
+                      </div>
+                      <span className="text-sm font-medium">{training.participants} Teilnehmer</span>
                     </div>
                   </div>
                 </div>
+                
+                {/* Hover effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/0 to-black/0 group-hover:from-black/5 group-hover:to-transparent transition-all duration-300 pointer-events-none"></div>
               </Card>
             ))}
           </div>
